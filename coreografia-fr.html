@@ -1486,7 +1486,7 @@
     if (scelta) return;
     if (document.documentElement.getAttribute('data-ui-lang') === L) return;
     var b = document.querySelector('.ui-lang-btn[data-ui-lang="' + L + '"]');
-    if (b) { mioClic = true; b.click(); mioClic = false; }
+    if (b) { mioClic = true; window.__gmClicAutomatico = true; b.click(); window.__gmClicAutomatico = false; mioClic = false; }
     else {
       document.documentElement.setAttribute('data-ui-lang', L);
       document.documentElement.lang = L;

@@ -1474,6 +1474,27 @@
   .fc-poster .tile-media.is-poster { aspect-ratio:2/3; height:auto; }
 }
 
+/* 11/9/2026, rilievo di Gladia dal telefono: nel riquadro del teaser, che a
+   390 px e' alto 76 px, il cerchio dell'audio (42 px) e il pulsante schermo
+   intero (35 px) prendevano meta' del video e si sovrapponevano fra loro
+   (misurato: 1158-1194 contro 1161-1203). Stessa scelta gia' presa su Danza e
+   Coreografia per i video dentro il mosaico (.mosaic-video): li' il pulsante
+   e' piccolo e la linguetta non c'e'. Qui le misure scendono con la larghezza
+   invece che di scatto, cosi' a 44rem valgono ancora quelle del desktop e non
+   si vede nessun salto. Stesso giro: le fessure del collage, che a 390 px
+   erano 19 px su riquadri larghi 183 ("troppo spazio tra le foto"). */
+@media (max-width:44rem) {
+  .film-collage { gap:clamp(0.55rem, 2.73vw, 1.2rem); }
+  .fc-teaser .sound-toggle-label { display:none; }
+  .fc-teaser .sound-toggle { right:clamp(0.4rem, 1.6vw, 1rem); bottom:clamp(0.4rem, 1.6vw, 1rem); }
+  .fc-teaser .sound-toggle-circle { width:clamp(1.55rem, 6.4vw, 2.6rem); height:clamp(1.55rem, 6.4vw, 2.6rem); }
+  .fc-teaser .sound-toggle-circle .sound-icon { width:clamp(11px, 2.77vw, 18px); height:clamp(11px, 2.77vw, 18px); }
+  .fc-teaser .sound-toggle-circle::after { inset:clamp(-6px, -0.92vw, -3px); }
+  .fc-teaser .fc-full { top:clamp(0.4rem, 1.6vw, 1rem); right:clamp(0.4rem, 1.6vw, 1rem);
+    width:clamp(1.4rem, 5.6vw, 2.2rem); height:clamp(1.4rem, 5.6vw, 2.2rem); }
+  .fc-teaser .fc-full svg { width:clamp(10px, 2.55vw, 16px); height:clamp(10px, 2.55vw, 16px); }
+}
+
 /* ===== 6/9/2026, conforme a Danza (bozza A scelta da Gladia) ===== */
 /* Copiato da danza.html: la citazione sotto la riga di identità, fuori da .page. */
 .works-line.is-hero { display:block; margin:2.4rem auto 0; padding:1.8rem 1.5rem;
@@ -2267,10 +2288,16 @@
     if (location.protocol === 'file:') return;
     try {
       var u = new URL(location.href);
-      u.searchParams.set('reel', quale);
+      if (quale) u.searchParams.set('reel', quale); else u.searchParams.delete('reel');
       history.replaceState(null, '', u.pathname + u.search + u.hash);
     } catch (e) {}
   }
+  /* Un clic della persona sui pulsanti della lingua della pagina (non quelli automatici
+     dello script di apertura, che alza window.__gmClicAutomatico). */
+  var linguaSceltaDallaPersona = false;
+  document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+    b.addEventListener('click', function () { if (!window.__gmClicAutomatico) linguaSceltaDallaPersona = true; }, true);
+  });
   document.querySelectorAll('.lang-tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
       /* La linguetta cambia SOLO il reel e non tocca la lingua della pagina:
@@ -2279,7 +2306,9 @@
          sovrascrive piu' (prima il video tornava alla lingua della pagina), e finisce
          nell'indirizzo, cosi' condividendo si manda proprio questo video. */
       var quale = tab.getAttribute('data-lang');
-      reelSceltoDaIndirizzo = quale;
+      /* Regola di Gladia (11/9/2026): la lingua della pagina comanda sempre sul video,
+         TRANNE il trilingue: scelto una volta, resta qualunque lingua si prema dopo. */
+      reelSceltoDaIndirizzo = (quale === 'tri') ? 'tri' : null;
       impostaReel(quale, true);
       scriviReelNellIndirizzo(quale);
     });
@@ -2300,8 +2329,13 @@
        la lingua viene riapplicata piu' volte all'apertura, e dal secondo giro il reel
        dell'indirizzo veniva sovrascritto. Il reel lo cambia solo un tocco della persona
        sulle linguette del video, qui sotto. */
-    if (reelSceltoDaIndirizzo) { primoGiroLingua = false; return; }
+    if (reelSceltoDaIndirizzo === 'tri') { primoGiroLingua = false; return; }
+    /* Fase di apertura (nessun clic della persona sulla lingua): il video dell'indirizzo
+       vince, qualunque sia. Dopo un clic vero sulla lingua, il video la segue e ?reel=
+       sparisce dall'indirizzo, che cosi' dice il vero: «il video segue la lingua». */
+    if (!linguaSceltaDallaPersona && reelSceltoDaIndirizzo) { primoGiroLingua = false; return; }
     impostaReel(lang, !primoGiroLingua);
+    if (linguaSceltaDallaPersona) { reelSceltoDaIndirizzo = null; scriviReelNellIndirizzo(null); }
     primoGiroLingua = false;
   });
 

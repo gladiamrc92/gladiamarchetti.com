@@ -1309,7 +1309,7 @@
     if (scelta) return;
     if (document.documentElement.getAttribute('data-ui-lang') === L) return;
     var b = document.querySelector('.ui-lang-btn[data-ui-lang="' + L + '"]');
-    if (b) { mioClic = true; b.click(); mioClic = false; }
+    if (b) { mioClic = true; window.__gmClicAutomatico = true; b.click(); window.__gmClicAutomatico = false; mioClic = false; }
     else {
       document.documentElement.setAttribute('data-ui-lang', L);
       document.documentElement.lang = L;
@@ -1636,8 +1636,11 @@
   }
   function updateVideoLangLabel(e) {
     var lang = e && e.detail && e.detail.lang;
-    if (reelSceltoDaIndirizzo) return;
+    /* In apertura il video dell'indirizzo vince; dopo un clic vero della persona sulla
+       lingua, il video la segue e ?reel= sparisce dall'indirizzo (regola di Gladia, 11/9). */
+    if (reelSceltoDaIndirizzo && !linguaSceltaDallaPersona) return;
     if (!lang || !langSources[lang] || lang === activeVideoLang) return;
+    if (linguaSceltaDallaPersona) { reelSceltoDaIndirizzo = false; scriviReelNellIndirizzo(null); }
     var tab = document.querySelector('.lang-tab[data-lang="' + lang + '"]');
     /* Clic automatico: allinea il video alla lingua, ma non conta come una scelta della
        persona e non scrive ?reel= nell'indirizzo (senza ?reel= l'indirizzo dice gia'
@@ -1812,10 +1815,16 @@
     if (location.protocol === 'file:') return;
     try {
       var u = new URL(location.href);
-      u.searchParams.set('reel', quale);
+      if (quale) u.searchParams.set('reel', quale); else u.searchParams.delete('reel');
       history.replaceState(null, '', u.pathname + u.search + u.hash);
     } catch (e) {}
   }
+  /* Un clic della persona sui pulsanti della lingua della pagina (non quelli automatici
+     dello script di apertura, che alza window.__gmClicAutomatico). */
+  var linguaSceltaDallaPersona = false;
+  document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+    b.addEventListener('click', function () { if (!window.__gmClicAutomatico) linguaSceltaDallaPersona = true; }, true);
+  });
   document.querySelectorAll('.lang-tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
       var group = tab.closest('.lang-select');
