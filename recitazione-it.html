@@ -2289,11 +2289,31 @@
     aggiornaEtichettaAudio();
   }
 
+
+  /* Il video scelto va scritto nell'indirizzo, cosi' il pulsante Condividi del browser manda
+     esattamente quello che si sta guardando (chiesto da Gladia l'11/9/2026: sceglieva il
+     trilingue, condivideva, e a chi riceveva arrivava il video della lingua). Non ricarica
+     niente, cambia solo cio' che si legge nella barra. Aprendo il file col doppio clic non
+     si tocca. */
+  function scriviReelNellIndirizzo(quale) {
+    if (location.protocol === 'file:') return;
+    try {
+      var u = new URL(location.href);
+      u.searchParams.set('reel', quale);
+      history.replaceState(null, '', u.pathname + u.search + u.hash);
+    } catch (e) {}
+  }
   document.querySelectorAll('.lang-tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
       /* La linguetta cambia SOLO il reel e non tocca la lingua della pagina:
-         serve proprio a poter guardare il trilingue col sito in italiano. */
-      impostaReel(tab.getAttribute('data-lang'), true);
+         serve proprio a poter guardare il trilingue col sito in italiano.
+         Dall'11/9/2026 la scelta e' definitiva: un cambio di lingua successivo non la
+         sovrascrive piu' (prima il video tornava alla lingua della pagina), e finisce
+         nell'indirizzo, cosi' condividendo si manda proprio questo video. */
+      var quale = tab.getAttribute('data-lang');
+      reelSceltoDaIndirizzo = quale;
+      impostaReel(quale, true);
+      scriviReelNellIndirizzo(quale);
     });
   });
 

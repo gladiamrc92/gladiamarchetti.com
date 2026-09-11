@@ -1597,6 +1597,7 @@
   /* Vero quando il video e' stato scelto nell'indirizzo (?reel=): da quel momento la lingua
      della pagina non lo tocca piu'. Aggiunto l'11/9/2026, Recitazione ce l'aveva gia'. */
   var reelSceltoDaIndirizzo = false;
+  var clicAutomatico = false;
   function currentUiLang() {
     var lang = document.documentElement.getAttribute('data-ui-lang');
     return lang === 'en' || lang === 'fr' ? lang : 'it';
@@ -1606,7 +1607,10 @@
     if (reelSceltoDaIndirizzo) return;
     if (!lang || !langSources[lang] || lang === activeVideoLang) return;
     var tab = document.querySelector('.lang-tab[data-lang="' + lang + '"]');
-    if (tab) tab.click();
+    /* Clic automatico: allinea il video alla lingua, ma non conta come una scelta della
+       persona e non scrive ?reel= nell'indirizzo (senza ?reel= l'indirizzo dice gia'
+       «il video segue la lingua»). Solo un dito vero sulla linguetta blocca la scelta. */
+    if (tab) { clicAutomatico = true; tab.click(); clicAutomatico = false; }
   }
   document.addEventListener('gm-lang-change', updateVideoLangLabel);
   var langSources = {
@@ -1766,6 +1770,20 @@
     video.currentTime = 0;
   });
 
+
+  /* Il video scelto va scritto nell'indirizzo, cosi' il pulsante Condividi del browser manda
+     esattamente quello che si sta guardando (chiesto da Gladia l'11/9/2026: sceglieva il
+     trilingue, condivideva, e a chi riceveva arrivava il video della lingua). Non ricarica
+     niente, cambia solo cio' che si legge nella barra. Aprendo il file col doppio clic non
+     si tocca. */
+  function scriviReelNellIndirizzo(quale) {
+    if (location.protocol === 'file:') return;
+    try {
+      var u = new URL(location.href);
+      u.searchParams.set('reel', quale);
+      history.replaceState(null, '', u.pathname + u.search + u.hash);
+    } catch (e) {}
+  }
   document.querySelectorAll('.lang-tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
       var group = tab.closest('.lang-select');
@@ -1773,6 +1791,10 @@
       tab.classList.add('is-active');
       var lang = tab.getAttribute('data-lang');
       activeVideoLang = lang;
+      /* Dall'11/9/2026 la scelta della persona e' definitiva e finisce nell'indirizzo:
+         un cambio di lingua successivo non riporta il video alla lingua della pagina, e
+         condividendo si manda proprio questo video. */
+      if (!clicAutomatico) { reelSceltoDaIndirizzo = true; scriviReelNellIndirizzo(lang); }
       updateVideoLangLabel();
 
       reel.classList.remove('is-unmuted', 'is-playing');
