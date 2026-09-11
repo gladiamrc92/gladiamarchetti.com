@@ -1530,12 +1530,25 @@
 <link rel="alternate" hreflang="x-default" href="https://gladiamarchetti.com/danza.html">
 </head>
 <script>
-/* ANTEPRIME DEL LINK 11/9/2026: questa copia della pagina si apre in it. Serve perche' chi legge l'anteprima
-   di un link e' un programma che non preme i pulsanti della lingua: legge quello che trova scritto. */
+/* ANTEPRIME DEL LINK 11/9/2026: questa copia della pagina si apre in it e ci resta, anche quando il browser
+   non lascia scrivere niente in memoria (browser dentro le app, navigazione privata). */
 (function () {
-  try { localStorage.setItem('gm-portfolio-lang', 'it'); } catch (e) {}
-  document.documentElement.setAttribute('data-ui-lang', 'it');
-  document.documentElement.lang = 'it';
+  var L = 'it';
+  try { localStorage.setItem('gm-portfolio-lang', L); } catch (e) {}
+  document.documentElement.setAttribute('data-ui-lang', L);
+  document.documentElement.lang = L;
+  function forza() {
+    if (document.documentElement.getAttribute('data-ui-lang') === L) return;
+    var b = document.querySelector('.ui-lang-btn[data-ui-lang="' + L + '"]');
+    if (b) { b.click(); }
+    else {
+      document.documentElement.setAttribute('data-ui-lang', L);
+      document.documentElement.lang = L;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', forza);
+  window.addEventListener('load', forza);
+  [0, 50, 200, 600, 1500].forEach(function (t) { setTimeout(forza, t); });
 })();
 </script>
 <body data-primo-schermo="centro">
