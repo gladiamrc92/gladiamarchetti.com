@@ -1,9 +1,8 @@
 <!doctype html>
-<html lang="it">
+<html lang="fr" class="paper">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gladia Marchetti · Danzatrice · CV</title>
+<title>Gladia Marchetti · Danseuse · CV</title>
 <link rel="stylesheet" href="playfair.css">
 <style>
   /* CV danse, deux pages A4 portrait. 18/8, regle unique pour TOUS les PDF
@@ -129,59 +128,9 @@
   .spacer { flex: 1; }
   .foot { display: flex; justify-content: space-between; align-items: baseline; margin-top: 3mm;
     font-size: 6.4pt; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); }
-
-  /* ---- 19/8: questo file è ANCHE la pagina del sito -------------------
-     Verde a schermo, BIANCO quando qualcuno preme Stampa dal browser.
-     Il PDF verde si genera aprendo questo file con #pdf in fondo all'URL:
-     l'ancora mette class="pdf" su <html> e disattiva la regola di stampa,
-     altrimenti Chrome (che genera il PDF proprio con una stampa) lo
-     produrrebbe bianco. Il PDF chiaro resta danza-cv-fr-impression.html.
-     Le modifiche di CONTENUTO vanno fatte in tutti e due i file. */
-  .tools { position: fixed; top: 0; right: 0; z-index: 9; display: flex; gap: 1.4rem;
-    padding: 1.1rem 1.4rem; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
-  .tools button, .tools a { background: none; border: 0; padding: 0; cursor: pointer;
-    font: inherit; letter-spacing: inherit; text-transform: inherit;
-    color: var(--accent); border-bottom: 1px solid var(--rule); }
-  @media screen {
-    html, body { background: #18201f; }
-    /* Sotto i 818px il foglio A4 viene ridotto in scala (script in fondo):
-       scale() non accetta un calc con vw, quindi il numero lo calcola il JS. */
-    .stage { display: block; padding: 3.2rem 0 3rem; width: 210mm; margin: 0;
-      position: relative; left: var(--x, 0px);
-      transform-origin: top left; transform: scale(var(--z, 1)); }
-    .pg { margin: 0 0 2.2rem; box-shadow: 0 1.2rem 3.4rem rgba(0,0,0,.45); }
-    body { overflow-x: hidden; }
-  }
-  @media print {
-    /* chi stampa dal browser riceve il fondo chiaro, senza dover scegliere */
-    html:not(.pdf) {
-      --ground: #f4f2ec; --ground-soft: #e9e8e0;
-      --ink: #232f2f; --ink-dim: #4d5c5c; --ink-faint: #6b7a7a;
-      --accent: #b04f2c; --rule: rgba(35,47,47,0.16);
-    }
-    html:not(.pdf) .logo-white { display: none !important; }
-    html:not(.pdf) .logo-black { display: block !important; }
-    html, body { background: var(--ground); }
-    .stage { transform: none !important; left: 0 !important; width: auto !important; padding: 0 !important; margin: 0 !important; }
-    body { height: auto !important; }
-    .pg { margin: 0 !important; box-shadow: none !important; }
-    .tools { display: none !important; }
-  /* 3/9: chi stampa non puo' cliccare, quindi le etichette VIDEO spariscono dalla carta */
-  html:not(.pdf) .video { display: none !important; }
-  }
 </style>
-<script>
-if (location.hash === '#pdf') document.documentElement.className += ' pdf';
-</script>
-<style>@media print { body, html { height:auto !important; min-height:0 !important; overflow:visible !important; } .stage { height:auto !important; } }</style>
 </head>
 <body>
-
-<div class="tools mono">
-  <button type="button" onclick="window.print()">Stampa</button>
-  <a href="danza-cv-it-impression.pdf" download="Gladia Marchetti CV Danzatrice 2026.pdf">Scarica il PDF</a>
-</div>
-<div class="stage">
 
 <!-- ============================ PAGE 1 ============================ -->
 <section class="pg">
@@ -190,93 +139,90 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
     <div class="brand">
       <img class="logo logo-white" src="media/logo-white.png" alt="Gladia Marchetti">
       <img class="logo logo-black" src="media/logo-black.png" alt="Gladia Marchetti">
-      <p class="role mono">Danzatrice &middot; Interprete</p>
-      <p class="style">Contemporaneo &middot; Experimental</p>
-      <p class="where mono">Francia</p>
+      <p class="role mono">Danseuse &middot; Interprète</p>
+      <p class="style">Contemporain &middot; Expérimental</p>
+      <p class="where mono">France</p>
     </div>
 
     <div class="block">
-      <span class="kicker mono">Lingue</span>
+      <span class="kicker mono">Langues</span>
       <ul>
-        <li>Italiano <span>madrelingua</span></li>
-        <li>Francese <span>fluente</span></li>
-        <li>Inglese <span>fluente</span></li>
+        <li>Italien <span>langue maternelle</span></li>
+        <li>Français <span>courant</span></li>
+        <li>Anglais <span>courant</span></li>
       </ul>
     </div>
 
     <div class="block">
-      <span class="kicker mono">Contatti</span>
+      <span class="kicker mono">Contact</span>
       <ul class="contact">
-        <li><a href="mailto:gladiamarchetti@gmail.com">gladiamarchetti@gmail.com</a></li>
-        <li><a href="https://www.instagram.com/just_gladia/" target="_blank" rel="noopener">Instagram</a> <span>@just_gladia</span></li>
-        <li><a href="https://gladiamarchetti.com/danza-it.html" target="_blank" rel="noopener">Portfolio e reel</a></li>
+        <li><a>gladiamarchetti@gmail.com</a></li>
+        <li><a>Instagram</a> <span>@just_gladia</span></li>
+        <li><a>Portfolio et reel</a> <span>gladiamarchetti.com/danza-fr.html</span></li>
       </ul>
     </div>
   </aside>
 
   <main class="main">
     <div class="sec">
-      <span class="kicker mono">Scena</span>
+      <span class="kicker mono">Scène</span>
       <div class="cr">
-        <p class="role mono">Interprete &middot; Cerimonia di apertura</p>
-        <p class="title">Giochi Paralimpici di Parigi 2024</p>
+        <p class="role mono">Interprète &middot; Cérémonie d’ouverture</p>
+        <p class="title">Jeux Paralympiques de Paris 2024</p>
         <p class="client mono">Alexander Ekman &middot; Thomas Jolly &middot; 2024</p>
-        <p class="detail">Place de la Concorde, con Chilly Gonzales, Christine and the Queens e Lucky Love</p>
-        <a class="video mono" data-portfolio="danza-paralimpiadi.html">Video</a>
+        <p class="detail">Place de la Concorde, avec Chilly Gonzales, Christine and the Queens et Lucky Love</p>
       </div>
       <div class="cr">
-        <p class="role mono">Interprete</p>
+        <p class="role mono">Interprète</p>
         <p class="title">Encore en corps</p>
         <p class="client mono">Compagnie Relief &middot; Dominique Lisette &middot; 2023 – 2025</p>
-        <p class="detail">20 repliche nella regione parigina</p>
+        <p class="detail">20 représentations en Île-de-France</p>
       </div>
       <div class="cr">
-        <p class="role mono">Protagonista &middot; Danza e teatro</p>
+        <p class="role mono">Rôle-titre &middot; Danse et théâtre</p>
         <p class="title">Carmen</p>
         <p class="client mono">Compagnie CTBL &middot; George E. Prevost &middot; 2017 – 2025</p>
-        <p class="detail">75 repliche nella regione parigina</p>
+        <p class="detail">75 représentations en Île-de-France</p>
       </div>
       <div class="cr">
-        <p class="role mono">Interprete</p>
+        <p class="role mono">Interprète</p>
         <p class="title">Coloricocola</p>
         <p class="client mono">Nagan Production &middot; Machita Daly &middot; 2018 – 2021</p>
-        <p class="detail">Spettacolo di Brice Kapel, Palais des Festivals di Cannes<br>Riallestimento a Lexington, USA, Cary Memorial Hall, assistente alla coreografia</p>
+        <p class="detail">Spectacle de Brice Kapel, Palais des Festivals de Cannes<br>Reprise au Cary Memorial Hall de Lexington (USA), comme assistante chorégraphe</p>
       </div>
       <div class="cr">
-        <p class="role mono">Interprete</p>
+        <p class="role mono">Interprète</p>
         <p class="title">Éteignons les écrans</p>
         <p class="client mono">Nagan Production &middot; 2021 – 2024</p>
-        <p class="detail">25 repliche nella regione parigina</p>
+        <p class="detail">25 représentations en Île-de-France</p>
       </div>
       <div class="cr">
-        <p class="role mono">Coreografa e interprete &middot; Duo</p>
+        <p class="role mono">Chorégraphe et interprète &middot; Duo</p>
         <p class="title">INequality</p>
         <p class="client mono">Compagnie Wected &middot; 2019 – 2024</p>
-        <p class="detail">Festival Onze Bouge, Parigi<br>Apertura dell’Amman Contemporary Dance Festival, Giordania</p>
-        <a class="video mono" data-portfolio="coreografia-inequality.html">Video</a>
+        <p class="detail">Festival Onze Bouge, Paris<br>Ouverture de l’Amman Contemporary Dance Festival, Jordanie</p>
       </div>
       <div class="cr">
-        <p class="role mono">Interprete &middot; Creazione hip hop</p>
+        <p class="role mono">Interprète &middot; Création hip hop</p>
         <p class="title">C’Franc</p>
         <p class="client mono">Compagnie No MaD &middot; Mehdi Slimani &middot; 2020 – 2021</p>
-        <p class="detail">15 repliche nella regione parigina</p>
-        <a class="video mono" data-portfolio="danza-cfranc.html">Video</a>
+        <p class="detail">15 représentations en Île-de-France</p>
       </div>
     </div>
 
     <div class="sec">
-      <span class="kicker mono">Stage</span>
+      <span class="kicker mono">Stages</span>
       <div class="grid">
-        <span class="y mono">2025</span><p class="n">Édouard Hue<span>Beaver Dam Company</span><em>Qualità di movimento e repertorio della compagnia</em></p>
+        <span class="y mono">2025</span><p class="n">Édouard Hue<span>Beaver Dam Company</span><em>Qualités de mouvement et répertoire de la compagnie</em></p>
         <span class="y mono">2024</span><p class="n">Laja Field<em>Floorwork</em></p>
-        <span class="y mono">2023</span><p class="n">Tamara Gvozdenovic &amp; Kangding Ray<em>Danza con musica dal vivo, movimento e musicalità</em></p>
-        <span class="y mono">2023</span><p class="n">Carmel Loanga<em>Personaggio, performance e linguaggio coreografico</em></p>
+        <span class="y mono">2023</span><p class="n">Tamara Gvozdenovic &amp; Kangding Ray<em>Danse avec musique live, mouvement et musicalité</em></p>
+        <span class="y mono">2023</span><p class="n">Carmel Loanga<em>Personnage, performance et langage chorégraphique</em></p>
       </div>
     </div>
 
     <div class="spacer"></div>
     <div class="foot mono">
-      <span>Gladia Marchetti &middot; Danzatrice</span>
+      <span>Gladia Marchetti &middot; Danseuse</span>
       <span>1 / 2</span>
     </div>
   </main>
@@ -288,20 +234,20 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
     <div class="brand">
       <img class="logo logo-white" src="media/logo-white.png" alt="Gladia Marchetti">
       <img class="logo logo-black" src="media/logo-black.png" alt="Gladia Marchetti">
-      <p class="role mono">Danzatrice &middot; Interprete</p>
-      <p class="style">Contemporaneo &middot; Experimental</p>
-      <p class="where mono">Francia</p>
+      <p class="role mono">Danseuse &middot; Interprète</p>
+      <p class="style">Contemporain &middot; Expérimental</p>
+      <p class="where mono">France</p>
     </div>
 
     <div class="block">
-      <span class="kicker mono">Battle</span>
+      <span class="kicker mono">Battles</span>
       <ul class="battles">
-        <li><span class="lab mono">2022</span>OZ Dance <span>Vincitrice</span></li>
+        <li><span class="lab mono">2022</span>OZ Dance <span>Gagnante</span></li>
       </ul>
     </div>
 
     <div class="block bottom">
-      <span class="kicker mono">Marchi</span>
+      <span class="kicker mono">Marques</span>
       <ul class="brands">
         <li>Hermès</li><li>LVMH</li><li>Valentino</li><li>Victoria’s Secret</li>
         <li>Nestlé</li><li>Engie</li><li>Innoha</li><li>Caisse d’Épargne</li>
@@ -311,78 +257,73 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
 
   <main class="main">
     <div class="sec">
-      <span class="kicker mono">Video ed eventi</span>
+      <span class="kicker mono">Image et événementiel</span>
       <div class="three">
         <div class="cr small">
-          <p class="role mono">Spettacolo</p>
+          <p class="role mono">Spectacle</p>
           <p class="title">Bonduelle</p>
-          <p class="client mono">Ruolo principale<br>2018</p>
-          <a class="video mono" data-portfolio="danza.html#bonduelle">Video</a>
+          <p class="client mono">Rôle principal<br>2018</p>
         </div>
         <div class="cr small">
-          <p class="role mono">Spot pubblicitario</p>
+          <p class="role mono">Film publicitaire</p>
           <p class="title">Adolphe Lafont</p>
           <p class="client mono">2023</p>
-          <a class="video mono" data-portfolio="danza.html#lafont">Video</a>
         </div>
         <div class="cr small">
-          <p class="role mono">Videoclip ufficiale</p>
+          <p class="role mono">Clip officiel</p>
           <p class="title">Si on parlait</p>
           <p class="client mono">Sheryfa Luna<br>2017</p>
-          <a class="video mono" data-portfolio="danza.html#sheryfa">Video</a>
         </div>
         <div class="cr small">
-          <p class="role mono">Evento</p>
+          <p class="role mono">Événement</p>
           <p class="title">Ledger</p>
           <p class="client mono">Compagnie Human<br>2022</p>
-          <a class="video mono" data-portfolio="danza.html#ledger">Video</a>
         </div>
         <div class="cr small">
-          <p class="role mono">Evento</p>
+          <p class="role mono">Événement</p>
           <p class="title nowrap">Delta Festival</p>
           <p class="client mono">Compagnie Human<br>2023</p>
         </div>
         <div class="cr small">
-          <p class="role mono">Televisione</p>
+          <p class="role mono">Télévision</p>
           <p class="title nowrap">Melty Future Awards</p>
-          <p class="client mono">Con Amir<br>2017</p>
+          <p class="client mono">Avec Amir<br>2017</p>
         </div>
         <div class="cr small">
-          <p class="role mono">Cortometraggio</p>
+          <p class="role mono">Court métrage</p>
           <p class="title">Janine</p>
-          <p class="client mono">Danza e recitazione<br>2022</p>
-          <a class="video mono" href="https://www.youtube.com/watch?v=AYuHwkdxWWI" target="_blank" rel="noopener">Video</a>
+          <p class="client mono">Danse et jeu<br>2022</p>
         </div>
       </div>
     </div>
 
     <div class="sec">
-      <span class="kicker mono">Formazione in danza</span>
+      <span class="kicker mono">Formation en danse</span>
       <div class="school">
-        <p class="n">Studio Harmonic <span>Parigi &middot; 2014 – 2015</span></p>
+        <p class="n">Studio Harmonic <span>Paris &middot; 2014 – 2015</span></p>
         <ul>
-          <li><b class="mono">Contemporaneo</b><span>Corinne Lanselle, Stéphanie Chatton, Stéphane Fratti, Peter Mika</span></li>
-          <li><b class="mono">Classico</b><span>Grégory Cianci, Oli Speers</span></li>
+          <li><b class="mono">Contemporain</b><span>Corinne Lanselle, Stéphanie Chatton, Stéphane Fratti, Peter Mika</span></li>
+          <li><b class="mono">Classique</b><span>Grégory Cianci, Oli Speers</span></li>
           <li><b class="mono">Jazz</b><span>Pascal Loussouarn, Salem Hammadi, James Carlès</span></li>
           <li><b class="mono">Hip hop</b><span>Ly Em</span></li>
-          <li><b class="mono">Teatro</b><span>Pascal Couillaud</span></li>
-          <li><b class="mono">Canto</b><span>Alvina Lanselle</span></li>
+          <li><b class="mono">Théâtre</b><span>Pascal Couillaud</span></li>
+          <li><b class="mono">Chant</b><span>Alvina Lanselle</span></li>
         </ul>
       </div>
       <div class="school">
         <p class="n">EDGE Performing Arts Center <span>Los Angeles &middot; 2011 – 2013</span></p>
         <ul>
-          <li><b class="mono">Contemporaneo</b><span>Karen Chuang, Marissa Osato</span></li>
-          <li><b class="mono">Classico</b><span>Nicole Harlan</span></li>
+          <li><b class="mono">Contemporain</b><span>Karen Chuang, Marissa Osato</span></li>
+          <li><b class="mono">Classique</b><span>Nicole Harlan</span></li>
           <li><b class="mono">Jazz</b><span>Denise Leitner, Terry Best, Malaya, Adam Parson</span></li>
           <li><b class="mono">Hip hop</b><span>Tovaris Wilson, Noland Padilla</span></li>
         </ul>
       </div>
       <div class="school">
-        <p class="n">Officina delle Arti <span>Italia &middot; 1998 – 2011</span></p>
+        <p class="n">Officina delle Arti <span>Italie &middot; 1998 – 2011</span></p>
         <ul>
-          <li><b class="mono">Contemporaneo</b><span>Loretta Fariselli, Valentina Buldrini</span></li>
-          <li><b class="mono">Classico</b><span>Sabrina Minguzzi, esami RAD fino al livello Intermediate</span></li>
+          <li><b class="mono">Contemporain</b><span>Loretta Fariselli, Valentina Buldrini</span></li>
+          <li><b class="mono">Classique</b><span>Sabrina Minguzzi, examens RAD jusqu’au niveau Intermediate</span></li>
           <li><b class="mono">Modern jazz</b><span>Sara Buratti</span></li>
           <li><b class="mono">Hip hop</b><span>Denis Di Pasqua, Kriss Buzzi, La B Fujiko</span></li>
         </ul>
@@ -390,54 +331,20 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
     </div>
 
     <div class="sec">
-      <span class="kicker mono">Formazione in recitazione</span>
+      <span class="kicker mono">Formation en jeu</span>
       <div class="grid">
-        <span class="y mono">2023</span><p class="n">Alexandra Reynolds &amp; Tom Afiyan<em>Movimento per cinema e televisione</em></p>
-        <span class="y mono">2019 – 2022</span><p class="n">Actors Factory<span>Parigi</span><em>Recitazione davanti alla macchina da presa</em></p>
+        <span class="y mono">2023</span><p class="n">Alexandra Reynolds &amp; Tom Afiyan<em>Mouvement pour la télévision et le cinéma</em></p>
+        <span class="y mono">2019 – 2022</span><p class="n">Actors Factory<span>Paris</span><em>Jeu face caméra</em></p>
       </div>
     </div>
 
     <div class="spacer"></div>
     <div class="foot mono">
-      <span>Gladia Marchetti &middot; Danzatrice</span>
+      <span>Gladia Marchetti &middot; Danseuse</span>
       <span>2 / 2</span>
     </div>
   </main>
 </section>
 
-</div>
-
-<script>
-(function () {
-  var st = document.querySelector('.stage');
-  function fit() {
-    var w = document.documentElement.clientWidth;
-    var sw = st.offsetWidth;
-    var z = Math.min(1, (w - 24) / sw);
-    st.style.setProperty('--z', z);
-    st.style.setProperty('--x', Math.max(0, (w - sw * z) / 2) + 'px');
-    /* lo scale non riduce lo spazio occupato: si accorcia l'involucro a mano */
-    var h = st.scrollHeight;
-    document.body.style.height = (h * z + 40) + 'px';
-  }
-  fit();
-  addEventListener('resize', fit);
-})();
-</script>
-
-<script>
-/* TELEFONO E IPAD 10/9/2026. Dal telefono «Stampa» apre il PDF bianco, che ha gia' il formato di pagina giusto (decisione di Gladia,
-   10/9): il motore di stampa dei telefoni ignora @page. Sul computer resta window.print(). */
-(function () {
-  var b = document.querySelector('.tools button'); var a = document.querySelector('.tools a[download]');
-  if (!b || !a) return;
-  var pdf = a.getAttribute('href');
-  /* Safari (Mac) ignora @page, formato e margini, e aggiunge intestazione e pie': anche li' Stampa apre il PDF (Gladia, 10/9 ore 15). */
-  var safari = /Apple/.test(navigator.vendor || '') && !/CriOS|Chrome|Chromium|Edg/.test(navigator.userAgent || '');
-  b.addEventListener('click', function (e) {
-    if (window.matchMedia('(pointer:coarse)').matches || safari) { e.preventDefault(); e.stopImmediatePropagation(); window.open(pdf, '_blank'); }
-  }, true);
-})();
-</script>
 </body>
 </html>
