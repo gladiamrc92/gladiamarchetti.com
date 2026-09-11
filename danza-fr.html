@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="media/logo/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="media/logo/favicon-16.png">
 <link rel="apple-touch-icon" href="media/logo/favicon-180.png">
-<title>Gladia Marchetti — Coreografia</title>
+<title>Gladia Marchetti — Danza</title>
 <style>
   @font-face {
     font-family: "Playfair Display";
@@ -170,17 +170,6 @@
     color: var(--ink-faint);
   }
 
-  .reel-play {
-    font-size: 1.4rem;
-    color: var(--accent);
-  }
-
-  .reel-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
   .reel-cinema {
     aspect-ratio: 2.35 / 1;
     width: 100%;
@@ -214,11 +203,15 @@
     align-items: center;
   }
 
-  /* Linguetta che invita a premere il volume. Esce da sotto il cerchio verso
-     sinistra e resta aperta finche' non si preme. Niente width scritta a mano:
-     il testo cambia lunghezza da lingua a lingua e un numero solo andrebbe
-     bene per una delle tre. Versione scelta da Gladia il 13/8/2026.
-     Identica su danza, recitazione e direzione del movimento. */
+  /* ===== La linguetta che invita a premere l'audio =====
+     Sta PRIMA del cerchio nel codice e il pulsante e' ancorato a destra,
+     quindi aprendosi spinge verso sinistra. Si apre su max-width e non su
+     width perche' il testo cambia lunghezza da lingua a lingua e un numero
+     scritto a mano andrebbe bene per una sola delle tre.
+     Misurata aperta: 241px in italiano, 217 in inglese e francese, dentro un
+     video che sul telefono e' largo 342. Non tocca il bordo in nessun caso.
+     Compare da sola un secondo e mezzo dopo l'apertura e resta finche' non si
+     preme: e' la versione scelta da Gladia il 13/8/2026 fra tre. */
   .sound-toggle-label {
     flex: none;
     max-width: 0;
@@ -258,8 +251,8 @@
     padding-right: 0 !important;
   }
 
-  /* Se un giorno il mosaico di coreografia avra' dei video, li' il pulsante e'
-     piccolo e la linguetta non ci sta. */
+  /* I riquadri del mosaico non hanno la linguetta: li' il pulsante e' piccolo
+     e le didascalie dei crediti stanno subito sotto. */
   .mosaic-video .sound-toggle-label { display: none; }
 
   .sound-toggle-circle {
@@ -283,15 +276,21 @@
     inset: -6px;
     border-radius: 50%;
     border: 1.5px solid rgba(255, 255, 255, 0.6);
-    animation: coreo-ring-pulse 2s ease-out infinite;
+    animation: danza-ring-pulse 2s ease-out infinite;
   }
 
-  .reel-cinema.is-unmuted .sound-toggle-circle::after {
+  .reel-cinema.is-unmuted .sound-toggle-circle::after,
+  .mosaic-video.is-unmuted .sound-toggle-circle::after {
     animation: none;
     content: none;
   }
 
-  @keyframes coreo-ring-pulse {
+  /* NOTA: nel riquadro del mosaico il cerchio dell'audio va rimpicciolito,
+     quello dell'hero e' tarato su un video largo quanto lo schermo */
+  .mosaic-video .sound-toggle { right: 0.7rem; bottom: 0.7rem; }
+  .mosaic-video .sound-toggle-circle { width: 2.1rem; height: 2.1rem; }
+
+  @keyframes danza-ring-pulse {
     0% { transform: scale(0.85); opacity: 0.9; }
     100% { transform: scale(1.4); opacity: 0; }
   }
@@ -325,244 +324,13 @@
   .page-hero {
     min-height: 80vh;
     display: flex;
+    /* column come sulle altre tre pagine: senza, il riquadro veniva stirato
+       per riempire l'altezza dell'hero e perdeva le sue proporzioni 2.35/1
+       (sul telefono diventava 390x641, piu alto che largo). */
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.6rem;
     padding: 2vh 0;
-  }
-
-  .content-flow {
-    position: relative;
-    width: 100vw;
-    left: 50%;
-    margin-left: -50vw;
-    padding: 2rem 8vw 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6rem;
-  }
-
-  .photo-collage {
-    position: relative;
-    width: 100%;
-    max-width: 75rem;
-    margin: 0 auto;
-    height: 118rem;
-    padding: 2rem 0 4rem;
-  }
-
-  /* Otto foto, ordine di lettura a zigzag: p1, p6, p2, p5, p7, p8, p4, p3.
-     I due teatri dorati (p5 e p3) stanno a 44rem di distanza di proposito,
-     perche' sono la stessa sala e affiancati si leggevano come un doppione. */
-  /* Ordine ribilanciato sulla luce, 13/8. Prima si scendeva incontrando
-     quattro foto scure di fila (trio, sorriso, abbraccio, quartetto: dal 64 al
-     76% di superficie persa nel nero) e poi due chiarissime attaccate.
-     Ora le tre chiare stanno in posizione 1, 4 e 7, quindi non ci sono mai piu'
-     di due scure di seguito. Effetto collaterale voluto: le tre produzioni si
-     distribuiscono invece di stare a coppie.
-     I due teatri dorati (p5 e p3) restano lontanissimi, terza e ottava. */
-  /* Riequilibrio del 13/8 sera. Dopo il riordino sulla luce le quattro foto
-     con didascalia erano finite tutte nella colonna di sinistra (6, 8, 6 e 8
-     per cento): le quattro scritte scendevano incolonnate e la pagina sembrava
-     avere un lato scritto e uno muto. Se n'e' accorta Gladia guardando.
-     Adesso le didascalie si alternano sinistra, destra, sinistra, destra:
-     p1, p8, p7, p3. Il duo (p8) e il sorriso (p2) si sono scambiati di posto,
-     la sala prove (p4) e il lampadario (p3) si sono scambiati di lato.
-     L'ordine di lettura verticale, e quindi il ritmo della luce, non cambia. */
-  .collage-p1 { left: 6%; top: 0rem; width: 30rem; }  /* 1 colonne, chiara, didascalia */
-  .collage-p6 { left: 60%; top: 12rem; width: 24rem; }  /* 2 trio, scura */
-  .collage-p2 { left: 56%; top: 33rem; width: 20rem; }  /* 3 sorriso, scura */
-  .collage-p8 { left: 6%; top: 52rem; width: 24rem; }  /* 4 duo, chiara, didascalia */
-  .collage-p7 { left: 52%; top: 60rem; width: 28rem; }  /* 5 quartetto, scura, didascalia */
-  .collage-p4 { left: 8%; top: 72rem; width: 20rem; }  /* 6 sala prove, chiara */
-  .collage-p3 { left: 52%; top: 84rem; width: 20rem; }  /* 7 lampadario, scura, didascalia */
-
-  /* La proporzione sta sulla foto, non sul contenitore, cosi' la didascalia
-     puo' scorrere sotto senza essere schiacciata dentro il rapporto.
-     Stessa struttura di recitazione.html (.mosaic-pX .story-photo). */
-  .collage-p1 .collage-photo { aspect-ratio: 2 / 3; }
-  .collage-p2 .collage-photo { aspect-ratio: 1 / 1; }
-  .collage-p3 .collage-photo { aspect-ratio: 3 / 4; }
-  .collage-p4 .collage-photo { aspect-ratio: 3 / 4; }
-  .collage-p6 .collage-photo { aspect-ratio: 16 / 9; }
-  .collage-p7 .collage-photo { aspect-ratio: 16 / 9; }
-  .collage-p8 .collage-photo { aspect-ratio: 16 / 9; }
-
-  .collage-p1,
-  .collage-p2,
-  .collage-p3,
-  .collage-p4,
-  .collage-p6,
-  .collage-p7,
-  .collage-p8 {
-    position: absolute;
-    margin: 0;
-  }
-
-  .collage-photo {
-    width: 100%;
-    background: var(--ground-soft);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: 1px solid var(--rule);
-  }
-
-  /* Fascia dei lavori, 13/8. Sta sotto il mosaico e sopra il dossier.
-     Tre riquadri uguali di proposito: il mosaico sopra e' l'album e si guarda,
-     questa e' la prova e si usa, quindi deve leggersi in dieci secondi.
-     Le copertine sono i fotogrammi di YouTube scaricati e alleggeriti, cosi'
-     non ripetiamo foto che stanno gia' nel mosaico e non chiediamo niente a
-     un altro sito mentre la pagina carica. */
-  /* Niente titolo sopra la fascia: tre copertine con il triangolo del play
-     sotto un mosaico di foto si spiegano da sole, deciso da Gladia. Senza
-     titolo il distacco dal mosaico lo deve fare lo spazio, non una scritta:
-     da qui il respiro in cima. */
-  .works-band {
-    width: 100%;
-    max-width: 75rem;
-    margin: 0 auto;
-    padding: 2rem 0 0;
-  }
-
-  .works-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.2rem;
-  }
-
-  .works-row figure { margin: 0; }
-
-  .work-cover {
-    position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    padding: 0;
-    border: 1px solid var(--rule);
-    background-color: var(--ground-soft);
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
-  }
-
-  .work-cover::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(12, 18, 18, 0.05), rgba(12, 18, 18, 0.42));
-    transition: opacity 0.25s ease;
-  }
-
-  .work-play {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    z-index: 1;
-    font-size: 1.4rem;
-    color: var(--ink);
-  }
-
-  .work-cover:hover::after,
-  .work-cover:focus-visible::after { opacity: 0.55; }
-
-  .work-frame {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: 1px solid var(--rule);
-  }
-
-  @media (max-width:44rem) {
-    .works-row { grid-template-columns: 1fr; gap: 2.6rem; }
-    .works-band { padding-top: 3rem; }
-  }
-
-  .mosaic-caption {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.03em;
-    color: var(--ink-faint);
-    /* Sul telefono la riga intera non ci sta e nessuna scelta di larghezza la
-       fa entrare: li' la didascalia va a capo, e balance spezza le due righe
-       alla stessa lunghezza invece di lasciare una parola sola sotto. */
-    text-wrap: balance;
-  }
-
-  /* Soglia a 80rem (1280px), non piu' a 56rem.
-     Le posizioni sono in percentuale e le larghezze in rem: sotto i 1280px il
-     contenitore si stringe, le percentuali avvicinano le foto ma le larghezze
-     restano ferme, e le foto si accavallano. Misurato il 13/8: cinque coppie
-     sovrapposte a 1024px, la pagina che sfonda di 10px a 900px.
-     La soglia sta a 1280 e non piu' in basso perche' li' la colonna mostra le
-     foto piu' grandi del mosaico: in colonna una foto arriva a 416px, nel
-     mosaico la piu' larga vale 416px solo da 1238px di viewport in su. */
-  @media (max-width: 80rem) {
-    .photo-collage {
-      height: auto;
-      max-width: none;
-      padding: 2rem 6vw;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .collage-p1,
-    .collage-p2,
-    .collage-p3,
-    .collage-p4,
-    .collage-p6,
-    .collage-p7,
-    .collage-p8 {
-      position: static;
-      width: 100%;
-      /* 28rem e non 26: la didascalia e' larga quanto la foto, e a 26rem quella
-         di Cannes restava a 8px dal bordo. Sotto i 480px comanda comunque la
-         larghezza dello schermo, quindi li' non cambia niente. */
-      max-width: 28rem;
-    }
-  }
-
-  /* Nella fascia intermedia c'e' spazio in piu': le foto respirano fino a 34rem
-     invece di restare ferme a 26. Sotto i 56rem non cambia niente. */
-  @media (min-width: 56.01rem) and (max-width: 80rem) {
-    .collage-p1,
-    .collage-p2,
-    .collage-p3,
-    .collage-p4,
-    .collage-p6,
-    .collage-p7,
-    .collage-p8 {
-      max-width: 34rem;
-    }
-  }
-
-  .mosaic-video {
-    background: var(--ground-soft);
-    border: 1px solid var(--rule);
-    box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.14);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--ink-faint);
-  }
-
-  .mosaic-video .reel-play {
-    font-size: 1.2rem;
-    color: var(--accent);
-  }
-
-  .closing {
-    margin: 0;
-    font-style: italic;
-    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
-    color: var(--accent);
   }
 
   .bio-block {
@@ -616,6 +384,33 @@
     text-wrap: pretty;
   }
 
+  /* DECISIONE, non una toppa: la frase inglese va a capo sui due punti.
+     Presa da Gladia il 13/8/2026 guardando le due versioni una sopra l'altra.
+
+     Sopra i due punti c'e' l'affermazione, sotto la spiegazione: il capo riga
+     cade dove la frase ha la sua giuntura vera. Lasciando decidere al browser,
+     "making" restava appeso in fondo alla prima riga, cioe' la seconda meta'
+     cominciava e si interrompeva subito.
+
+     Il capo e' imposto dallo <span class="quote-break"> nel testo. Questa
+     regola gli da' la larghezza per esistere: la seconda meta' a corpo 56px
+     chiede 1049px e la scatola comune ne da' 1008, quindi senza i 67rem
+     (1072px, 23 di margine) "my own." cadrebbe da solo su una terza riga.
+
+     Costo accettato: le due righe non sono piu' di lunghezza simile, la prima
+     e' piu' corta della seconda. Il browser stava ottimizzando proprio quello
+     con text-wrap: pretty. Scambio voluto, l'equilibrio delle lunghezze si
+     nota misurando, la frase spezzata a meta' si sente leggendo.
+
+     NON riportare a 63rem "per coerenza" e non togliere lo span.
+     Il corpo resta 56px. Italiano e francese non sono agganciati qui: stanno
+     gia' in due righe dentro i 63rem e vanno a capo sui due punti da soli.
+     Sotto i 1024px l'inglese torna a tre righe: li' comanda la finestra, non
+     questa regola, e si e' scelto di non rimpicciolire il testo per rimediare. */
+  .bio-block-method p.method-lead[data-i18n="en"] {
+    max-width: 67rem;
+  }
+
   /* Su telefono la coda corta pesa piu della coerenza di larghezza:
      righe pari, quindi balance invece di pretty. */
   @media (max-width: 44rem) {
@@ -624,9 +419,291 @@
     }
   }
 
-  .bio-block-short {
-    min-height: 50vh;
-    padding: 3rem 8vw;
+  .photo-mosaic {
+    position: relative;
+    /* Tetto alla larghezza: sopra i 1600px la composizione smette di allargarsi
+       e resta centrata. Senza questo le foto restano larghe uguale (em fissi)
+       mentre i "left" in % continuano ad allontanarle, e su monitor grandi il
+       mosaico si svuota lasciando la colonna centrale deserta. */
+    width: min(100vw, 100rem);
+    left: 50%;
+    /* Lo spostamento deve stare nel LAYOUT, non solo nei pixel disegnati:
+       transform sposta il dipinto ma lascia la scatola dov'era, e la pagina
+       guadagnava 47px di scorrimento orizzontale sul telefono. */
+    margin-left: calc(min(100vw, 100rem) / -2);
+    /* Le misure interne del mosaico sono in em, non in rem, cosi' scalano tutte
+       insieme al font-size qui sotto. I "left" dei riquadri sono in % di questa
+       larghezza: percentuali ed em scalano allo stesso ritmo, quindi le distanze
+       relative restano identiche a ogni dimensione di finestra. Prima le
+       larghezze erano in rem fissi e sotto i 1318px i riquadri si accavallavano. */
+    font-size: 1rem;
+    /* 201.625 e non 215: il 13/8/2026 il battle e' salito di 9.375em e tutto
+       quello che stava sotto e' salito con lui, quindi il mosaico si accorcia
+       della stessa quantita'. Questa altezza deve restare QUI, prima del media
+       query per telefono che la rimette a auto: una regola piu' specifica
+       (per esempio con body davanti) vincerebbe anche dentro il media query e
+       sul telefono il mosaico resterebbe alto 955px con dentro 3046px di foto,
+       col risultato che il pulsante del CV finisce sopra le immagini. */
+    height: 206.625em;
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 82.35rem) {
+    .photo-mosaic { font-size: calc(100vw / 82.35); }
+  }
+
+  /* NOTA: i "top" delle citazioni sono posizioni assolute dall'inizio del mosaico.
+     Prima del 6/8 erano scostamenti dal flusso e non corrispondevano a quello che
+     si vedeva. I valori con i decimali qui sotto sono le posizioni reali di allora,
+     riconvertite: visivamente identiche, ma ora il numero dice la verita'. */
+  .mosaic-pA { left: 6%; top: 0em; width: 30em; }
+  /* La citazione del battle sta nella colonna sinistra, sotto la prima foto:
+     chiude il buco che si apriva li' sotto e cade dentro la fascia del video
+     battle (20.6-56.2em), cosi' la si legge mentre il battle si muove accanto.
+     Il transform la centra sul suo top qualunque sia la sua altezza nelle tre
+     lingue, quindi non si muove quando il francese va a capo una volta in piu'.
+     Non e' salita col resto il 13/8: e' agganciata alla prima foto, che sta a
+     top 0 e non si sposta, e a 38.6em sarebbe finita sopra la foto stessa. */
+  .mosaic-text1 { left: 8%;
+    top: 48em;
+    transform: translateY(-50%); width: 26em; }
+  /* I "top" da qui in giu' sono scesi di 9.375em il 13/8/2026 rispetto ai
+     valori precedenti (30, 190.26, 70, 86, 107.02): il video battle e' salito
+     per chiudere il vuoto in alto a destra e tutto il blocco sotto e' salito
+     con lui, cosi' ogni distanza gia' approvata resta identica. */
+  .mosaic-pB { left: 60%; top: 20.625em; width: 20em; aspect-ratio: 9 / 16; }
+  .mosaic-text3 { left: 52%; top: 185.885em; width: 26em; }
+  .mosaic-pH { left: 8%; top: 60.625em; width: 32em; }
+  .mosaic-pC { left: 56%; top: 76.625em; width: 22em; }
+  /* citazione 2 allineata in basso con pC, la foto in bianco e nero a destra */
+  .mosaic-text2 { left: 8%; top: 97.645em; width: 32em; }
+  /* ===== Il video delle performance, formato cinema 2.35 =====
+     Prende lo spazio lasciato libero dal video delle prove, uscito il 12/8.
+     Media e a destra, non a banda larga: il materiale e' broadcast ripreso da
+     lontano e alla scala grande si vede che e' impastato. Priorita' di
+     posizione si', priorita' di dimensione no.
+     A left 36% il bordo destro cade su quello di pF con uno scarto fra lo 0,3
+     e il 4% a seconda della larghezza.
+     Il bordo destro va calcolato come left% + 1.214 x larghezza in em:
+     sotto i 1317px un em vale 1.214% della larghezza del mosaico, non 1%. */
+  .mosaic-pP { left: 36%; top: 109.625em; width: 40em; aspect-ratio: 2.3529 / 1; }
+
+  /* Crediti del video: registro da cartello, non da citazione. Niente barra
+     dell'accento e niente corsivo, cosi' non si legge come una frase sua. */
+  /* Niente font-size QUI: top, left e width sono in em e gli em si calcolano
+     sul font dell'elemento stesso. Con 0.72rem sul contenitore, top:137em
+     diventava 98,6em del mosaico e i crediti finivano molto piu' in alto.
+     Il font piccolo va messo sul paragrafo interno. */
+  /* left 49 e non meno: pE arriva al 48% sugli schermi stretti. La larghezza
+     dei crediti e' in em ma il loro testo e' in rem, quindi piu' la finestra
+     si stringe piu' righe occupano, e sotto serve spazio abbondante.
+     49% + 27em cade esattamente sul bordo destro del video (36% + 40em) sugli
+     schermi larghi. Su quelli stretti i crediti rientrano di due o tre punti
+     invece di sporgere: rientrare si legge come allineato, sporgere come un
+     errore. */
+  .mosaic-credits { left: 49%; top: 127.625em; width: 27em;
+    color: var(--ink-faint); text-align: right; }
+  .mosaic-credits p {
+    margin: 0;
+    font-size: 0.68rem;
+    line-height: 1.65;
+    letter-spacing: 0.03em;
+  }
+  /* Qui stavano le tre varianti del video delle performance (A media a
+     destra, B banda larga, C piccola) e il pannello per cambiarle. Scelta
+     la A il 13/8/2026 e riportati i suoi valori dentro le regole vere qui
+     sopra, l'impalcatura e' stata tolta. Le tre varianti restano visibili nel
+     backup danza-mosaico-draft.backup-20260813-141259.html. */
+  /* Anche questi tre sono scesi di 9.375em il 13/8/2026 rispetto ai valori
+     approvati il giorno prima (139, 152, 182.5). */
+  .mosaic-pE { left: 14%; top: 129.625em; width: 28em; }
+  .mosaic-pF { left: 60%; top: 142.625em; width: 20em; }
+  /* 178.125 e non 173.125: fra la fine della verticale (pE) e l'inizio di
+     questo video restavano 24px, lo stacco piu' stretto di tutta la pagina
+     contro gli 87-304px di tutti gli altri, e le ultime tre figure si
+     leggevano come un blocco unico. Cinque em in piu' portano lo stacco a
+     104px, in linea con pA-text1 (87) e pC-pP (88). Segnalato da Gladia il
+     13/8/2026. text3 scende della stessa quantita' per restare centrata su
+     questo video, e il mosaico si allunga di 5em. */
+  .mosaic-pG { left: 20%; top: 178.125em; width: 22em; aspect-ratio: 1 / 1; }
+
+  .mosaic-pA .story-photo { aspect-ratio: 3 / 4; }
+  .mosaic-pH .story-photo { aspect-ratio: 16 / 9; }
+  .mosaic-pC .story-photo { aspect-ratio: 4 / 5; }
+  .mosaic-pE .story-photo { aspect-ratio: 2 / 3; }
+  /* pE e' 2:3 perche' ospita la verticale sulle mani: figura allungata,
+     piede al 2% dell altezza del file e mano al 90%. 2:3 e' il rapporto esatto
+     del file, quindi entra intera. In un quadrato ne perdeva un terzo. */
+  .mosaic-pF .story-photo { aspect-ratio: 3 / 4; }
+
+  .mosaic-pA,
+  .mosaic-pB,
+  .mosaic-pC,
+  .mosaic-pD,
+  .mosaic-pE,
+  .mosaic-pF,
+  .mosaic-pG,
+  .mosaic-pH,
+  /* NOTA: senza pP qui il riquadro del video resta nel flusso e il suo "top"
+     non e' una posizione ma uno spostamento, quindi finisce sopra la foto
+     della verticale. Questa lista elenca gli slot uno per uno: uno slot nuovo
+     va aggiunto anche qui, non solo nel blocco per telefono. */
+  .mosaic-pP,
+  .mosaic-credits,
+  .mosaic-text1,
+  .mosaic-text2,
+  .mosaic-text3 {
+    /* !important perche' .story-fragment piu' avanti nel file rimette
+       position:relative con la stessa specificita' e altrimenti vince.
+       Senza questo le citazioni restano nel flusso e il loro "top" non e'
+       una posizione ma uno scostamento da dove sono capitate, che dipende
+       dall'altezza delle citazioni scritte prima nell'HTML. */
+    position: absolute !important;
+    margin: 0;
+    z-index: 1;
+  }
+
+  @media (max-width: 44rem) {
+    .photo-mosaic {
+      height: auto;
+      padding: 2rem 6vw;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .mosaic-pA,
+    .mosaic-pB,
+    .mosaic-pC,
+    .mosaic-pD,
+    .mosaic-pE,
+    .mosaic-pF,
+    .mosaic-pG,
+    .mosaic-pH,
+    .mosaic-pP,
+    .mosaic-credits,
+    .mosaic-text1,
+    .mosaic-text2,
+    .mosaic-text3 {
+      /* !important perche' .story-fragment piu' avanti nel file rimette
+         position:relative con la stessa specificita' e altrimenti vince,
+         lasciando alle citazioni gli spostamenti left/top del desktop */
+      position: static !important;
+      left: auto !important;
+      top: auto !important;
+      width: 100% !important;
+      transform: none !important;
+    }
+
+    /* I contenitori dei video devono restare posizionati anche sul telefono.
+       Dentro ognuno c'e' un <video class="mosaic-clip"> con position:absolute
+       e inset:0, che si aggancia all'antenato posizionato piu' vicino. Se il
+       contenitore diventa static per via del reset qui sopra, quell'antenato
+       diventa .photo-mosaic, e il video si stira su TUTTO il mosaico: misurato
+       il 13/8/2026 a 390px, tre video alti 4171px l'uno sopra le foto, che
+       sparivano completamente. Difetto presente fin da quando sono stati messi
+       i video nel mosaico (11/8), non introdotto dal rimpasto.
+       Serve la specificita' in piu' di .photo-mosaic: fra due dichiarazioni
+       !important vince quella con il selettore piu' specifico, e il reset qui
+       sopra e' !important. Senza position:relative non cambia il flusso, il
+       riquadro resta impilato in colonna come gli altri. */
+    .photo-mosaic .mosaic-video {
+      position: relative !important;
+    }
+
+    .story-fragment {
+      margin: 1.5rem 0;
+    
+      /* relative, non static: la virgoletta di apertura e' posizionata in
+         assoluto e senza un aggancio qui si riferisce al mosaico intero,
+         finendo nel suo angolo in alto a sinistra sopra la prima foto.
+         Senza scostamenti, nel flusso si comporta come static. */
+      position: relative !important;
+    }
+  }
+
+  .story-photo {
+    width: 100%;
+    background: var(--ground-soft);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--rule);
+    transition: opacity 0.2s ease;
+  }
+
+  .mosaic-video {
+    background: var(--ground-soft);
+    border: 1px solid var(--rule);
+    box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.14);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--ink-faint);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mosaic-clip {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .story-fragment {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0 0.2rem 1.9rem;
+    border-left: 2px solid var(--accent);
+    text-align: left;
+  }
+
+  .story-fragment::before {
+    content: "\201C";
+    position: absolute;
+    left: 0.55rem;
+    top: 0.15rem;
+    font-family: "Playfair Display", "Big Caslon", Baskerville, Georgia, serif;
+    font-style: italic;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .story-fragment p {
+    max-width: 44ch;
+    margin: 0;
+    font-family: "Playfair Display", "Big Caslon", Baskerville, Georgia, serif;
+    font-style: italic;
+    font-size: clamp(0.82rem, 1.3vw, 0.98rem);
+    line-height: 1.45;
+    color: var(--ink);
+    text-align: justify;
+    text-wrap: wrap;
+  }
+
+  .mosaic-text1 p {
+    max-width: 39.4ch;
+  }
+
+  .mosaic-text3 p {
+    max-width: 41.4ch;
+  }
+
+  .mosaic-text2 p {
+    max-width: 47.1ch;
+  }
+
+  .story-fragment .quote-break,
+  .bio-block-method .quote-break {
+    display: block;
   }
 
   .line-connector {
@@ -659,6 +736,13 @@
     font-size: 1.1rem;
     line-height: 1;
     margin-top: -0.3rem;
+  }
+
+  .closing {
+    margin: 0;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    color: var(--accent);
   }
 
   .page-actions {
@@ -941,8 +1025,40 @@
     border: 0;
   }
 
+  /* Link "salta al contenuto principale".
+     Invisibile finche' non lo si raggiunge col tabulatore: e' il primo
+     elemento raggiungibile della pagina, cosi' chi naviga da tastiera o con un
+     lettore di schermo non deve attraversare intestazione e selettore di
+     lingua per arrivare al contenuto.
+     Non e' display:none: quello lo toglierebbe anche alla tastiera, cioe'
+     esattamente a chi serve. Sta fuori schermo e rientra quando prende il fuoco. */
+  .salta-al-contenuto {
+    position: absolute;
+    left: 50%;
+    top: -100px;
+    transform: translateX(-50%);
+    z-index: 100;
+    padding: 0.7em 1.4em;
+    background: var(--ink);
+    color: var(--ground);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0 0 4px 4px;
+    transition: top 0.18s ease;
+  }
+
+  .salta-al-contenuto:focus {
+    top: 0;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+
 /* ==========================================================================
-   BOZZA EDITORIALE COREOGRAFIA 15/8/2026. Blocco copiato dalla bozza Danza (danza-editoriale-draft.html) per non far divergere le due pagine. Nessuna regola vecchia toccata.
+   BOZZA EDITORIALE 14/8/2026. Blocchi nuovi, nessuna regola vecchia toccata.
    ========================================================================== */
 
 /* Spostata il 15/8 da sopra il logo a sotto il video, su due righe: il video
@@ -951,21 +1067,63 @@
 .identity-line p { margin:0; font-size:0.7rem; letter-spacing:0.16em;
   text-transform:uppercase; color:var(--ink-faint); line-height:1.9; }
 .identity-line .identity-role { color:var(--accent); letter-spacing:0.24em; }
-.identity-line + .line-connector { padding-top:1.2rem; }
+/* 16/8: la freccia stava a 19px dal testo e a 169px dal primo riquadro.
+   Ora sta in mezzo: stessa distanza sopra e sotto (misurato: 56 e 56). */
+.identity-line + .line-connector { padding:2rem 0 0.5rem; }
+.identity-line + .line-connector .connector-line { height:4rem; }
+#danza.page { padding-top:0; }
+#danza .works-mosaic { padding-top:2.5rem; }
 
-/* --- Mosaico dei lavori. Sfalsato come lo voleva Gladia, ma NEL FLUSSO:
-   niente position:absolute sui riquadri, quindi nessuna sovrapposizione
-   possibile e nessuna geometria da riverificare a ogni modifica. Lo sfalsamento
-   lo fanno larghezza variabile piu' margin auto. --- */
+/* --- Mosaico dei lavori, 17/8: GRIGLIA con gerarchia (Gladia: "dimensioni
+   diverse secondo l'importanza, come in coreografia"). 12 colonne, righe da
+   13rem, i riquadri riempiono la cella (object-fit cover). Paralimpiadi grande
+   su due righe; Bonduelle e Lafont impilati a destra; Sheryfa, Ledger e
+   C'Franc sotto. Ogni riquadro e' FERMO su una foto di copertina (.tile-cover);
+   al passaggio del cursore la copertina sfuma, il clip parte e compaiono i
+   crediti sopra l'immagine. Gli altri restano fermi. La scala a zig zag di
+   prima e' in danza.backup-20260817-0830-pre-griglia-D2.html. --- */
 .works-mosaic {
-  display:flex; flex-direction:column; gap:7rem;
+  display:grid; grid-template-columns:repeat(12, 1fr); grid-auto-rows:13rem; gap:1.4rem;
   width:min(100vw, 82rem); position:relative; left:50%;
   transform:translateX(-50%); margin:0; padding:3.5rem 3rem 0;
 }
-.works-mosaic > * { width:var(--w, 50%); margin:0; }
+.works-mosaic > .work-tile { width:auto; margin:0; display:flex; }
+.works-mosaic > .work-tile:nth-child(1) { grid-column:1 / 8;  grid-row:1 / 3; }  /* Paralimpiadi */
+.works-mosaic > .work-tile:nth-child(2) { grid-column:8 / 13; grid-row:1; }      /* Bonduelle */
+.works-mosaic > .work-tile:nth-child(3) { grid-column:8 / 13; grid-row:2; }      /* Lafont */
+.works-mosaic > .work-tile:nth-child(4) { grid-column:1 / 5;  grid-row:3; }      /* Sheryfa */
+.works-mosaic > .work-tile:nth-child(5) { grid-column:5 / 9;  grid-row:3; }      /* Ledger */
+.works-mosaic > .work-tile:nth-child(6) { grid-column:9 / 13; grid-row:3; }      /* C'Franc */
 /* Il pulsante del CV prendeva il gap standard della sezione (2.2rem) e stava
    attaccato all'ultimo riquadro. */
-.works-actions { margin-top:4.5rem; }
+.works-actions { margin-top:3rem; }
+/* 16/8: stessa taglia del titolo del Metodo su coreografia (clamp 2.4rem/4vw/56px),
+   cosi' le due pagine madri hanno una riga di voce dello stesso peso. */
+/* 16/8, terza versione: una riga sola, corsivo, con un filetto sopra e
+   sotto che la incornicia invece di lasciarla "piazzata li'". Sotto i 64rem
+   la riga puo' andare a capo. */
+/* 16/8 mattina: la riga sta dentro .page (40rem) ed e' nowrap, quindi
+   sbordava a destra e margin:auto non poteva centrarla (misurato a 1440:
+   centro testo 884, centro pulsante 720). Ora e' un flex item largo quanto
+   il suo testo, centrato da align-self anche quando e' piu' largo di .page. */
+.works-line { position:relative; margin:7.5rem 0 0; align-self:center; width:max-content;
+  max-width:min(100vw - 3rem, 64rem); padding:2.2rem 1.5rem; text-align:center;
+  font-style:italic; font-size:clamp(1.15rem, 1.6vw, 1.55rem); line-height:1.5; letter-spacing:0.01em;
+  color:var(--ink); white-space:nowrap; }
+.works-line::before, .works-line::after { content:""; position:absolute; left:50%; transform:translateX(-50%);
+  width:3.5rem; height:1px; background:var(--accent); }
+.works-line::before { top:0; } .works-line::after { bottom:0; }
+@media (max-width:64rem) { .works-line { white-space:normal; } }
+.works-line + .works-actions { margin-top:3.5rem; }
+/* 2/9: la citazione sta sotto la riga di identità, fuori da .page: si centra
+   con margin auto (width:max-content), respiro ridotto sopra e la freccia
+   riparte da qui con la stessa altezza di prima. */
+.works-line.is-hero { display:block; margin:2.4rem auto 0; padding:1.8rem 1.5rem; }
+.works-line.is-hero + .line-connector { padding:1.6rem 0 0.5rem; }
+.works-line.is-hero + .line-connector .connector-line { height:4rem; }
+/* 2/9: il pulsante del CV chiude le fasce, dopo i marchi. */
+.names-band .works-actions.is-end { margin-top:5rem; display:flex; justify-content:center; }
+
 .at-left  { margin-right:auto; }
 .at-right { margin-left:auto; }
 
@@ -973,26 +1131,28 @@
    come su delphinegaborit.com, dove sborda in basso a destra oltre la foto. */
 .work-tile { position:relative; overflow:visible; }
 
-.tile-media { position:relative; width:100%; aspect-ratio:16/9;
+.tile-media { position:relative; width:100%; height:100%; aspect-ratio:auto;
   border:1px solid var(--rule); background-color:var(--ground-soft);
   background-size:cover; background-position:center; overflow:hidden; }
-.at-left:first-child .tile-media { aspect-ratio:2.3529/1; }
+/* Copertina ferma sopra il clip: sfuma al passaggio (o quando il clip gira). */
+.tile-cover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1;
+  transition:opacity .45s ease; pointer-events:none; }
+.work-tile:hover .tile-cover, .work-tile:focus-within .tile-cover, .work-tile.is-playing .tile-cover { opacity:0; }
+/* Niente cornice chiara attorno a foto e video: Gladia, 15/8, "su tutto il
+   sito, su tutte le pagine con le quali stiamo lavorando". */
+.tile-media, .work-cover, .work-frame, .book-item, .lightbox-media { border:0; }
 .tile-media video { width:100%; height:100%; object-fit:cover; display:block; }
 .tile-media .work-cover { aspect-ratio:auto; height:100%; border:0; }
 
 /* La didascalia e' ancorata all'angolo in basso a destra dell'immagine e
    sborda oltre. right negativo, non left: cosi' cresce verso l'interno della
    pagina e non puo' mai spingere fuori il bordo destro creando lo scorrimento
-   orizzontale.
-   18/8/2026, chiesto da Gladia: il verso e' INVERTITO rispetto a prima.
-   A riposo i nomi si leggono DENTRO la foto, al passaggio del cursore
-   scendono e si tolgono di mezzo lasciando la foto pulita. E' lo stesso
-   movimento di danza.html, dove pero' sotto la didascalia parte un clip:
-   qui le foto sono ferme, quindi il premio del passaggio e' la foto intera.
-   Il passaggio nasconde solo col MOUSE: col fuoco da tastiera la didascalia
-   resta, o chi naviga con Tab perderebbe l'unica etichetta visibile. */
-/* 3/9/2026, conforme a Danza (17/8 griglia D2), bozza B scelta da Gladia: crediti in basso a SINISTRA
-   dentro il riquadro, con l'ombra portata sotto il testo. */
+   orizzontale. */
+/* 17/8 (griglia D2): i crediti stanno DENTRO il riquadro, in basso a
+   sinistra, e compaiono al passaggio insieme al clip, sopra un velo scuro dal
+   basso. Sotto i 60rem (telefono, niente cursore) stanno sotto l'immagine,
+   sempre visibili. La versione con i crediti fissi di fianco (bozza C, 16/8)
+   sta nel backup pre-griglia-D2. */
 .tile-cap {
   position:absolute; left:1.1rem; right:1.1rem; bottom:1rem; z-index:2;
   display:flex; flex-direction:column; align-items:flex-start; text-align:left;
@@ -1000,31 +1160,22 @@
   transition:opacity .35s ease, transform .35s ease;
   text-shadow:0 1px 10px rgba(8,12,12,0.85), 0 0 24px rgba(8,12,12,0.6);
 }
-.work-tile:hover .tile-cap { opacity:0; transform:translateY(0.4rem); }
-
+/* 18/8 (crash test a freddo, decisione di Gladia): i crediti si leggono da
+   FERMI, sulla copertina; al passaggio spariscono e resta solo il clip. */
+.work-tile:hover .tile-cap, .work-tile:focus-within .tile-cap { opacity:0; transform:translateY(0.4rem); }
 .tile-role   { font-size:0.66rem; letter-spacing:0.22em; color:var(--accent); }
 .tile-title  { font-size:1.6rem; line-height:1.02; letter-spacing:0.01em;
                color:var(--accent); margin:0.1rem 0; }
 .tile-client { font-size:0.72rem; letter-spacing:0.16em; color:var(--accent);
                margin-top:0.35rem; }
 .tile-detail { font-size:0.6rem; letter-spacing:0.04em; line-height:1.6;
-               color:var(--ink-faint); margin-top:0.5rem; }
+               color:var(--ink); opacity:.85; margin-top:0.5rem; }
+.works-mosaic > .work-tile:nth-child(1) .tile-title { font-size:2.4rem; }
 
-/* Didascalie fisse su tablet e telefono, chiesto da Gladia il 17/8/2026.
-   La condizione era solo (hover: none), cioe' dipendeva dal PUNTATORE e non
-   dalla larghezza: misurato lo stesso giorno, a 390 e a 834px con il mouse
-   dichiarato le quattro didascalie restavano a opacity 0 e position absolute,
-   quindi invisibili e non raggiungibili, perche' su un dito il passaggio del
-   mouse non esiste. Colpiva due casi veri: un iPad con tastiera e trackpad
-   (dichiara hover: hover) e la pagina guardata in una finestra stretta.
-   La virgola qui e' un OPPURE fra le due condizioni: basta che ne valga una.
-   60rem e' la stessa soglia a cui .works-pack-row passa a colonna singola
-   piu' sotto, quindi il riquadro a tutta larghezza e la didascalia sotto
-   arrivano insieme e non c'e' una fascia in cui il disegno si sfalsa. */
-@media (hover: none), (max-width: 60rem) { .tile-cap { opacity:1; transform:none; position:static;
-  align-items:flex-start; text-align:left; max-width:none; margin-top:0.8rem; }
-  .tile-title { font-size:1.7rem; } .tile-cap { text-shadow:none; } .tile-media::after { display:none; } }
-@media (prefers-reduced-motion: reduce) { .tile-cap { transition:none; } }
+@media (max-width:60rem) {
+  .tile-cap { position:static; margin:0.8rem 0 0; opacity:1; transform:none; text-shadow:none; }
+  .tile-title, .works-mosaic > .work-tile:nth-child(1) .tile-title { font-size:1.7rem; }
+  .tile-media::after { display:none; } }
 
 
 /* --- Leggibilita' dei crediti sopra l'immagine. Tre cose insieme, perche'
@@ -1038,17 +1189,25 @@
    --accent (#c25a34) e un'immagine bianca sotto scendeva a 2.59:1, sotto la
    soglia di 3.0 per il testo grande. A 0.93 sale sopra. --accent non si tocca
    mai, quindi l'unica leva era il fondo.
-   18/8/2026: il velo sta ora a RIPOSO, perche' e' a riposo che i nomi si
-   leggono sopra la foto. Al passaggio sparisce insieme alla didascalia e
-   resta l'immagine pulita. --- */
-.tile-media::after {
-  content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
-  /* 3/9, velo di danza (17/8, Gladia): scuro solo dove sta la didascalia,
-     sopra torna il colore. 0.92 in basso, 0 al 62%. */
+   Il velo compare SOLO al passaggio: a riposo l'immagine resta pulita. --- */
+/* 17/8: velo scuro dal basso al passaggio, per leggere i crediti sopra
+   l'immagine (come sulle copertine di coreografia). */
+.tile-media::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
+  /* 17/8, Gladia: scuro solo dove sta la didascalia, sopra torna il colore
+     (stessa curva delle porte della home: 0.92 in basso, 0 al 62%). */
   background:linear-gradient(to top, rgba(8,12,12,0.92) 0%, rgba(8,12,12,0.35) 38%, rgba(8,12,12,0) 62%);
-  opacity:1; transition:opacity .35s ease;
-}
-.work-tile:hover .tile-media::after { opacity:0; }
+  opacity:1; transition:opacity .35s ease; }
+.work-tile:hover .tile-media::after, .work-tile:focus-within .tile-media::after { opacity:0; }
+/* 18/8, Gladia: su Bonduelle la scritta si perdeva sulla giacca bianca dello
+   chef; velo piu' scuro e piu' alto solo su quel riquadro. */
+/* 2/9, Gladia: stessa cosa su C'Franc, la scritta si confondeva con la
+   maglietta bianca. Misurato sulla copertina (cfranc-foto-2, riquadro 390x208):
+   contrasto medio di --accent dietro PERFORMER 1.72 col velo normale,
+   3.40 con questo (soglia 3.0 per il testo grande). */
+#lavoro-bonduelle .tile-media::after,
+#lavoro-cfranc .tile-media::after {
+  background:linear-gradient(to top, rgba(8,12,12,0.96) 0%, rgba(8,12,12,0.72) 45%, rgba(8,12,12,0) 78%); }
+.work-tile:hover .tile-media video { filter:none; }
 
 .tile-media video,
 .tile-media .work-cover { transition:filter .35s ease; }
@@ -1056,7 +1215,6 @@
 .work-tile:hover .tile-media .work-cover { filter:brightness(0.82); }
 
 .tile-cap { text-shadow:0 1px 10px rgba(8,12,12,0.85), 0 0 24px rgba(8,12,12,0.6); }
-
 .grid-quote { grid-column:1 / -1; max-width:34rem; margin:1.5rem 0; }
 .big-quote p { margin:0; }
 .da-confermare { color:#c8622f; letter-spacing:0.08em; }
@@ -1100,22 +1258,20 @@
    lunghezza di UNA lista, e a fine ciclo il fotogramma coincide con quello
    di partenza. Se si aggiunge o toglie una foto va aggiornata la copia,
    altrimenti il salto si vede. */
+/* 16/8, richiesta di Gladia: il nastro va da solo, si ferma quando ci sei
+   sopra, e si puo' scorrere con trackpat/rotella o trascinare col mouse.
+   Quindi niente animazione CSS: e' un contenitore che scorre davvero
+   (overflow-x:auto) e un piccolo script lo fa avanzare da solo (scrollLeft)
+   finche' nessuno lo tocca. La lista e' sempre duplicata: arrivati a meta'
+   si torna a zero e non si vede il salto. */
 .book-track {
   display:flex; align-items:flex-start; gap:0.9rem; width:max-content;
-  animation:book-scorre 64s linear infinite;
 }
-.book-band:hover .book-track,
-.book-track:focus-within { animation-play-state:paused; }
-@keyframes book-scorre {
-  from { transform:translateX(0); }
-  to   { transform:translateX(-50%); }
-}
-/* Chi ha chiesto meno movimento non si prende un nastro che gira all'infinito:
-   li' il book torna fermo e si scorre a mano. */
-@media (prefers-reduced-motion: reduce) {
-  .book-track { animation:none; }
-  .book-band { overflow-x:auto; }
-}
+.book-band { overflow-x:auto; overflow-y:hidden; scrollbar-width:none; cursor:grab;
+  -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; }
+.book-band::-webkit-scrollbar { display:none; }
+.book-band.is-dragging { cursor:grabbing; user-select:none; }
+.book-band.is-dragging .book-item { pointer-events:none; }
 .book-item {
   flex:0 0 auto; padding:0; cursor:pointer;
   width:var(--w); height:var(--h); margin-top:var(--top, 0);
@@ -1136,6 +1292,13 @@
 .lightbox-img { max-width:100%; max-height:90vh; object-fit:contain; }
 .lightbox-close { position:absolute; top:1rem; right:1.4rem; z-index:1;
   background:none; border:0; color:#fff; font-size:2rem; line-height:1; cursor:pointer; }
+/* Frecce della galleria del book (16/8): solo per le foto, non per i video. */
+.lightbox-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:1;
+  background:none; border:0; color:#fff; font-size:3.2rem; line-height:1; padding:0.4rem 1rem;
+  cursor:pointer; opacity:0.75; }
+.lightbox-nav:hover, .lightbox-nav:focus-visible { opacity:1; }
+.lightbox-nav.is-prev { left:0.6rem; } .lightbox-nav.is-next { right:0.6rem; }
+@media (max-width:40rem) { .lightbox-nav { font-size:2.4rem; padding:0.2rem 0.5rem; } }
 
 /* --- Banda nomi. Il difetto segnalato da Gladia il 14/8: stava incollata
    alla fascia arancione di chiusura. Il respiro sotto e' volutamente piu'
@@ -1155,6 +1318,8 @@
   color:var(--ink);
 }
 .names-list.is-battles { display:flex; justify-content:center; }
+/* 18/8: otto marchi su due righe pari (4+4), non sette piu' uno orfano. */
+.names-list.is-brands { max-width:44rem; margin:0 auto; }
 .names-list.is-battles .is-win b { font-size:1.25rem; color:var(--accent); }
 .names-list.is-battles .is-win span { font-size:0.68rem; letter-spacing:0.18em;
   text-transform:uppercase; }
@@ -1168,12 +1333,26 @@
    stessa pagina, il contenuto si apre sopra. */
 .lightbox-inner { width:min(94vw, 76rem); display:flex; flex-direction:column;
   align-items:center; gap:1.2rem; }
+/* Larghezza legata all'altezza dello schermo: con le miniature sotto, su un
+   portatile da 900px il video a tutta larghezza usciva dal fondo. */
 .lightbox-media { width:100%; aspect-ratio:16/9; background:#000; }
+.lightbox-inner { width:min(94vw, 76rem, calc(66vh * 16 / 9)); max-height:96vh; overflow:auto; }
 .lightbox-media iframe, .lightbox-media video { width:100%; height:100%; border:0; display:block; }
 .lightbox-cap { width:100%; text-align:left; color:#efe9e2; }
 .lightbox-cap .lb-role { font-size:0.6rem; letter-spacing:0.22em; color:var(--accent); }
 .lightbox-cap .lb-title { font-size:1.9rem; line-height:1.1; color:var(--accent); margin:0.2rem 0; }
 .lightbox-cap .lb-detail { font-size:0.66rem; letter-spacing:0.04em; line-height:1.7; opacity:0.75; }
+/* Miniature sotto il video: le foto del progetto (15/8, sul modello di Anne
+   Fotso: immagini che dicono "c'ero" accanto al video). La prima e' il video
+   stesso, cosi' si torna indietro con un clic. */
+.lightbox-thumbs { width:100%; display:flex; flex-wrap:wrap; gap:0.5rem; }
+.lightbox-thumbs button { flex:0 0 auto; width:7.5rem; height:5rem; padding:0; border:1px solid transparent;
+  background:#111 center/cover no-repeat; cursor:pointer; opacity:0.7; transition:opacity .2s, border-color .2s; }
+.lightbox-thumbs button:hover, .lightbox-thumbs button:focus-visible { opacity:1; }
+.lightbox-thumbs button.is-current { opacity:1; border-color:var(--accent); }
+.lightbox-thumbs button.is-video { display:grid; place-items:center; color:#efe9e2; font-size:1.4rem; }
+.lightbox-media.is-photo { background:#000; }
+.lightbox-media img { width:100%; height:100%; object-fit:contain; display:block; }
 .is-apribile { cursor:pointer; }
 .is-apribile .tile-media { transition:transform .35s ease; }
 .is-apribile:hover .tile-media { transform:scale(1.012); }
@@ -1196,9 +1375,16 @@
    spostata solo quella, non tutta la fascia a destra.
    Sotto i 44rem la griglia va a una colonna sola e forzare la terza
    spingerebbe la voce fuori: li' la regola si annulla. */
-.names-list.is-second li:last-child { grid-column: 3; }
-@media (max-width: 44rem) {
-  .names-list.is-second li:last-child { grid-column: auto; }
+/* 17/8, crash test leggero: fra 44rem e 60rem la griglia ha DUE colonne
+   (19rem minime) e forzare la terza creava una colonna fantasma fuori pagina
+   (18 px di scorrimento orizzontale a 768). La regola vale solo quando tre
+   colonne ci stanno davvero. */
+@media (min-width: 68rem) {
+  .names-list.is-second li:last-child { grid-column: 3; }
+  /* 2/9, Gladia: C'Franc tolto dalla fascia perche' e' gia' nel mosaico
+     ("quelli che sono nel mosaico non servono a metterli anche sotto").
+     Con quattro voci la quarta sta al centro, non a destra. */
+  .names-list.is-second li:nth-child(4):last-child { grid-column: 2; }
 }
 .names-list.is-second li,
 .names-list.is-battles li { display:flex; flex-direction:column; gap:0.35rem; }
@@ -1214,14 +1400,15 @@
 .names-band { max-width:76rem; }
 .names-list.is-second b { font-size:0.84rem; letter-spacing:0.1em; white-space:nowrap; }
 .names-list.is-second { grid-template-columns:repeat(auto-fit, minmax(19rem, 1fr)); }
-@media (max-width:44rem) { .names-list.is-second b { white-space:normal; } }
+@media (max-width:60rem) { .names-list.is-second b { white-space:normal; } }
 .names-list.is-battles span,
 .names-list.is-second span { font-size:0.62rem; letter-spacing:0.05em;
   line-height:1.6; color:var(--ink-faint); }
 
-@media (max-width:44rem) {
-  .works-mosaic { gap:4rem; padding-top:2rem; }
-  .works-mosaic > * { width:100% !important; margin:0; }
+@media (max-width:60rem) {
+  .works-mosaic { display:flex; flex-direction:column; gap:2.5rem; padding-top:2rem; }
+  .works-mosaic > .work-tile:nth-child(n) { width:100% !important; margin:0; display:block; }
+  .tile-media { aspect-ratio:16/9; height:auto; }
   .works-row { grid-template-columns:1fr; gap:2.6rem; }
   .book-item:hover { width:var(--w); }
 }
@@ -1232,133 +1419,12 @@
 }
 
 
-/* --- Solo coreografia: metodo corto sotto i lavori, e riquadri con foto
-   (niente clip video per progetto), quindi il tile-media porta lo sfondo. --- */
-.method-short { padding-top:6rem; }
-/* Pagina madre: foto ferme, quindi didascalie sempre visibili (stessa regola delle sottopagine). */
-/* Didascalie in hover, come Danza: Gladia le vuole animate (16/8). Mosaico piu' stretto: gap 7rem -> 4.5rem. */
-.works-mosaic { gap:4.5rem; }
-/* 16/8 pomeriggio: la frase riprende il disegno della citazione di danza.html
-   (una riga in corsivo incorniciata da due filetti accent, centrata da
-   align-self perche' e' un flex item largo quanto il suo testo). Regola
-   copiata dalla versione corretta di stamattina della sessione Danza. */
-.works-line { position:relative; margin:7.5rem 0 0; align-self:center; width:max-content;
-  max-width:min(100vw - 3rem, 64rem); padding:2.2rem 1.5rem; text-align:center;
-  font-style:italic; font-size:clamp(1.15rem, 1.6vw, 1.55rem); line-height:1.5; letter-spacing:0.01em;
-  color:var(--ink); white-space:nowrap; }
-.works-line::before, .works-line::after { content:""; position:absolute; left:50%; transform:translateX(-50%);
-  width:3.5rem; height:1px; background:var(--accent); }
-.works-line::before { top:0; } .works-line::after { bottom:0; }
-@media (max-width:64rem) { .works-line { white-space:normal; } }
-.works-line + .works-actions { margin-top:3.5rem; }
-.tile-media, .work-cover, .work-frame, .book-item { border:0; }
-/* Freccia centrata fra riga identita' e primo riquadro (era 19px sopra e 169 sotto, misurato il 16/8): stessi numeri di Danza. */
-.identity-line + .line-connector { padding:3.5rem 0 1rem; }
-#coreografia.page { padding-top:0; min-width:0; width:100%; box-sizing:border-box; }
-/* min-width:0: la section e' un flex item del body e con min-width:auto
-   prendeva la larghezza min-content dei figli (436 px a 390 di viewport,
-   scorrimento orizzontale su telefono). Presente anche nella versione della
-   notte, misurato il 16/8 mattina; danza.html non ne soffre. */
-.works-mosaic { padding-top:2.5rem; }
-
-
-/* --- Mosaico incastrato (16/8): due righe piene, bordi allineati, spazi
-   stretti come il collage film di recitazione. La didascalia resta DENTRO il
-   riquadro (in basso a destra) perche' con le righe strette non c'e' piu'
-   spazio sotto in cui sbordare. --- */
-.works-pack { display:flex; flex-direction:column; gap:1.3rem; width:100%; }
-.works-pack-row { display:flex; gap:1.5%; align-items:flex-start; justify-content:space-between; }
-.works-pack-row > .work-tile { width:var(--w); margin:0; }
-.works-pack .tile-media { aspect-ratio:var(--ar, 16/9); }
-/* 3/9: posizione della didascalia gia' in .tile-cap, come su danza. */
-@media (max-width:44rem) { .works-pack-row { flex-direction:column; gap:1.3rem; } .works-pack-row > .work-tile { width:100% !important; } .works-pack .tile-media { aspect-ratio:16/9; }
-  /* 6/9/2026: sul computer il riquadro del live INequality e' 1.29/1 e sta a 42% (scelta di Gladia); a 16/9 il 42% taglia la testa, misurato sui provini: qui resta 30% */
-  #lavoro-inequality .tile-media { background-position:center 30% !important; } }
-
-/* 16/8: la regola ereditata da danza (li:last-child in colonna 3) qui non
-   serve, la fascia ha tre voci sole; e fra 44 e 66rem la griglia auto-fit ha
-   due colonne, quindi forzare la terza creava una colonna implicita fuori
-   pagina (18px di scorrimento a 768px, misurato dal crash test). */
-.names-list.is-second li:last-child { grid-column:auto; }
-
-/* 16/8 sera, dopo il crash test editoriale: la prova (scene e festival,
-   interpreti diretti) sale subito sotto il mosaico, prima della frase e del
-   pulsante. La fascia sta dentro .page (40rem) e ne esce con lo stesso trucco
-   del mosaico. La frase e' piu' lunga della precedente: va a capo su due
-   righe bilanciate invece di restare su una riga sola. */
-.page > .names-band { width:min(100vw, 76rem); position:relative; left:50%; transform:translateX(-50%); padding:6.5rem 2rem 1rem; }
-.works-line { white-space:normal; max-width:min(100vw - 3rem, 46rem); text-wrap:balance; margin-top:5.5rem; }
-
-/* --- 3/9/2026, conforme a Danza (bozza B scelta da Gladia). Regole copiate da danza.html (2/9): la frase
-   sta sotto la riga di identita', fuori da .page, centrata con margin auto;
-   la freccia riparte da li' con la stessa altezza di prima. --- */
-.works-line.is-hero { display:block; margin:2.4rem auto 0; padding:1.8rem 1.5rem; }
-/* 3/9, Gladia: la frase su UNA riga come su Danza. Misurata su una riga a
-   1600px: 1026 IT, 1017 EN, 1042 FR (col padding), quindi il tetto sta a
-   68rem e non a 64 come su Danza, dove la frase e' piu' corta. Sotto i 64rem
-   di finestra torna a capo su due righe pari, stessa soglia di Danza. */
-.works-line.is-hero { white-space:nowrap; max-width:min(100vw - 3rem, 68rem); }
-@media (max-width:64rem) { .works-line.is-hero { white-space:normal; text-wrap:balance; } }
-.works-line.is-hero + .line-connector { padding:1.6rem 0 0.5rem; }
-.works-line.is-hero + .line-connector .connector-line { height:4rem; }
-/* 2/9 (Danza): il pulsante chiude le fasce, dopo l'ultima lista. */
-.names-band .works-actions.is-end { margin-top:5rem; display:flex; justify-content:center; }
-/* La fascia ora finisce col pulsante: stesso respiro in fondo di danza (9rem). */
-.page > .names-band { padding-bottom:9rem; }
-/* 3/9: PROVATO E ANNULLATO. Avevo ridotto questo vuoto (261->213 px), ma
-   Gladia aveva chiesto la riduzione solo sulle sottopagine, non sulla madre.
-   Guardate le due versioni una accanto all'altra: 261 px non e' un problema
-   vero, e' lo stesso identico respiro che ha Danza prima della banda
-   arancione. Rimesso uguale, le due pagine restano conformi su questo punto. */
-/* 3/9, Gladia: il mosaico va tenuto in una schermata, come su Danza.
-   Misurato a 1440 e a 1512: la griglia di Danza e' alta 709 px, questo
-   mosaico incastrato ne faceva 840 e su uno schermo da 900 restava sempre
-   tagliato in fondo. 63.2rem e' la larghezza a cui le due righe tornano
-   esattamente a 709. Si stringe la LARGHEZZA perche' le proporzioni dei
-   riquadri sono fisse (--ar): l'altezza scende solo per conseguenza.
-   Costo accettato da lei: il mosaico e' piu' stretto delle fasce sotto. */
-.works-pack { width:min(100%, 63.2rem); margin:0 auto; }
-/* 3/9, segnalato da Gladia: fra il pulsante e la banda arancione qui c'erano
-   216 px contro i 144 di Danza. Causa: su Danza la fascia dei nomi sta FUORI
-   dalla section, qui sta dentro, e i 72 px di coda della section si sommavano
-   ai 144 della fascia. La fascia da' gia' il suo respiro, quindi la section
-   non ne aggiunge altro. */
-#coreografia.page { padding-bottom:0; }
-/* 3/9: la riga del numero sta sotto la lista, piu' piccola e smorzata,
-   come le righe di dettaglio della fascia sopra. */
-.cast-count { margin:1.4rem 0 0; font-size:0.62rem; letter-spacing:0.05em;
-/* 3/9 sera, check di layout: niente vedove nei paragrafi lunghi, nei crediti e
-   nelle righe corte che vanno a capo su telefono (regola 2 di Portfolio/CLAUDE.md). */
-.sub-note p, .sub-credits .names-list.is-second span, .sub-credits .names-list.is-second b, .sub-crosslink, .cast-count, .closing-band .closing, .fc-client, .fc-role, .fc-detail { text-wrap:balance; }
-  text-transform:uppercase; color:var(--ink-faint); }
-/* 3/9: PROVATO E ANNULLATO, non rifarlo. Avevo stretto la fascia dei nomi
-   alla larghezza del mosaico ridotto (63.2rem) perche' il mosaico era
-   diventato piu' stretto del testo sotto. Costo scoperto misurando: nella
-   fascia dei crediti il titolo piu' lungo, "Amman Contemporary Dance
-   Festival", chiede 312 px e con tre colonne dentro 947 px ne restano 288,
-   quindi la griglia scendeva a due colonne e Amman finiva da solo sulla
-   seconda riga. Per tre crediti su una riga la fascia deve essere larga
-   almeno 1083 px, cioe' piu' del mosaico: le due cose non stanno insieme.
-   Su Danza mosaico (1312) e fasce (1216) non sono allineati nemmeno loro,
-   quindi l'allineamento non e' una regola di questo sito, era una mia
-   preferenza. La fascia resta a 66rem come prima. */
-/* 3/9: stessa ricetta di Danza su Bonduelle (18/8) e C'Franc (2/9): velo
-   piu' scuro e piu' alto solo sul riquadro dove la scritta si perde, qui la
-   foto verde di INequality (cosa aperta dal 18/8). */
-#lavoro-inequality .tile-media::after {
-  background:linear-gradient(to top, rgba(8,12,12,0.96) 0%, rgba(8,12,12,0.72) 45%, rgba(8,12,12,0) 78%); }
-
-  /* "Salta al contenuto", portato da danza.html il 9/9/2026 (passo 8, lettori di schermo):
-     primo elemento raggiungibile della pagina, fuori schermo finche' non prende il fuoco
-     da tastiera. Non e' display:none, che lo toglierebbe proprio a chi serve. */
-  .salta-al-contenuto {
-    position: absolute; left: 50%; top: -100px; transform: translateX(-50%); z-index: 100;
-    padding: 0.7em 1.4em; background: var(--ink); color: var(--ground);
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.72rem;
-    letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
-    border-radius: 0 0 4px 4px; transition: top 0.18s ease;
-  }
-  .salta-al-contenuto:focus { top: 0; outline: 2px solid var(--accent); outline-offset: 2px; }
+/* 4/9: niente vedove nei blocchi di testo e nelle righe corte, misurato con lo
+   script delle bounding box (regola 2 di Portfolio/CLAUDE.md). Stessa passata
+   fatta su Coreografia il 3/9. */
+.works-line, .closing-band .closing, .sub-credits .names-list.is-second span,
+.sub-credits .names-list.is-second b, .sub-credits-event, .fc-client, .fc-detail,
+.tile-cap .tile-detail, .sub-note p { text-wrap:balance; }
 
 /* ===== TELEFONO E IPAD 10/9/2026 (passo 8, rilievi di Gladia dal telefono vero) ===== */
 .spezza .sep { display:block; height:0; overflow:hidden; font-size:0; line-height:0; }
@@ -1440,41 +1506,47 @@
   /* E: il rimando al cortometraggio, sottolineatura che non pesta la riga dopo */
   .sub-crosslink a { border-bottom:0; text-decoration:underline; text-underline-offset:0.4em; text-decoration-thickness:1px; line-height:2.1; }
 }
-
-@media (max-width:44rem) { .cast-count { text-align:center; } }
 </style>
 <!-- ANTEPRIME DEL LINK 11/9/2026: come appare il link quando lo si manda. Testo scritto dai madrelingua. -->
-<meta name="description" content="Choreographer for live performance, music video, short film and feature film.">
+<meta name="description" content="Interprète en danse contemporaine et expérimentale, pour le spectacle vivant et pour l’audiovisuel.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gladia Marchetti">
-<meta property="og:locale" content="en_GB">
-<meta property="og:url" content="https://gladiamarchetti.com/coreografia.html">
-<meta property="og:title" content="Gladia Marchetti · Choreography">
-<meta property="og:description" content="Choreographer for live performance, music video, short film and feature film.">
-<meta property="og:image" content="https://gladiamarchetti.com/media/anteprime/coreografia.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://gladiamarchetti.com/danza-fr.html">
+<meta property="og:title" content="Gladia Marchetti · Danse">
+<meta property="og:description" content="Interprète en danse contemporaine et expérimentale, pour le spectacle vivant et pour l’audiovisuel.">
+<meta property="og:image" content="https://gladiamarchetti.com/media/anteprime/danza.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gladia Marchetti">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gladia Marchetti · Choreography">
-<meta name="twitter:description" content="Choreographer for live performance, music video, short film and feature film.">
-<meta name="twitter:image" content="https://gladiamarchetti.com/media/anteprime/coreografia.jpg">
+<meta name="twitter:title" content="Gladia Marchetti · Danse">
+<meta name="twitter:description" content="Interprète en danse contemporaine et expérimentale, pour le spectacle vivant et pour l’audiovisuel.">
+<meta name="twitter:image" content="https://gladiamarchetti.com/media/anteprime/danza.jpg">
+<link rel="canonical" href="https://gladiamarchetti.com/danza.html">
 </head>
+<script>
+/* ANTEPRIME DEL LINK 11/9/2026: questa copia della pagina si apre in fr. Serve perche' chi legge l'anteprima
+   di un link e' un programma che non preme i pulsanti della lingua: legge quello che trova scritto. */
+(function () {
+  try { localStorage.setItem('gm-portfolio-lang', 'fr'); } catch (e) {}
+  document.documentElement.setAttribute('data-ui-lang', 'fr');
+  document.documentElement.lang = 'fr';
+})();
+</script>
 <body data-primo-schermo="centro">
-<a class="salta-al-contenuto" href="#coreografia" data-i18n="it">Salta al contenuto</a>
-<a class="salta-al-contenuto" href="#coreografia" data-i18n="en">Skip to content</a>
-<a class="salta-al-contenuto" href="#coreografia" data-i18n="fr">Aller au contenu</a>
 
-<h1 class="sr-only" data-i18n="it">Gladia Marchetti, coreografia</h1>
-<h1 class="sr-only" data-i18n="en">Gladia Marchetti, choreography</h1>
-<h1 class="sr-only" data-i18n="fr">Gladia Marchetti, chorégraphie</h1>
+<h1 class="sr-only" data-i18n="it">Gladia Marchetti, danza</h1>
+<h1 class="sr-only" data-i18n="en">Gladia Marchetti, dance</h1>
+<h1 class="sr-only" data-i18n="fr">Gladia Marchetti, danse</h1>
+
+<a class="salta-al-contenuto" href="#contenuto" data-i18n="it">Salta al contenuto</a>
+<a class="salta-al-contenuto" href="#contenuto" data-i18n="en">Skip to content</a>
+<a class="salta-al-contenuto" href="#contenuto" data-i18n="fr">Aller au contenu</a>
 
 <div class="frame" aria-hidden="true"></div>
 
-<!-- Era aria-label="Lingua / Language", due lingue insieme, l'unica etichetta
-     della pagina non tradotta. Uniformata al 14/8/2026 al meccanismo che usa
-     tutto il resto. -->
-<div class="ui-lang-select" role="group" aria-label="Lingua" data-i18n-aria-it="Lingua" data-i18n-aria-en="Language" data-i18n-aria-fr="Langue">
+<div class="ui-lang-select" role="group" aria-label="Lingua / Language" data-i18n-aria-it="Lingua / Language" data-i18n-aria-en="Language" data-i18n-aria-fr="Langue / Language">
   <button class="ui-lang-btn is-active" type="button" data-ui-lang="en">EN</button>
   <button class="ui-lang-btn" type="button" data-ui-lang="fr">FR</button>
   <button class="ui-lang-btn" type="button" data-ui-lang="it">IT</button>
@@ -1487,32 +1559,24 @@
   </a>
 </div>
 
+<!-- tabindex="-1" non e' decorativo: senza, molti browser fanno scorrere la
+     pagina ma NON spostano il fuoco della tastiera, quindi il tabulatore
+     successivo riparte dall'intestazione e il link non serve a niente. -->
+<div id="contenuto" role="main" tabindex="-1" aria-label="Contenuto principale" data-i18n-aria-it="Contenuto principale" data-i18n-aria-en="Main content" data-i18n-aria-fr="Contenu principal">
 <div class="page-hero">
-  <div class="reel reel-cinema" id="coreografia-reel" aria-label="Video, coreografia" data-i18n-aria-it="Video, coreografia" data-i18n-aria-en="Video, choreography" data-i18n-aria-fr="Vidéo, chorégraphie">
-    <button class="reel-full" type="button" id="coreografia-reel-full" aria-label="Schermo intero" data-i18n-aria-it="Schermo intero" data-i18n-aria-en="Full screen" data-i18n-aria-fr="Plein &eacute;cran"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-    <!-- preload="metadata" invece di "auto". Attenzione: finche' c'e' autoplay
-         questo cambia poco, perche' la riproduzione scarica comunque il file
-         mentre va. Serve davvero solo il giorno in cui l'autoplay non ci fosse.
-         Il reel pesa 9,1 MB in AV1 e 11,3 in H.264 (era 16,2 per chiunque
-         prima della compressione del 13/8): l'unico risparmio vero che resta
-         sarebbe far partire il video al click invece che da solo. Non provato
-         sul campo il 13/8: Chrome headless si chiude appena il video inizia a
-         bufferare. -->
-    <video class="reel-video" id="coreografia-video" playsinline muted loop preload="none" data-avvia-in-vista poster="media/coreografia/coreografia-reel-cinema-poster.jpg">
-      <!-- Due versioni dello stesso identico video: nessun taglio, stessa
-           risoluzione, stesse inquadrature. Il browser prende la prima che sa
-           leggere e ignora l'altra, quindi si scarica un file solo.
-           AV1 9,1 MB (Chrome, Firefox, Edge, Safari 17+), H.264 11,3 MB per
-           tutti gli altri. Prima erano 16,2 MB per chiunque: quel file resta
-           in _archivio-media/coreografia/_originali-pre-compressione/ (spostato
-           li' il 10/9/2026, fuori dalla pubblicazione) ed e' la sorgente
-           da cui riesportare, non cancellarlo.
-           Qualita' percepita misurata con VMAF: 96,3 l'AV1 e 96,2 l'H.264,
-           sopra la soglia in cui la differenza non e' visibile. -->
-      <source src="media/coreografia/coreografia-reel-cinema-av1.mp4" type="video/mp4; codecs=&quot;av01.0.08M.08&quot;">
-      <source src="media/coreografia/coreografia-reel-cinema.mp4" type="video/mp4">
+  <div class="reel reel-cinema" id="danza-reel" aria-label="Reel di danza" data-i18n-aria-it="Reel di danza" data-i18n-aria-en="Dance reel" data-i18n-aria-fr="Reel de danse">
+    <button class="reel-full" type="button" id="danza-reel-full" aria-label="Schermo intero" data-i18n-aria-it="Schermo intero" data-i18n-aria-en="Full screen" data-i18n-aria-fr="Plein &eacute;cran"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <video class="reel-video" id="danza-video" playsinline muted loop preload="none" data-avvia-in-vista poster="media/danza/danza-reel-1-cinema-poster.jpg">
+      <source src="media/danza/danza-reel-1-cinema.mp4" type="video/mp4">
     </video>
-    <button class="sound-toggle" type="button" id="coreografia-sound-toggle" aria-label="Attiva audio" data-i18n-aria-it="Attiva audio" data-i18n-aria-en="Turn on sound" data-i18n-aria-fr="Activer le son" data-aria-on-it="Disattiva audio" data-aria-on-en="Turn off sound" data-aria-on-fr="Couper le son" data-aria-off-it="Attiva audio" data-aria-off-en="Turn on sound" data-aria-off-fr="Activer le son">
+    <button class="sound-toggle" type="button" id="danza-sound-toggle" aria-label="Attiva audio"
+            data-i18n-aria-it="Attiva audio" data-i18n-aria-en="Turn on sound" data-i18n-aria-fr="Activer le son"
+            data-aria-off-it="Attiva audio" data-aria-off-en="Turn on sound" data-aria-off-fr="Activer le son"
+            data-aria-on-it="Disattiva audio" data-aria-on-en="Turn off sound" data-aria-on-fr="Couper le son">
+      <!-- La linguetta che invita a premere. E' aria-hidden perche' il nome
+           vero del pulsante resta l'aria-label qui sopra, che dice l'azione
+           ("Attiva audio"): questa dice il motivo, non l'azione, e ripeterla
+           a un lettore di schermo confonderebbe e basta. -->
       <span class="sound-toggle-label mono" aria-hidden="true"
             data-i18n-text-it="Con l’audio è meglio"
             data-i18n-text-en="Best with sound"
@@ -1530,170 +1594,176 @@
 </div>
 
 <div class="identity-line">
-  <p class="mono identity-role" data-i18n="it">Coreografa</p>
-  <p class="mono identity-role" data-i18n="en">Choreographer</p>
-  <p class="mono identity-role" data-i18n="fr">Chor&eacute;graphe</p>
-  <!-- 3/9, scelta da Gladia fra tre proposte: la riga di genere dichiara quello
-       che il mosaico paga davvero, i cast misti di Éteignons (danza, circo,
-       musica dal vivo). In inglese NON "Creation", che e' un calco dal
-       francese: nel settore anglofono una produzione nuova e' "new work".
-       3/9, Gladia: via la prima parola (Creazione / New work / Création),
-       resta il solo cast pluridisciplinare. Da far passare dal controllo
-       lingua nelle tre lingue. -->
-  <p class="mono identity-genre" data-i18n="it">Cast multidisciplinari</p>
-  <p class="mono identity-genre" data-i18n="en">Multidisciplinary casts</p>
-  <p class="mono identity-genre" data-i18n="fr">Distribution pluridisciplinaire</p>
+  <p class="mono identity-role" data-i18n="it">Performer</p>
+  <p class="mono identity-role" data-i18n="en">Performer</p>
+  <p class="mono identity-role" data-i18n="fr">Interpr&egrave;te</p>
+  <!-- 17/8 sera: genere dichiarato, parola "Experimental" tenuta non tradotta
+       in italiano su richiesta esplicita di Gladia. Ordine invertito su sua
+       richiesta: genere prima della base geografica, si legge come una frase. -->
+  <p class="mono identity-genre" data-i18n="it">Contemporaneo &middot; Experimental</p>
+  <p class="mono identity-genre" data-i18n="en">Contemporary &middot; Experimental</p>
+  <p class="mono identity-genre" data-i18n="fr">Contemporain &middot; Exp&eacute;rimental</p>
+  <!-- 17/8, formula unica decisa da Gladia per tutte le pagine e i PDF:
+       solo il paese, niente "disponibile ovunque". 3/9: da "Base in Francia" a "Francia", decisione di Gladia dopo il crash test italiano. -->
   <p class="mono" data-i18n="it">Francia</p>
   <p class="mono" data-i18n="en">France</p>
   <p class="mono" data-i18n="fr">France</p>
 </div>
 
-<!-- 3/9/2026, conforme a Danza (decisione del 2/9 su Danza, scelta da Gladia per Coreografia il 3/9): la frase sale sotto la riga di identita',
-     prima della freccia. Su Danza tre lettori su quattro: riga migliore
-     della pagina, letta da pochi dov'era. Testo invariato. -->
-  <p class="works-line is-hero solo-largo-stretto" data-i18n="it">Costruisco il&nbsp;lavoro intorno agli interpreti, partendo dal&nbsp;loro mondo e&nbsp;dalla&nbsp;loro tecnica.</p>
-  <p class="works-line is-hero solo-stretto" data-i18n="it">Costruisco il lavoro intorno agli interpreti,<br>partendo dal loro mondo e dalla loro tecnica.</p>
-  <p class="works-line is-hero solo-largo-stretto" data-i18n="en">I build the&nbsp;work around the&nbsp;performers: their&nbsp;world, their&nbsp;technique.</p>
-  <p class="works-line is-hero solo-stretto" data-i18n="en">I build the work around the performers:<br>their world, their technique.</p>
-  <p class="works-line is-hero solo-largo-stretto" data-i18n="fr">Je fa&ccedil;onne le&nbsp;travail autour des&nbsp;interpr&egrave;tes, &agrave;&nbsp;partir de&nbsp;leur univers et&nbsp;de&nbsp;leur technique.</p>
-  <p class="works-line is-hero solo-stretto" data-i18n="fr">Je fa&ccedil;onne le travail autour des interpr&egrave;tes,<br>&agrave; partir de leur univers et de leur technique.</p>
+<!-- 2/9: la citazione sale qui sotto la riga di identità, decisione di Gladia
+     dopo il cross di quattro crash test (tre su quattro: riga migliore, letta
+     da pochi dov'era). Era dopo il mosaico. Testo invariato.
+  <!-- 16/8: l'unica riga di testo suo nella pagina, ripresa dalla vecchia bio
+       (era il titolo del blocco Percorso, tre lingue gia' approvate). Sta dopo
+       i lavori: prima cosa ha fatto, poi come lavora. -->
+  <p class="works-line is-hero solo-largo-stretto" data-i18n="it">Amo soprattutto il&nbsp;processo creativo: fare mia l&rsquo;idea del&nbsp;coreografo.</p>
+  <p class="works-line is-hero solo-stretto" data-i18n="it">Amo soprattutto il processo creativo:<br>fare mia l&rsquo;idea del coreografo.</p>
+  <p class="works-line is-hero solo-largo-stretto" data-i18n="en">What I love most is the&nbsp;creative process: making the&nbsp;choreographer&rsquo;s idea my own.</p>
+  <p class="works-line is-hero solo-stretto" data-i18n="en">What I love most is the creative process:<br>making the choreographer&rsquo;s idea my own.</p>
+  <p class="works-line is-hero solo-largo-stretto" data-i18n="fr">J&rsquo;aime avant tout le&nbsp;processus de&nbsp;cr&eacute;ation : m&rsquo;approprier l&rsquo;id&eacute;e du&nbsp;chor&eacute;graphe.</p>
+  <p class="works-line is-hero solo-stretto" data-i18n="fr">J&rsquo;aime avant tout le processus de cr&eacute;ation&nbsp;:<br>m&rsquo;approprier l&rsquo;id&eacute;e du chor&eacute;graphe.</p>
 
 <div class="line-connector">
-  <a class="line-connector-link" href="#coreografia-content" aria-label="Scendi ai lavori" data-i18n-aria-it="Scendi ai contenuti" data-i18n-aria-en="Scroll to content" data-i18n-aria-fr="Aller au contenu">
+  <a class="line-connector-link" href="#danza-lavori" aria-label="Vai ai lavori" data-i18n-aria-it="Vai ai lavori" data-i18n-aria-en="Scroll to the work" data-i18n-aria-fr="Aller aux projets">
     <span class="connector-line"></span>
     <span class="connector-arrow">&#8595;</span>
   </a>
 </div>
 
-<!-- role="main" e' il punto di riferimento "contenuto principale": senza, un
-     lettore di schermo non ha il comando per saltare qui e deve rifarsi tutta
-     l'intestazione ogni volta. E' un attributo, non un elemento nuovo, quindi
-     non tocca il layout di un pixel.
-     NON usare un <main> vero: in questa pagina esiste gia' una regola CSS
-     "main { display:flex; align-items:center; justify-content:center }",
-     avanzo di un'altra pagina, che schiaccerebbe il contenuto a 5px di
-     larghezza. Misurato il 14/8/2026, non ipotizzato: 1395 elementi spostati
-     su 21 combinazioni. -->
-<section class="page is-standalone" role="main" id="coreografia" tabindex="-1" aria-label="Coreografia" data-i18n-aria-it="Coreografia" data-i18n-aria-en="Choreography" data-i18n-aria-fr="Chorégraphie">
-  <div class="works-mosaic" id="coreografia-content">
+<section class="page is-standalone" id="danza" aria-label="Danza, i lavori" data-i18n-aria-it="Danza, i lavori" data-i18n-aria-en="Dance, selected work" data-i18n-aria-fr="Danse, projets">
 
-    <!-- 16/8: mosaico "incastrato" come il collage di recitazione: due righe
-         allineate ai bordi, foto a stessa altezza per riga (57% a 16/9 e
-         41.5% a 1.2945:1 danno la stessa altezza), spazi stretti. Chiesto da
-         Gladia dopo la bozza B ("allineami tutti, incastrati come recitazione"). -->
-    <div class="works-pack">
-      <div class="works-pack-row">
-    <article class="work-tile is-apribile" style="--w:57%; --ar:16/9;" tabindex="0" role="link" data-href="coreografia-eteignons.html">
-      <div class="tile-media" style=" background-position:center 30%;" data-sfondo="media/coreografia/g1-trio-brice.jpg" role="img" aria-label="Éteignons les écrans, trio con Brice Kapel sul palco del Palais des Festivals" data-i18n-aria-it="Éteignons les écrans, trio con Brice Kapel sul palco del Palais des Festivals" data-i18n-aria-en="Éteignons les écrans, trio with Brice Kapel on stage at the Palais des Festivals" data-i18n-aria-fr="Éteignons les écrans, trio avec Brice Kapel sur la scène du Palais des Festivals"></div>
+  <div class="works-mosaic" id="danza-lavori">
+    <article class="work-tile is-apribile at-left" style="--w:60%;" id="lavoro-paralimpiadi" data-yt="jCSCyGR2Fzo" tabindex="0" role="link" data-href="danza-paralimpiadi.html"
+      data-lb-detail-it="Cerimonia di apertura, Place de la Concorde, 28.08.2024 &middot; Coreografia Alexander Ekman &middot; Direzione artistica Thomas Jolly &middot; Con Chilly Gonzales, Christine and the Queens, Lucky Love"
+      data-lb-detail-en="Opening ceremony, Place de la Concorde, 28.08.2024 &middot; Choreography Alexander Ekman &middot; Artistic director Thomas Jolly &middot; With Chilly Gonzales, Christine and the Queens, Lucky Love"
+      data-lb-detail-fr="C&eacute;r&eacute;monie d&rsquo;ouverture, Place de la Concorde, 28.08.2024 &middot; Chor&eacute;graphie Alexander Ekman &middot; Direction artistique Thomas Jolly &middot; Avec Chilly Gonzales, Christine and the Queens, Lucky Love">
+      <div class="tile-media"><img class="tile-cover" src="media/danza/paralimpiadi-foto-paris2024.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 62%;"><video class="mosaic-clip" playsinline muted loop preload="none" data-poster="media/danza/paralimpiadi-mosaico-poster.jpg" aria-label="Cerimonia paralimpica" data-i18n-aria-it="Cerimonia paralimpica" data-i18n-aria-en="Paralympic ceremony" data-i18n-aria-fr="Cérémonie paralympique"><source src="media/danza/paralimpiadi-mosaico.mp4" type="video/mp4"></video></div>
       <figcaption class="tile-cap">
-        <span class="tile-title">&Eacute;TEIGNONS LES &Eacute;CRANS</span>
-        <span class="tile-client mono">BRICE KAPEL &middot; NAGAN PRODUCTION</span>
+        <span class="tile-role mono" data-i18n-text-it="INTERPRETE" data-i18n-text-en="PERFORMER" data-i18n-text-fr="INTERPR&Egrave;TE">INTERPR&Egrave;TE</span>
+        <span class="tile-title" data-i18n-text-it="GIOCHI PARALIMPICI" data-i18n-text-en="PARALYMPIC GAMES" data-i18n-text-fr="JEUX PARALYMPIQUES">JEUX PARALYMPIQUES</span>
+        <span class="tile-client mono">PARIS 2024</span>
+        <span class="tile-detail mono" data-i18n-text-it="Coreografia Alexander Ekman &middot; Direzione artistica Thomas Jolly" data-i18n-text-en="Choreography Alexander Ekman &middot; Artistic director Thomas Jolly" data-i18n-text-fr="Chor&eacute;graphie Alexander Ekman &middot; Direction artistique Thomas Jolly">Chor&eacute;graphie Alexander&nbsp;Ekman &middot; Direction artistique Thomas&nbsp;Jolly</span>
       </figcaption>
     </article>
-    <article class="work-tile is-apribile" style="--w:41.5%; --ar:1.2945/1;" tabindex="0" role="link" data-href="coreografia-comme-si.html">
-      <div class="tile-media" style="" data-sfondo="media/coreografia/rapper-smile-wide.jpg" role="img" aria-label="Comme Si, l'interprete in bianco sorride a braccio alzato, in primo piano un cappello rosso di spalle" data-i18n-aria-it="Comme Si, l'interprete in bianco sorride a braccio alzato, in primo piano un cappello rosso di spalle" data-i18n-aria-en="Comme Si, a red hat seen from behind in the foreground, behind it the performer in white smiling with one arm raised" data-i18n-aria-fr="Comme Si, un chapeau rouge de dos au premier plan, derrière l'interprète en blanc sourit, un bras levé"></div>
+    <article class="work-tile is-apribile at-right" style="--w:50%;" id="lavoro-bonduelle" data-src="media/danza/bonduelle-completo.mp4" tabindex="0" role="button">
+      <div class="tile-media"><img class="tile-cover" src="media/danza/cover-bonduelle.jpg" alt="" loading="lazy" decoding="async"><video class="mosaic-clip" playsinline muted loop preload="none" data-poster="media/danza/bonduelle-poster.jpg" aria-label="Spettacolo per Bonduelle" data-i18n-aria-it="Spettacolo per Bonduelle" data-i18n-aria-en="Live show for Bonduelle" data-i18n-aria-fr="Spectacle créé pour Bonduelle"><source src="media/danza/bonduelle-vero.mp4" type="video/mp4"></video></div>
       <figcaption class="tile-cap">
-        <span class="tile-title">COMME SI</span>
-        <span class="tile-client mono" data-i18n-text-it="LUCIEN LUMI&Egrave;RE &middot; VIDEOCLIP" data-i18n-text-en="LUCIEN LUMI&Egrave;RE &middot; MUSIC VIDEO" data-i18n-text-fr="LUCIEN LUMI&Egrave;RE &middot; CLIP">LUCIEN LUMI&Egrave;RE &middot; CLIP</span>
+        <span class="tile-role mono" data-i18n-text-it="PROTAGONISTA" data-i18n-text-en="TITLE ROLE" data-i18n-text-fr="R&Ocirc;LE-TITRE">R&Ocirc;LE-TITRE</span>
+        <span class="tile-title">BONDUELLE</span>
+        <span class="tile-client mono" data-i18n-text-it="CREAZIONE ORIGINALE" data-i18n-text-en="LIVE SHOW" data-i18n-text-fr="CR&Eacute;ATION ORIGINALE">CR&Eacute;ATION ORIGINALE</span>
+        <span class="tile-detail mono" data-i18n-text-it="Spettacolo su misura per il brand" data-i18n-text-en="An original show for the brand" data-i18n-text-fr="Spectacle cr&eacute;&eacute; pour la marque">Spectacle cr&eacute;&eacute; pour la marque</span>
+      </figcaption>
+    </article>
+    <article class="work-tile is-apribile at-left" style="--w:48%;" id="lavoro-lafont" data-yt="Hg7KEawMp8w" tabindex="0" role="button" data-lb-fotos="media/danza/lafont-set.jpg">
+      <div class="tile-media"><img class="tile-cover" src="media/danza/lafont-set.jpg" alt="" loading="lazy" decoding="async"><video class="mosaic-clip" playsinline muted loop preload="none" data-poster="media/danza/lafont-poster.jpg" aria-label="Spot Adolphe Lafont" data-i18n-aria-it="Spot Adolphe Lafont" data-i18n-aria-en="Adolphe Lafont commercial" data-i18n-aria-fr="Publicité Adolphe Lafont"><source src="media/danza/lafont-mosaico.mp4" type="video/mp4"></video></div>
+      <figcaption class="tile-cap">
+        <span class="tile-role mono" data-i18n-text-it="BALLERINA" data-i18n-text-en="DANCER" data-i18n-text-fr="DANSEUSE">DANSEUSE</span>
+        <span class="tile-title">ADOLPHE LAFONT</span>
+        <span class="tile-client mono" data-i18n-text-it="SPOT PUBBLICITARIO" data-i18n-text-en="COMMERCIAL" data-i18n-text-fr="FILM PUBLICITAIRE">FILM PUBLICITAIRE</span>
+      </figcaption>
+    </article>
+    <article class="work-tile is-apribile at-right" style="--w:46%;" id="lavoro-sheryfa" data-yt="MioTvCU7rNQ" tabindex="0" role="button">
+      <div class="tile-media"><img class="tile-cover" src="media/danza/cover-sheryfa.jpg" alt="" loading="lazy" decoding="async"><video class="mosaic-clip" playsinline muted loop preload="none" data-poster="media/danza/sheryfa-poster.jpg" aria-label="Videoclip di Sheryfa Luna" data-i18n-aria-it="Videoclip di Sheryfa Luna" data-i18n-aria-en="Sheryfa Luna music video" data-i18n-aria-fr="Clip de Sheryfa Luna"><source src="media/danza/sheryfa-mosaico.mp4" type="video/mp4"></video></div>
+      <figcaption class="tile-cap">
+        <span class="tile-role mono" data-i18n-text-it="BALLERINA" data-i18n-text-en="DANCER" data-i18n-text-fr="DANSEUSE">DANSEUSE</span>
+        <span class="tile-title">SHERYFA LUNA</span>
+        <span class="tile-client mono">SI ON PARLAIT</span>
+        <span class="tile-detail mono" data-i18n-text-it="Videoclip ufficiale" data-i18n-text-en="Official music video" data-i18n-text-fr="Clip officiel">Clip officiel</span>
+      </figcaption>
+    </article>
+    <article class="work-tile is-apribile at-left" style="--w:50%;" id="lavoro-ledger" data-yt="EIcFXA_ygII" tabindex="0" role="button">
+      <div class="tile-media"><img class="tile-cover" src="media/danza/ledger-poster.jpg" alt="" loading="lazy" decoding="async"><video class="mosaic-clip" playsinline muted loop preload="none" data-poster="media/danza/ledger-poster.jpg" aria-label="Evento Ledger" data-i18n-aria-it="Evento Ledger" data-i18n-aria-en="Ledger event" data-i18n-aria-fr="Événement Ledger"><source src="media/danza/ledger-mosaico.mp4" type="video/mp4"></video></div>
+      <figcaption class="tile-cap">
+        <span class="tile-role mono" data-i18n-text-it="BALLERINA" data-i18n-text-en="DANCER" data-i18n-text-fr="DANSEUSE">DANSEUSE</span>
+        <span class="tile-title">LEDGER</span>
+        <span class="tile-client mono" data-i18n-text-it="EVENTO" data-i18n-text-en="EVENT" data-i18n-text-fr="&Eacute;V&Eacute;NEMENT">&Eacute;V&Eacute;NEMENT</span>
+      </figcaption>
+    </article>
+    <!-- 16/8 sera, sesto riquadro chiesto da Gladia: C'Franc, Cie No MaD
+         (Mehdi Slimani), 15 date in Ile-de-France (il Delta Festival era Compagnie Human, tolto il 18/8). Clip 1:49-1:59 del teaser
+         ufficiale (lei da sola a terra nel fumo rosa), ritagliato al centro
+         perche' la ripresa e' larga; foto 04 e 05 dal sito della compagnia
+         (media/danza/_nomad-scaricate), da chiedere l'ok alla compagnia. -->
+    <article class="work-tile is-apribile at-right" style="--w:48%;" id="lavoro-cfranc" data-href="danza-cfranc.html" data-yt="gCKdMcCAMEE" tabindex="0" role="link" data-lb-fotos="media/danza/cfranc-foto-2.jpg|media/danza/cfranc-foto-1.jpg"
+      data-lb-detail-it="Creazione hip hop &middot; Coreografia Mehdi Slimani &middot; 15 repliche nella regione parigina"
+      data-lb-detail-en="Hip hop piece &middot; Choreography Mehdi Slimani &middot; 15 performances in the Paris region"
+      data-lb-detail-fr="Cr&eacute;ation hip hop &middot; Chor&eacute;graphie Mehdi Slimani &middot; 15 dates en &Icirc;le-de-France">
+      <div class="tile-media"><img class="tile-cover" src="media/danza/cfranc-foto-2.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 12%;"><video class="mosaic-clip" playsinline muted loop preload="none" data-poster="media/danza/cfranc-poster.jpg" aria-label="C'Franc, Compagnie No MaD" data-i18n-aria-it="C'Franc, Compagnie No MaD" data-i18n-aria-en="C'Franc, Compagnie No MaD" data-i18n-aria-fr="C'Franc, Compagnie No MaD"><source src="media/danza/cfranc-mosaico.mp4" type="video/mp4"></video></div>
+      <figcaption class="tile-cap">
+        <span class="tile-role mono" data-i18n-text-it="INTERPRETE" data-i18n-text-en="PERFORMER" data-i18n-text-fr="INTERPR&Egrave;TE">INTERPR&Egrave;TE</span>
+        <span class="tile-title">C&rsquo;FRANC</span>
+        <span class="tile-client mono">COMPAGNIE NO MAD</span>
+        <span class="tile-detail mono" data-i18n-text-it="Creazione hip hop &middot; Mehdi Slimani" data-i18n-text-en="Hip hop piece &middot; Mehdi Slimani" data-i18n-text-fr="Cr&eacute;ation hip hop &middot; Mehdi Slimani">Cr&eacute;ation hip hop &middot; Mehdi&nbsp;Slimani</span>
       </figcaption>
     </article>
       </div>
-      <div class="works-pack-row">
-    <article class="work-tile is-apribile" style="--w:41.5%; --ar:1.2945/1;" id="lavoro-inequality" tabindex="0" role="link" data-href="coreografia-inequality.html">
-      <div class="tile-media" style=" background-position:center 42%;" data-sfondo="media/coreografia/inequality/onze-bouge-colonnes.jpg" role="img" aria-label="INequality, due interpreti sulle colonne di carta al festival Onze Bouge" data-i18n-aria-it="INequality, due interpreti sulle colonne di carta al festival Onze Bouge" data-i18n-aria-en="INequality, two performers on the paper columns at the Onze Bouge festival" data-i18n-aria-fr="INequality, deux interprètes sur les colonnes de papier au festival Onze Bouge"></div>
-      <figcaption class="tile-cap">
-        <span class="tile-title">INEQUALITY</span>
-        <span class="tile-client mono" data-i18n-text-it="COMPAGNIE WECTED &middot; SPETTACOLO" data-i18n-text-en="COMPAGNIE WECTED &middot; LIVE SHOW" data-i18n-text-fr="COMPAGNIE WECTED &middot; SPECTACLE">COMPAGNIE WECTED &middot; SPECTACLE</span>
-      </figcaption>
-    </article>
-    <article class="work-tile is-apribile" style="--w:57%; --ar:16/9;" tabindex="0" role="link" data-href="coreografia-inequality-film.html">
-      <div class="tile-media" style=" background-position:center 100%;" data-sfondo="media/coreografia/inequality/film-rise-colonnes-double.jpg" role="img" aria-label="INequality, il cortometraggio: doppia esposizione con le colonne di carta" data-i18n-aria-it="INequality, il cortometraggio: doppia esposizione con le colonne di carta" data-i18n-aria-en="INequality, the short film: double exposure with the paper columns" data-i18n-aria-fr="INequality, le court métrage : double exposition avec les colonnes de papier"></div>
-      <figcaption class="tile-cap">
-        <span class="tile-title">INEQUALITY</span>
-        <span class="tile-client mono" data-i18n-text-it="COMPAGNIE WECTED &middot; CORTOMETRAGGIO" data-i18n-text-en="COMPAGNIE WECTED &middot; SHORT FILM" data-i18n-text-fr="COMPAGNIE WECTED &middot; COURT-M&Eacute;TRAGE">COMPAGNIE WECTED &middot; COURT-M&Eacute;TRAGE</span>
-      </figcaption>
-    </article>
-      </div>
-    </div>
-
-  </div>
-
-<div class="names-band">
-  <p class="band-kicker mono" data-i18n="it">Spettacolo dal&nbsp;vivo</p>
-  <p class="band-kicker mono" data-i18n="en">Live performance</p>
-  <p class="band-kicker mono" data-i18n="fr">Spectacle vivant</p>
-  <ul class="names-list is-second mono">
-    <li><b>Palais des&nbsp;Festivals, Cannes</b><span>&Eacute;teignons&nbsp;les&nbsp;&eacute;crans &middot; Brice Kapel</span></li>
-    <li><b data-i18n-text-it="Festival Onze Bouge, Parigi" data-i18n-text-en="Festival Onze Bouge, Paris" data-i18n-text-fr="Festival Onze Bouge, Paris">Festival Onze Bouge, Paris</b><span>INequality &middot; Compagnie Wected</span></li>
-    <li><b>Amman Contemporary Dance Festival</b><span data-i18n="it">INequality &middot; spettacolo di&nbsp;apertura del&nbsp;festival</span><span data-i18n="en">INequality &middot; festival&nbsp;opening</span><span data-i18n="fr">INequality &middot; spectacle d'ouverture du&nbsp;festival</span></li>
-  </ul>
-  <div class="names-rule" aria-hidden="true"></div>
-  <p class="band-kicker mono" data-i18n="it">Interpreti diretti</p>
-  <p class="band-kicker mono" data-i18n="en">Performers</p>
-  <p class="band-kicker mono" data-i18n="fr">Interpr&egrave;tes dirig&eacute;s</p>
-  <ul class="names-list is-cast mono">
-    <li data-i18n="it">Danzatori</li> <li data-i18n="en">Dancers</li> <li data-i18n="fr">Danseurs</li>
-    <li data-i18n="it">Circensi</li> <li data-i18n="en">Circus&nbsp;artists</li> <li data-i18n="fr">Circassiens</li>
-    <!-- 3/9, Gladia: aggiunti gli attori alla lista degli interpreti diretti. -->
-    <li data-i18n="it">Attori</li> <li data-i18n="en">Actors</li> <li data-i18n="fr">Com&eacute;diens</li>
-    <li data-i18n="it">Cantanti</li> <li data-i18n="en">Singers</li> <li data-i18n="fr">Chanteurs</li>
-    <li data-i18n="it">Musicisti</li> <li data-i18n="en">Musicians</li> <li data-i18n="fr">Musiciens</li>
-    <li data-i18n="it">Coriste</li> <li data-i18n="en">Backing&nbsp;vocalists</li> <li data-i18n="fr">Choristes</li>
-  </ul>
-
-  <!-- 3/9, chiesto da Gladia dopo averlo visto in bozza: il numero vero del cast piu' grande, ancorato allo spettacolo
-       che lo dimostra. Dalla sottopagina Éteignons: 4 danzatori, 3 artisti di
-       circo, 1 cantante, 2 coriste, 4 musicisti dal vivo. -->
-  <p class="cast-count mono" data-i18n="it">Fino a&nbsp;14 interpreti in&nbsp;scena &middot; &Eacute;teignons&nbsp;les&nbsp;&eacute;crans</p>
-  <p class="cast-count mono" data-i18n="en">Up to&nbsp;14 performers on&nbsp;stage &middot; &Eacute;teignons&nbsp;les&nbsp;&eacute;crans</p>
-  <p class="cast-count mono" data-i18n="fr">Jusqu&rsquo;&agrave; 14 interpr&egrave;tes en&nbsp;sc&egrave;ne&nbsp;&middot; &Eacute;teignons&nbsp;les&nbsp;&eacute;crans</p>
-
-  <div class="page-actions works-actions is-end">
-    <!-- 3/9/2026, conforme a Danza (decisione del 2/9 su Danza, scelta da Gladia per Coreografia il 3/9): il pulsante del dossier chiude le fasce,
-         "una volta che hai finito, se vuoi piu' informazioni". Link ancora
-         4/9/2026: il dossier esiste in tre lingue, ogni pulsante apre la sua
-         (coreografia-it / -en / -fr). Stessa meccanica del CV danza: la pagina
-         verde si apre a schermo, da li' si preme Stampa e si scarica il PDF
-         chiaro (-impression). -->
-    <a class="btn-square" href="_dossier/coreografia-it.html" target="_blank" rel="noopener" data-i18n="it">Sfoglia il dossier completo</a>
-    <a class="btn-square" href="_dossier/coreografia-en.html" target="_blank" rel="noopener" data-i18n="en">See the full portfolio</a>
-    <a class="btn-square" href="_dossier/coreografia-fr.html" target="_blank" rel="noopener" data-i18n="fr">Parcourir le dossier complet</a>
-  </div>
-</div>
 
 </section>
 
+<div class="names-band">
+  <!-- 2/9: ordine nuovo deciso da Gladia: prima la scena, poi i marchi, e il CV
+       per ultimo, "una volta che hai
+       finito, se vuoi più informazioni". Il nastro del book è stato tolto,
+       tornerà come pagina a parte con le polaroid. -->
+  <p class="band-kicker mono" data-i18n="it">Scena</p>
+  <p class="band-kicker mono" data-i18n="en">On&nbsp;stage</p>
+  <p class="band-kicker mono" data-i18n="fr">Sc&egrave;ne</p>
+  <ul class="names-list is-second mono">
+    <li><b data-i18n-text-it="Carmen &middot; 75&nbsp;repliche" data-i18n-text-en="Carmen &middot; 75&nbsp;performances" data-i18n-text-fr="Carmen &middot; 75&nbsp;repr&eacute;sentations">Carmen &middot; 75&nbsp;repr&eacute;sentations</b><span data-i18n="it">Protagonista &middot; Compagnie CTBL</span><span data-i18n="en">Title role &middot; Compagnie CTBL</span><span data-i18n="fr">R&ocirc;le-titre &middot; Compagnie CTBL</span></li>
+    <li><b>Palais des Festivals, Cannes</b><span>Coloricocola &middot; Machita Daly &middot; Nagan Production</span></li>
+    <li><b>Compagnie Relief</b><span>Encore en corps &middot; Dominique Lisette</span></li>
+    <li><b>Amman Contemporary Dance Festival</b><span data-i18n="it">INequality &middot; Compagnie Wected &middot; spettacolo di&nbsp;apertura</span><span data-i18n="en">INequality &middot; Compagnie Wected &middot; opening night</span><span data-i18n="fr">INequality &middot; Compagnie Wected &middot; en&nbsp;ouverture</span></li>
+  </ul>
+
+  <div class="names-rule" aria-hidden="true"></div>
+
+  <p class="band-kicker mono" data-i18n="it">Marchi</p>
+  <p class="band-kicker mono" data-i18n="en">Brands</p>
+  <p class="band-kicker mono" data-i18n="fr">Marques</p>
+  <ul class="names-list is-brands mono">
+    <li>Valentino</li> <li>Herm&egrave;s</li> <li>LVMH</li> <li>Victoria&rsquo;s&nbsp;Secret</li>
+    <li>Nestl&eacute;</li>
+    <li>Engie</li> <li>Caisse&nbsp;d&rsquo;&Eacute;pargne</li> <li>Innoha</li>
+  </ul>
+
+  <div class="page-actions works-actions is-end">
+    <!-- 19/8: il pulsante APRE la pagina del CV, verde a schermo e bianca se
+         si preme Stampa; da lì si scarica il PDF chiaro (-impression.pdf).
+         Decisione di Gladia. 2/9: il CV esiste in tre lingue, ogni pulsante
+         apre la sua (danza-cv-it / -en / -fr). -->
+    <a class="btn-square" href="_dossier/danza-cv-it.html" target="_blank" rel="noopener" data-i18n="it">Sfoglia il CV completo</a>
+    <a class="btn-square" href="_dossier/danza-cv-en.html" target="_blank" rel="noopener" data-i18n="en">See the full CV</a>
+    <a class="btn-square" href="_dossier/danza-cv-fr.html" target="_blank" rel="noopener" data-i18n="fr">Consulter le CV complet</a>
+  </div>
+</div>
+
 <div class="lightbox" id="lightbox" hidden>
   <button class="lightbox-close" type="button" aria-label="Chiudi" data-i18n-aria-it="Chiudi" data-i18n-aria-en="Close" data-i18n-aria-fr="Fermer">&times;</button>
+  <button class="lightbox-nav is-prev" type="button" aria-label="Foto precedente" data-i18n-aria-it="Foto precedente" data-i18n-aria-en="Previous photo" data-i18n-aria-fr="Photo pr&eacute;c&eacute;dente" hidden>&#8249;</button>
+  <button class="lightbox-nav is-next" type="button" aria-label="Foto successiva" data-i18n-aria-it="Foto successiva" data-i18n-aria-en="Next photo" data-i18n-aria-fr="Photo suivante" hidden>&#8250;</button>
   <div class="lightbox-inner">
     <img class="lightbox-img" id="lightbox-img" alt="" hidden>
     <div class="lightbox-media" id="lightbox-media" hidden></div>
     <div class="lightbox-cap" id="lightbox-cap" hidden></div>
+    <div class="lightbox-thumbs" id="lightbox-thumbs" hidden></div>
   </div>
 </div>
 
-
-
 <div class="closing-band">
-  <p class="closing" data-i18n="it">Trasformiamo la&nbsp;tua idea in&nbsp;spettacolo.</p>
-  <p class="closing" data-i18n="en">Let’s turn your idea into&nbsp;a&nbsp;show.</p>
-  <p class="closing" data-i18n="fr">Transformons ton idée en&nbsp;spectacle.</p>
-  <a class="btn-square" href="mailto:gladiamarchetti@gmail.com?subject=Contatto%20%C2%B7%20Coreografia" data-i18n="it">Scrivimi</a>
-  <a class="btn-square" href="mailto:gladiamarchetti@gmail.com?subject=Contact%20%C2%B7%20Choreography" data-i18n="en">Drop me a line</a>
-  <a class="btn-square" href="mailto:gladiamarchetti@gmail.com?subject=Contact%20%C2%B7%20Chor%C3%A9graphie" data-i18n="fr">Écris-moi</a>
+  <p class="closing" data-i18n="it">Creiamo qualcosa insieme, e&nbsp;vediamo fin dove arriva.</p>
+  <p class="closing" data-i18n="en">Let’s create something together and&nbsp;see how far it goes.</p>
+  <p class="closing" data-i18n="fr">Créons quelque chose ensemble, et&nbsp;voyons jusqu'où ça nous mène.</p>
+  <a class="btn-square" href="mailto:gladiamarchetti@gmail.com?subject=Contatto%20%C2%B7%20Danza" data-i18n="it">Scrivimi</a>
+  <a class="btn-square" href="mailto:gladiamarchetti@gmail.com?subject=Contact%20%C2%B7%20Dance" data-i18n="en">Drop me a line</a>
+  <a class="btn-square" href="mailto:gladiamarchetti@gmail.com?subject=Contact%20%C2%B7%20Danse" data-i18n="fr">Écris-moi</a>
   <p class="closing-social mono">
     <a href="https://www.instagram.com/just_gladia/" target="_blank" rel="noopener">Instagram</a>
     <span aria-hidden="true">&middot;</span>
     <a href="https://www.linkedin.com/in/gladia-marchetti-31101b143" target="_blank" rel="noopener">LinkedIn</a>
     <span aria-hidden="true">&middot;</span>
-    <!-- Facebook tolto il 14/8/2026, deciso da Gladia. Il profilo esiste ed e'
-         suo, ma non e' visibile a chi non ha fatto l'accesso: chi cliccava da
-         qui trovava un lucchetto e "Questo contenuto non e' al momento
-         disponibile". E' un profilo personale, non un canale professionale, e
-         un link che porta a un muro fa peggio di un'icona che non c'e'.
-         Se un giorno nasce una PAGINA Facebook professionale, quella si'. -->
     <a href="https://www.youtube.com/@just_gladia" target="_blank" rel="noopener">YouTube</a>
   </p>
+</div>
 </div>
 
 <footer>
@@ -1708,13 +1778,10 @@
 </div>
 
 <script>
-</script>
-
-<script>
 (() => {
   const STORAGE_KEY = 'gm-portfolio-lang';
   const SUPPORTED = ['it', 'en', 'fr'];
-  const TITLES = { it: 'Gladia Marchetti — Coreografia', en: 'Gladia Marchetti — Choreography', fr: 'Gladia Marchetti — Chorégraphie' };
+  const TITLES = { it: 'Gladia Marchetti — Danza', en: 'Gladia Marchetti — Dance', fr: 'Gladia Marchetti — Danse' };
 
   function apply(lang) {
     document.documentElement.setAttribute('data-ui-lang', lang);
@@ -1731,7 +1798,6 @@
       const val = el.getAttribute('data-i18n-text-' + lang) || el.getAttribute('data-i18n-text-it');
       if (val) el.innerHTML = val;
     });
-    document.dispatchEvent(new CustomEvent('gm-lang-change', { detail: { lang } }));
   }
 
   let stored = null;
@@ -1749,76 +1815,110 @@
 })();
 </script>
 <script>
-  var coreoReel = document.getElementById('coreografia-reel');
-  var coreoVideo = document.getElementById('coreografia-video');
-  var coreoSoundToggle = document.getElementById('coreografia-sound-toggle');
+  var danzaReel = document.getElementById('danza-reel');
+  var danzaVideo = document.getElementById('danza-video');
+  var danzaSoundToggle = document.getElementById('danza-sound-toggle');
 
-  /* Il reel non ha piu' autoplay e ha preload="none": finche' nessuno chiama
-     play(), non scende un byte. Quindi questa riga NON e' un dettaglio, e' il
-     punto in cui si decide se scaricare 9 MB.
-     Prima il video aveva autoplay piu' preload: il file partiva durante
-     l'analisi della pagina, e il blocco che toglieva l'autoplay a chi ha
-     "riduci movimento" girava troppo tardi. Sembrava una protezione e ne
-     lasciava passare 2,5 MB lo stesso. Misurato il 14/8/2026, non ipotizzato. */
+  /* La partenza immediata vale solo per chi non ha chiesto di ridurre il
+     movimento: con preload="none" una play() qui forzerebbe lo scaricamento dei
+     5,9 MB proprio a chi non vedra' mai muoversi il video. */
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    coreoVideo.play().catch(function () {});
+    danzaVideo.play().catch(function () {});
   }
 
-  function coreoCurrentLang() {
-    var active = document.querySelector('.ui-lang-btn.is-active');
-    return active ? active.getAttribute('data-ui-lang') : 'en';
-  }
+  /* Pulsante audio dell'hero, rifatto il 13/8/2026 sul modello di quello del
+     video performance nel mosaico, che dei due era l'unico scritto bene.
+     Aveva tre difetti insieme, tutti verificati premendolo nel browser:
+       1. scriveva l'etichetta in italiano anche col sito in inglese o in
+          francese, perche' la stringa 'Disattiva audio' stava a mano nel codice;
+       2. non spegneva niente: ogni clic riaccendeva, quindi il pulsante
+          annunciava 'disattiva' e non disattivava;
+       3. riportava il video a zero a ogni clic, anche solo per togliere l'audio.
+     Il ritorno a zero resta, ma solo quando si ACCENDE, cosi' la musica parte
+     dall'inizio. Spegnendo, il video resta dov'e'. */
+  (function () {
+    var LINGUE = ['it', 'en', 'fr'];
 
-  function coreoSyncSoundLabel(on) {
-    var prefix = on ? 'data-aria-on-' : 'data-aria-off-';
-    ['it', 'en', 'fr'].forEach(function (lang) {
-      var val = coreoSoundToggle.getAttribute(prefix + lang);
-      if (val) coreoSoundToggle.setAttribute('data-i18n-aria-' + lang, val);
-    });
-    var current = coreoSoundToggle.getAttribute('data-i18n-aria-' + coreoCurrentLang());
-    if (current) coreoSoundToggle.setAttribute('aria-label', current);
-  }
-
-  /* Zittisce il reel dall'esterno, lasciando il pulsante coerente con quello
-     che si sente: stessa classe e stessa etichetta che metterebbe un clic
-     vero. Lo chiama il blocco dei video YouTube quando ne parte uno, cosi'
-     non si sovrappongono due audio. */
-  window.coreoZittisciReel = function () {
-    if (coreoVideo.muted) return;
-    coreoVideo.muted = true;
-    coreoReel.classList.remove('is-unmuted');
-    coreoSyncSoundLabel(false);
-  };
-
-  coreoSoundToggle.addEventListener('click', function () {
-    coreoReel.classList.remove('is-invito');   /* premuto: l'invito rientra */
-    var turningOn = coreoVideo.muted;
-    coreoVideo.muted = !turningOn;
-    coreoReel.classList.toggle('is-unmuted', turningOn);
-    if (turningOn) {
-      coreoVideo.currentTime = 0;
-      coreoVideo.play().catch(function () {});
-      /* L'altro verso della stessa regola: se si riaccende il reel, i video
-         YouTube si fermano invece di continuare a suonare sotto. */
-      if (window.coreoFermaVideoYouTube) window.coreoFermaVideoYouTube();
+    function lingua() {
+      var b = document.querySelector('.ui-lang-btn.is-active');
+      var l = b ? b.getAttribute('data-ui-lang') : 'it';
+      return LINGUE.indexOf(l) >= 0 ? l : 'it';
     }
-    coreoSyncSoundLabel(turningOn);
-  });
 
-  /* La linguetta esce da sola un attimo dopo che il video e' partito, cosi'
-     non compare sopra un rettangolo ancora vuoto, e resta aperta finche' non
-     si preme. Non torna piu' dopo, nemmeno rispegnendo l'audio: a quel punto
-     l'invito e' stato accolto e ripeterlo sarebbe insistere. */
-  setTimeout(function () {
-    if (!coreoVideo.muted) return;
-    coreoReel.classList.add('is-invito');
-  }, 1500);
+    /* Riallinea sia aria-label sia i data-i18n-aria-*, altrimenti al primo
+       cambio di lingua il traduttore rimette l'etichetta del verso sbagliato. */
+    function etichetta() {
+      var verso = danzaVideo.muted ? 'off' : 'on';
+      LINGUE.forEach(function (l) {
+        var v = danzaSoundToggle.getAttribute('data-aria-' + verso + '-' + l);
+        if (v) danzaSoundToggle.setAttribute('data-i18n-aria-' + l, v);
+      });
+      var cur = danzaSoundToggle.getAttribute('data-aria-' + verso + '-' + lingua());
+      if (cur) danzaSoundToggle.setAttribute('aria-label', cur);
+    }
 
-  coreoVideo.addEventListener('click', function () {
-    if (coreoVideo.paused) {
-      coreoVideo.play().catch(function () {});
+    /* Un solo audio alla volta in tutta la pagina, come fa gia' il riquadro
+       delle performance. Senza questo, chi accende qui e poi scende ad
+       accendere il mosaico si ritrova due musiche sovrapposte. */
+    function zittisciGliAltri() {
+      document.querySelectorAll('video').forEach(function (v) {
+        if (v === danzaVideo || v.muted) return;
+        v.muted = true;
+        var h = v.parentNode;
+        if (h && h.classList) h.classList.remove('is-unmuted');
+        var b = h && h.querySelector ? h.querySelector('.sound-toggle') : null;
+        if (b) {
+          LINGUE.forEach(function (l) {
+            var t = b.getAttribute('data-aria-off-' + l) || b.getAttribute('data-i18n-aria-' + l);
+            if (t) b.setAttribute('data-i18n-aria-' + l, t);
+          });
+          var cur = b.getAttribute('data-i18n-aria-' + lingua());
+          if (cur) b.setAttribute('aria-label', cur);
+        }
+      });
+    }
+
+    danzaSoundToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      danzaReel.classList.remove('is-invito');   /* premuto: l'invito rientra */
+      danzaVideo.muted = !danzaVideo.muted;
+      danzaReel.classList.toggle('is-unmuted', !danzaVideo.muted);
+      if (!danzaVideo.muted) {
+        zittisciGliAltri();
+        danzaVideo.currentTime = 0;
+        danzaVideo.play().catch(function () {});
+      }
+      etichetta();
+    });
+
+    /* La linguetta esce da sola un attimo dopo che il video e' partito, cosi'
+       non compare sopra un rettangolo ancora vuoto, e resta aperta finche' non
+       si preme. Non torna piu' dopo, nemmeno rispegnendo l'audio: a quel punto
+       l'invito e' stato accolto e ripeterlo sarebbe insistere. */
+    setTimeout(function () {
+      if (!danzaVideo.muted) return;
+      danzaReel.classList.add('is-invito');
+    }, 1500);
+
+    document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+      b.addEventListener('click', function () { setTimeout(etichetta, 0); });
+    });
+
+    /* Il blocco comune rispegne l'audio a ogni giro del loop e toglie
+       is-unmuted dal riquadro: da li' riallineo anche l'etichetta. */
+    new MutationObserver(function () {
+      if (danzaVideo.muted === danzaReel.classList.contains('is-unmuted')) return;
+      etichetta();
+    }).observe(danzaReel, { attributes: true, attributeFilter: ['class'] });
+
+    etichetta();
+  })();
+
+  danzaVideo.addEventListener('click', function () {
+    if (danzaVideo.paused) {
+      danzaVideo.play().catch(function () {});
     } else {
-      coreoVideo.pause();
+      danzaVideo.pause();
     }
   });
 </script>
@@ -1857,9 +1957,25 @@
     return m + ':' + ('0' + Math.floor(r)).slice(-2);
   }
 
-  document.querySelectorAll('video.reel-video, #proof-video').forEach(function (video) {
+  /* NOTA: #performance-video e' agganciato qui invece di avere un suo blocco a
+     parte, cosi' eredita gia' pronti il pulsante audio nei due sensi con le
+     etichette tradotte, lo spegnimento dell'audio a ogni giro del loop e lo
+     stop quando esce dallo schermo. Si porta dietro anche il cursore: se sul
+     riquadro del mosaico non lo vogliamo, basta toglierlo da questo selettore. */
+  document.querySelectorAll('video.reel-video, #proof-video, #performance-video').forEach(function (video) {
     var host = video.parentNode;
     host.classList.add('reel-scrub-host');
+
+    /* La barra di scorrimento e l'orologio restano solo sui video presentati
+       come video, cioe' l'hero in cima. I riquadri del mosaico sono immagini
+       che si muovono, dichiarate role="img": un contatore che scorre li fa
+       leggere come un lettore e abbassa di registro i crediti che stanno
+       sotto. Deciso il 13/8/2026.
+       La barra e l'orologio vengono comunque costruiti, solo non attaccati
+       alla pagina: cosi' tutto il codice che li aggiorna continua a girare
+       su nodi staccati senza dover essere riscritto, e per rimetterli basta
+       questa riga. */
+    var conCursore = !video.classList.contains('mosaic-clip');
 
     var scrub = document.createElement('div');
     scrub.className = 'reel-scrub';
@@ -1878,8 +1994,10 @@
     clock.className = 'reel-clock mono';
     clock.textContent = '0:00 / 0:00';
 
-    host.appendChild(scrub);
-    host.appendChild(clock);
+    if (conCursore) {
+      host.appendChild(scrub);
+      host.appendChild(clock);
+    }
 
     var fill = scrub.querySelector('.reel-scrub-fill');
     var knob = scrub.querySelector('.reel-scrub-knob');
@@ -1928,11 +2046,14 @@
       aggiorna();
     });
 
-    /* Se il video gira in loop e l'audio era acceso, al giro nuovo riparte muto */
+    /* Se il video gira in loop e l'audio era acceso, al giro nuovo riparte muto.
+       NOTA: un video con data-audio-persistente e' escluso da questa regola e
+       tiene la musica accesa giro dopo giro, finche' non la si spegne a mano. */
     var ultimoTempo = 0;
     video.addEventListener('timeupdate', function () {
       var d = video.duration || 0;
-      if (!video.muted && d > 2 && ultimoTempo > d - 1 && video.currentTime < 1) {
+      if (!video.muted && !video.hasAttribute('data-audio-persistente') &&
+          d > 2 && ultimoTempo > d - 1 && video.currentTime < 1) {
         video.muted = true;
         host.classList.remove('is-unmuted');
         var bottone = host.querySelector('.sound-toggle');
@@ -1963,9 +2084,20 @@
   var stato = new WeakMap();
 
   elenco.forEach(function (v) {
+    /* data-avvia-in-vista: i tre video del mosaico non hanno piu' autoplay ne'
+       preload, quindi all'apertura della pagina non scaricano un byte. Partono
+       da qui la prima volta che entrano nello schermo, che e' anche il momento
+       in cui qualcuno li puo' guardare.
+       Prima erano tutti e quattro in autoplay con preload="auto": la pagina
+       tirava giu' 25,9 MB prima che l'utente toccasse qualsiasi cosa, cioe' 41
+       secondi su una connessione mobile. Misurato il 13/8/2026 col browser,
+       leggendo video.buffered: erano al 100% quattro secondi dopo l'apertura.
+       ATTENZIONE: questa riga leggeva solo hasAttribute('autoplay'). Togliendo
+       autoplay senza toccarla, i video del mosaico non ripartivano piu' quando
+       rientravano in vista. */
     stato.set(v, {
       inVista: true,
-      andava: v.hasAttribute('data-avvia-in-vista') && !ridotto,
+      andava: (v.hasAttribute('autoplay') || v.hasAttribute('data-avvia-in-vista')) && !ridotto,
       autoStop: false
     });
     v.addEventListener('play', function () { stato.get(v).andava = true; });
@@ -1990,15 +2122,23 @@
   }
 
   if ('IntersectionObserver' in window) {
-    var osservatore = new IntersectionObserver(function (voci) {
-      voci.forEach(function (voce) {
-        var s = stato.get(voce.target);
-        if (!s) return;
-        s.inVista = voce.isIntersecting;
-        if (voce.isIntersecting) riprendi(voce.target); else ferma(voce.target);
-      });
-    }, { threshold: 0.15 });
-    elenco.forEach(function (v) { osservatore.observe(v); });
+    /* 16/8: due soglie. Il reel parte appena entra (15%). I clip del mosaico
+       (.mosaic-clip) partono solo quando il riquadro e' visibile quasi per
+       intero (85%) e si fermano appena torna a meta': Gladia non vuole
+       riquadri che si muovono tagliati dal bordo dello schermo. */
+    function osserva(soglia, filtro) {
+      var oss = new IntersectionObserver(function (voci) {
+        voci.forEach(function (voce) {
+          var s = stato.get(voce.target);
+          if (!s) return;
+          s.inVista = voce.isIntersecting && voce.intersectionRatio >= soglia;
+          if (s.inVista) riprendi(voce.target); else ferma(voce.target);
+        });
+      }, { threshold: [soglia] });
+      elenco.filter(filtro).forEach(function (v) { oss.observe(v); });
+    }
+    osserva(0.85, function (v) { return v.classList.contains('mosaic-clip'); });
+    osserva(0.15, function (v) { return !v.classList.contains('mosaic-clip'); });
   }
 
   document.addEventListener('visibilitychange', function () {
@@ -2008,126 +2148,409 @@
   window.addEventListener('focus', function () { elenco.forEach(riprendi); });
 })();
 </script>
+
 <script>
-  /* Click sulla copertina: il video parte DENTRO la pagina, non su YouTube.
-     L'iframe si crea solo al click, cosi' la pagina non carica tre player
-     (e tre tracciamenti) a chi non li guarda. */
-  /* Dal 14/8/2026 il player non e' piu' una scatola chiusa. Con enablejsapi=1
-     lo si comanda con postMessage SENZA caricare nessuno script di YouTube,
-     quindi la promessa di sopra resta intatta: chi non clicca non scarica
-     niente. Serve l'origin vero, percio' da file:// non funziona, ma da
-     file:// YouTube rifiuta l'embed in blocco (Errore 153), quindi non si
-     perde niente che prima funzionasse. */
-  (function () {
-    var telai = [];
-
-    function comanda(telaio, funzione) {
-      try {
-        telaio.contentWindow.postMessage(JSON.stringify({
-          event: 'command', func: funzione, args: []
-        }), 'https://www.youtube-nocookie.com');
-      } catch (e) {}
-    }
-
-    function fermaTutti(tranne) {
-      telai.forEach(function (t) { if (t !== tranne) comanda(t, 'pauseVideo'); });
-    }
-    window.coreoFermaVideoYouTube = function () { fermaTutti(null); };
-
-    document.querySelectorAll('.work-cover').forEach(function (cover) {
-      cover.addEventListener('click', function () {
-        var id = cover.getAttribute('data-video');
-        var frame = document.createElement('iframe');
-        frame.className = 'work-frame';
-        frame.src = 'https://www.youtube-nocookie.com/embed/' + id
-                  + '?autoplay=1&rel=0&enablejsapi=1&origin='
-                  + encodeURIComponent(location.origin);
-        frame.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
-        frame.setAttribute('allowfullscreen', '');
-        frame.setAttribute('title', cover.getAttribute('aria-label') || 'video');
-        cover.replaceWith(frame);
-        telai.push(frame);
-
-        /* Un solo video alla volta, e mai sopra l'audio del reel. */
-        fermaTutti(frame);
-        if (window.coreoZittisciReel) window.coreoZittisciReel();
-
-        /* Il fuoco entra nel player: cosi' la barra spaziatrice e il clic li
-           gestisce YouTube come si aspetta chiunque, senza che la pagina si
-           metta in mezzo rubando la barra spaziatrice allo scorrimento. Di
-           conseguenza si risolve anche il fuoco che finiva sul body quando il
-           pulsante cliccato spariva dal documento. */
-        try { frame.focus({ preventScroll: true }); } catch (e) { frame.focus(); }
-
-        /* Si ferma uscendo dallo schermo, con la stessa soglia 0.15 dei video
-           nativi. Non riparte da solo tornando in vista: un video che ricomincia
-           a parlare da solo mentre si scorre e' molesto, e il reel muto no. */
-        if ('IntersectionObserver' in window) {
-          new IntersectionObserver(function (voci) {
-            voci.forEach(function (voce) {
-              if (!voce.isIntersecting) comanda(frame, 'pauseVideo');
-            });
-          }, { threshold: 0.15 }).observe(frame);
-        }
-      });
-    });
-
-    /* Cambiando scheda o programma si ferma tutto, come fanno gia' i video
-       nativi della pagina. */
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) fermaTutti(null);
-    });
-  })();
-</script>
-<script>
-  /* Sfondi rimandati a quando servono.
-     Per le immagini di sfondo CSS il loading="lazy" NON esiste: il browser non
-     sa che si possono rimandare, quindi all'apertura scaricava tutte e dieci,
-     comprese quelle che stanno migliaia di pixel piu' in basso. L'indirizzo e'
-     passato in data-sfondo e viene rimesso qui.
-     Osservatore SEPARATO da quello dei video, non allargato: quello ha soglia
-     0.15 e serve a far partire e fermare la riproduzione, questo deve caricare
-     PRIMA che il riquadro si veda o l'immagine comparirebbe a scatto sotto gli
-     occhi. Margine 400px, soglia 0. Cosi' toccare uno non cambia l'altro. */
-  (function () {
-    var attesa = Array.prototype.slice.call(document.querySelectorAll('[data-sfondo]'));
-    function carica(e) {
-      var u = e.getAttribute('data-sfondo');
-      if (!u) return;
-      e.style.backgroundImage = "url('" + u + "')";
-      e.removeAttribute('data-sfondo');
-    }
-    /* Senza IntersectionObserver si caricano tutte subito: meglio una pagina
-       pesante di una pagina senza foto. */
-    if (!('IntersectionObserver' in window)) { attesa.forEach(carica); return; }
-    var osservatore = new IntersectionObserver(function (voci) {
-      voci.forEach(function (voce) {
-        if (!voce.isIntersecting) return;
-        carica(voce.target);
-        osservatore.unobserve(voce.target);
-      });
-    }, { rootMargin: '400px 0px', threshold: 0 });
-    attesa.forEach(function (e) { osservatore.observe(e); });
-  })();
-</script>
-<script>
-/* Riquadri del mosaico: ogni progetto ha la sua sottopagina, il clic (o Invio,
-   o barra spaziatrice) porta li'. Niente lightbox su questa pagina: le foto
-   e i video stanno nelle sottopagine. */
+/* NOTA: audio del video delle performance nel mosaico.
+   Il blocco comune qui sopra sa gia' rispegnere l'audio a ogni giro del loop e
+   rimettere l'etichetta giusta, ma il click sul pulsante non lo aggancia
+   nessuno: sull'hero e' collegato a mano piu' su. Questo lo collega, e a
+   differenza di quello dell'hero funziona nei due sensi e segue la lingua. */
 (function () {
-  document.querySelectorAll('.work-tile[data-href]').forEach(function (t) {
-    function vai() { location.href = t.getAttribute('data-href'); }
-    t.addEventListener('click', vai);
-    t.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); vai(); }
+  var riquadro = document.getElementById('performance-riquadro');
+  var video = document.getElementById('performance-video');
+  var bottone = document.getElementById('performance-sound-toggle');
+  if (!riquadro || !video || !bottone) return;
+
+  var LINGUE = ['it', 'en', 'fr'];
+
+  function lingua() {
+    var b = document.querySelector('.ui-lang-btn.is-active');
+    var l = b ? b.getAttribute('data-ui-lang') : 'it';
+    return LINGUE.indexOf(l) >= 0 ? l : 'it';
+  }
+
+  /* Riallinea sia aria-label sia i data-i18n-aria-*, altrimenti al primo
+     cambio di lingua il traduttore rimette l'etichetta del verso sbagliato. */
+  function etichetta() {
+    var verso = video.muted ? 'off' : 'on';
+    LINGUE.forEach(function (l) {
+      var v = bottone.getAttribute('data-aria-' + verso + '-' + l);
+      if (v) bottone.setAttribute('data-i18n-aria-' + l, v);
+    });
+    var cur = bottone.getAttribute('data-aria-' + verso + '-' + lingua());
+    if (cur) bottone.setAttribute('aria-label', cur);
+  }
+
+  /* Un solo audio alla volta in tutta la pagina: se qui si accende la musica,
+     l'hero in cima torna muto. Senza questo, chi accende l'hero e poi scorre
+     fin qui si ritrova due colonne sonore sovrapposte. */
+  function zittisciGliAltri() {
+    document.querySelectorAll('video').forEach(function (v) {
+      if (v === video || v.muted) return;
+      v.muted = true;
+      var h = v.parentNode;
+      if (h && h.classList) h.classList.remove('is-unmuted');
+      var b = h && h.querySelector ? h.querySelector('.sound-toggle') : null;
+      if (b) {
+        LINGUE.forEach(function (l) {
+          var t = b.getAttribute('data-aria-off-' + l) || b.getAttribute('data-i18n-aria-' + l);
+          if (t) b.setAttribute('data-i18n-aria-' + l, t);
+        });
+        var cur = b.getAttribute('data-i18n-aria-' + lingua());
+        if (cur) b.setAttribute('aria-label', cur);
+      }
+    });
+  }
+
+  bottone.addEventListener('click', function (e) {
+    e.stopPropagation();
+    video.muted = !video.muted;
+    riquadro.classList.toggle('is-unmuted', !video.muted);
+    if (!video.muted) {
+      zittisciGliAltri();
+      video.play().catch(function () {});
+    }
+    etichetta();
+  });
+
+  /* Pausa col clic sul video, come sull'hero. La musica resta dov'era: al
+     clic dopo riprende da li' con l'audio ancora acceso. */
+  video.addEventListener('click', function () {
+    if (video.paused) video.play().catch(function () {}); else video.pause();
+  });
+
+  document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+    b.addEventListener('click', function () { setTimeout(etichetta, 0); });
+  });
+
+  /* Il loop rispegne l'audio dal blocco comune, che toglie is-unmuted dal
+     riquadro: da li' riallineo anche l'etichetta. */
+  new MutationObserver(function () {
+    if (video.muted === riquadro.classList.contains('is-unmuted')) return;
+    etichetta();
+  }).observe(riquadro, { attributes: true, attributeFilter: ['class'] });
+
+  etichetta();
+})();
+</script>
+<script>
+/* Le immagini sotto la piega non si scaricano piu' all'apertura.
+   Misurato il 14/8/2026 servendo la pagina via http: erano 1,14 MB su 7,32 di
+   arrivo, cioe' le cinque foto del mosaico (910 KB, sfondi CSS) e i tre poster
+   dei video (229 KB). Nessuno le vede finche' non scorre.
+   Perche' un osservatore separato da quello dei video, che sta piu' sotto:
+   quello ha soglia 0.15 e serve a far partire e fermare la riproduzione, qui
+   invece serve caricare PRIMA che il riquadro si veda, altrimenti l'immagine
+   compare a scatto sotto gli occhi. Da qui il margine di 400px e la soglia 0.
+   Toccare uno dei due non deve cambiare l'altro.
+   Il poster dell'hero NON passa di qui: e' l'unica immagine sopra la piega e
+   deve esserci subito. */
+(function () {
+  var pigri = [].slice.call(document.querySelectorAll('[data-sfondo], [data-poster]'));
+  if (!pigri.length) return;
+
+  function carica(el) {
+    if (el.dataset.sfondo) {
+      el.style.backgroundImage = "url('" + el.dataset.sfondo + "')";
+      delete el.dataset.sfondo;
+    }
+    if (el.dataset.poster) {
+      el.poster = el.dataset.poster;
+      delete el.dataset.poster;
+    }
+  }
+
+  /* Senza IntersectionObserver si carica tutto subito: meglio una pagina
+     pesante di una pagina con i buchi al posto delle foto. */
+  if (!('IntersectionObserver' in window)) {
+    pigri.forEach(carica);
+    return;
+  }
+
+  var osservatorePigri = new IntersectionObserver(function (voci) {
+    voci.forEach(function (voce) {
+      if (!voce.isIntersecting) return;
+      carica(voce.target);
+      osservatorePigri.unobserve(voce.target);
+    });
+  }, { rootMargin: '400px 0px', threshold: 0 });
+
+  pigri.forEach(function (el) { osservatorePigri.observe(el); });
+})();
+</script>
+
+<script>
+/* Apre sopra la pagina: una foto del book, oppure il video intero di un
+   lavoro con i suoi crediti. Il video YouTube nasce solo qui, al clic, su
+   youtube-nocookie: chi non apre niente non scarica niente. */
+(function () {
+  var box = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  var media = document.getElementById('lightbox-media');
+  var cap = document.getElementById('lightbox-cap');
+  if (!box) return;
+
+  function svuota() {
+    var pn = box.querySelectorAll('.lightbox-nav'); [].forEach.call(pn, function (b) { b.hidden = true; });
+    img.hidden = true; img.src = '';
+    media.hidden = true; media.innerHTML = '';
+    cap.hidden = true; cap.innerHTML = '';
+    var th = document.getElementById('lightbox-thumbs'); if (th) { th.hidden = true; th.innerHTML = ''; }
+    media.classList.remove('is-photo');
+  }
+  function apri() {
+    box.hidden = false; document.body.style.overflow = 'hidden';
+    /* Zittisce i video DELLA PAGINA, non quello appena aperto: prima il
+       selettore prendeva anche il video dentro la lightbox e l'audio non
+       partiva mai. Il video della lightbox e' l'unico fuori da .tile-media
+       e dal reel, quindi si esclude per posizione, non per nome. */
+    document.querySelectorAll('.tile-media video, .reel-video').forEach(function (v) { v.muted = true; });
+    box.querySelector('.lightbox-close').focus();
+  }
+  function chiudi() { svuota(); box.hidden = true; document.body.style.overflow = ''; }
+  function segna(b) { [].forEach.call(b.parentNode.children, function (c) { c.classList.remove('is-current'); }); b.classList.add('is-current'); }
+
+  /* Galleria del book: le foto UNICHE sono la prima meta' della lista (la
+     seconda meta' e' la copia per il loop). Si naviga con le frecce a schermo
+     e con quelle della tastiera. */
+  var tutti = [].slice.call(document.querySelectorAll('.book-item'));
+  var uniche = tutti.filter(function (b) { return b.getAttribute('aria-hidden') !== 'true'; });
+  var prev = box.querySelector('.lightbox-nav.is-prev'), next = box.querySelector('.lightbox-nav.is-next');
+  var indice = -1;
+  function mostraFotoBook(i) {
+    indice = (i + uniche.length) % uniche.length;
+    var b = uniche[indice];
+    img.src = b.getAttribute('data-piena');
+    img.alt = b.getAttribute('aria-label') || '';
+    img.hidden = false;
+    prev.hidden = false; next.hidden = false;
+  }
+  tutti.forEach(function (b, k) {
+    b.addEventListener('click', function () {
+      svuota();
+      mostraFotoBook(k % uniche.length);
+      apri();
     });
   });
+  prev.addEventListener('click', function (e) { e.stopPropagation(); mostraFotoBook(indice - 1); });
+  next.addEventListener('click', function (e) { e.stopPropagation(); mostraFotoBook(indice + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (box.hidden || prev.hidden) return;
+    if (e.key === 'ArrowLeft') mostraFotoBook(indice - 1);
+    else if (e.key === 'ArrowRight') mostraFotoBook(indice + 1);
+  });
+
+  var thumbs = document.getElementById('lightbox-thumbs');
+  document.querySelectorAll('.work-tile.is-apribile').forEach(function (t) {
+    function mostraVideo() {
+      media.innerHTML = ''; media.classList.remove('is-photo');
+      var yt = t.getAttribute('data-yt'), src = t.getAttribute('data-src');
+      if (yt) {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + yt + '?autoplay=1&rel=0&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+        f.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+        f.setAttribute('allowfullscreen', '');
+        f.setAttribute('title', t.querySelector('.tile-title').textContent);
+        media.appendChild(f);
+      } else if (src) {
+        var v = document.createElement('video');
+        v.src = src; v.controls = true; v.autoplay = true; v.playsInline = true;
+        v.muted = false; v.volume = 1;
+        media.appendChild(v);
+      }
+      media.hidden = false;
+    }
+    function mostraFoto(src) {
+      media.innerHTML = ''; media.classList.add('is-photo');
+      var i = document.createElement('img'); i.src = src; i.alt = t.querySelector('.tile-title').textContent;
+      media.appendChild(i); media.hidden = false;
+    }
+    function entra() {
+      /* Il progetto di punta ha una sottopagina sua (15/8, stesso modello di
+         INequality su coreografia): il clic porta li', niente lightbox. */
+      var href = t.getAttribute('data-href');
+      if (href) { location.href = href; return; }
+      svuota();
+      mostraVideo();
+      thumbs.innerHTML = ''; thumbs.hidden = true;
+      var fotos = (t.getAttribute('data-lb-fotos') || '').split('|').filter(function (x) { return x; });
+      if (fotos.length) {
+        var poster = t.querySelector('[data-poster]') ? t.querySelector('[data-poster]').getAttribute('data-poster') : (t.querySelector('video') && t.querySelector('video').poster) || '';
+        var bV = document.createElement('button'); bV.type = 'button'; bV.className = 'is-video is-current';
+        bV.setAttribute('aria-label', 'Video'); bV.textContent = '\u25B6';
+        if (poster) bV.style.backgroundImage = "url('" + poster + "')";
+        bV.addEventListener('click', function () { mostraVideo(); segna(bV); });
+        thumbs.appendChild(bV);
+        fotos.forEach(function (src, k) {
+          var b = document.createElement('button'); b.type = 'button';
+          b.style.backgroundImage = "url('" + src + "')"; b.setAttribute('aria-label', 'Foto ' + (k + 1));
+          b.addEventListener('click', function () { mostraFoto(src); segna(b); });
+          thumbs.appendChild(b);
+        });
+        thumbs.hidden = false;
+      }
+      var q = function (c) { var e = t.querySelector(c); return e ? e.innerHTML : ''; };
+      /* Se il riquadro ha un credito lungo per la lightbox (data-lb-detail-xx),
+         qui c'e' spazio e si usa quello; nel riquadro resta la riga corta. */
+      var lang = document.documentElement.getAttribute('data-ui-lang') || 'en';
+      var lungo = t.getAttribute('data-lb-detail-' + lang) || t.getAttribute('data-lb-detail-fr');
+      var dettaglio = lungo ? [q('.tile-client'), lungo].filter(function (x) { return x; }).join(' &middot; ')
+                            : [q('.tile-client'), q('.tile-detail')].filter(function (x) { return x; }).join(' &middot; ');
+      cap.innerHTML = (q('.tile-role') ? '<div class="lb-role">' + q('.tile-role') + '</div>' : '')
+                    + '<div class="lb-title">' + q('.tile-title') + '</div>'
+                    + (dettaglio ? '<div class="lb-detail">' + dettaglio + '</div>' : '');
+      cap.hidden = false;
+      apri();
+    }
+    t.addEventListener('click', entra);
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); entra(); }
+    });
+    /* 16/8: ancora diretta dal CV in PDF (regola di Gladia: se una cosa si
+       puo' vedere nel portfolio, il PDF porta li', mai a un link esterno).
+       danza.html#lafont scorre fino al riquadro e lo apre. */
+    if (t.id && location.hash === '#' + t.id.replace('lavoro-', '')) {
+      setTimeout(function () { t.scrollIntoView({ block: 'center' }); entra(); }, 600);
+    }
+  });
+
+  box.querySelector('.lightbox-close').addEventListener('click', chiudi);
+  box.addEventListener('click', function (e) { if (e.target === box) chiudi(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !box.hidden) chiudi();
+  });
+})();
+</script>
+<script>
+/* 17/8: i clip del mosaico partono al passaggio del cursore e si fermano
+   quando esce (Gladia: "il video si accende solo quando ci passi sopra, gli
+   altri sono fermi"). Su schermi senza cursore partono quando il riquadro e'
+   quasi intero, come prima. is-playing fa sfumare la copertina. */
+(function () {
+  var clip = Array.prototype.slice.call(document.querySelectorAll('.mosaic-clip'));
+  clip.forEach(function (v) {
+    var t = v.closest('.work-tile');
+    v.addEventListener('play', function () { t.classList.add('is-playing'); });
+    v.addEventListener('pause', function () { t.classList.remove('is-playing'); });
+  });
+  if (window.matchMedia('(hover: hover)').matches) {
+    clip.forEach(function (v) {
+      var t = v.closest('.work-tile');
+      t.addEventListener('mouseenter', function () { v.play().catch(function () {}); });
+      t.addEventListener('mouseleave', function () { v.pause(); });
+    });
+  } else if ('IntersectionObserver' in window) {
+    var oss = new IntersectionObserver(function (voci) {
+      voci.forEach(function (x) { if (x.intersectionRatio >= 0.85) x.target.play().catch(function(){}); else x.target.pause(); });
+    }, { threshold: [0.85] });
+    clip.forEach(function (v) { oss.observe(v); });
+  }
+})();
+</script>
+<script>
+/* Copertine YouTube: identico a coreografia. L'iframe nasce solo al clic,
+   su youtube-nocookie, senza caricare nessuno script di YouTube. */
+(function () {
+  var telai = [];
+  function comanda(t, f) {
+    try { t.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:[]}),
+      'https://www.youtube-nocookie.com'); } catch (e) {}
+  }
+  function fermaTutti(tranne) { telai.forEach(function (t) { if (t !== tranne) comanda(t,'pauseVideo'); }); }
+  document.querySelectorAll('.work-cover').forEach(function (cover) {
+    cover.addEventListener('click', function () {
+      var id = cover.getAttribute('data-video');
+      var frame = document.createElement('iframe');
+      frame.className = 'work-frame';
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + id
+                + '?autoplay=1&rel=0&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+      frame.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+      frame.setAttribute('allowfullscreen','');
+      frame.setAttribute('title', cover.getAttribute('aria-label') || 'video');
+      cover.replaceWith(frame);
+      telai.push(frame);
+      fermaTutti(frame);
+      document.querySelectorAll('video').forEach(function (v) { v.muted = true; });
+      try { frame.focus({preventScroll:true}); } catch (e) { frame.focus(); }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (voci) {
+          voci.forEach(function (v) { if (!v.isIntersecting) comanda(frame,'pauseVideo'); });
+        }, {threshold:0.15}).observe(frame);
+      }
+    });
+  });
+})();
+</script>
+<script>
+/* Nastro del book (16/8): avanza da solo, si ferma quando il cursore e' sopra
+   o quando lo si tocca, si trascina col mouse, si scorre col trackpad. La
+   lista e' doppia: a meta' strada si torna indietro di meta' senza che si veda. */
+(function () {
+  var band = document.querySelector('.book-band'), track = document.querySelector('.book-track');
+  if (!band || !track) return;
+  var fermo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sopra = false, trascina = false, ultimoTocco = -1e9, ultimoT = null;
+  var VELOCITA = 28; /* px al secondo */
+  function meta() { return track.scrollWidth / 2; }
+  /* scrollLeft e' un intero: sommare mezzo pixel a fotogramma non lo muove
+     mai. Si tiene la posizione in virgola mobile e si scrive l'intero. */
+  var pos = null, ultimaScrittura = -1e9;
+  function passo(t) {
+    if (ultimoT === null) ultimoT = t;
+    var dt = Math.min((t - ultimoT) / 1000, 0.1); ultimoT = t;
+    var pausa = fermo || sopra || trascina || document.hidden || (t - ultimoTocco < 1500);
+    if (pausa || pos === null) pos = band.scrollLeft;
+    else { pos += VELOCITA * dt; if (Math.round(pos) !== band.scrollLeft) { ultimaScrittura = t; band.scrollLeft = Math.round(pos); } }
+    var m = meta();
+    if (m > 0) {
+      if (band.scrollLeft >= m) { ultimaScrittura = t; band.scrollLeft -= m; pos = band.scrollLeft; }
+      else if (band.scrollLeft < 0) { ultimaScrittura = t; band.scrollLeft += m; pos = band.scrollLeft; }
+    }
+    requestAnimationFrame(passo);
+  }
+  requestAnimationFrame(passo);
+  band.addEventListener('mouseenter', function () { sopra = true; });
+  band.addEventListener('mouseleave', function () { sopra = false; });
+  band.addEventListener('wheel', function () { ultimoTocco = performance.now(); }, {passive:true});
+  band.addEventListener('touchstart', function () { ultimoTocco = performance.now(); }, {passive:true});
+  band.addEventListener('touchmove', function () { ultimoTocco = performance.now(); }, {passive:true});
+  /* Gli scroll che scriviamo noi fanno scattare lo stesso evento: quelli
+     entro 60ms dall'ultima scrittura non contano come tocco dell'utente
+     (rotella e dita hanno gia' i loro eventi sopra). */
+  band.addEventListener('scroll', function () { var n = performance.now(); if (!trascina && n - ultimaScrittura > 60) ultimoTocco = n; }, {passive:true});
+  /* Trascinamento col mouse. Se ci si e' mossi piu' di 6px il clic che segue
+     non deve aprire la foto. */
+  var x0 = 0, s0 = 0, mosso = 0;
+  band.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    trascina = true; mosso = 0; x0 = e.clientX; s0 = band.scrollLeft;
+    band.classList.add('is-dragging'); band.setPointerCapture(e.pointerId);
+  });
+  band.addEventListener('pointermove', function (e) {
+    if (!trascina) return;
+    var dx = e.clientX - x0; mosso = Math.max(mosso, Math.abs(dx));
+    band.scrollLeft = s0 - dx;
+  });
+  function fine(e) {
+    if (!trascina) return;
+    trascina = false; ultimoTocco = performance.now();
+    /* Con pointer-events:none sui pulsanti durante il trascinamento il clic
+       non arriva; qui lo si fa arrivare solo se non ci si e' mossi. */
+    band.classList.remove('is-dragging');
+    if (mosso <= 6 && e.type === 'pointerup') {
+      var el = document.elementFromPoint(e.clientX, e.clientY);
+      var b = el && el.closest ? el.closest('.book-item') : null;
+      if (b) b.click();
+    }
+  }
+  band.addEventListener('pointerup', fine);
+  band.addEventListener('pointercancel', fine);
 })();
 </script>
 
 <script>
 (function () {
-  var b = document.getElementById('coreografia-reel-full'); if (!b) return;
+  var b = document.getElementById('danza-reel-full'); if (!b) return;
   var box = b.closest('.reel'), video = box && box.querySelector('video');
   b.addEventListener('click', function (e) {
     e.stopPropagation();
