@@ -2087,10 +2087,13 @@
     }
 
     var pageLang = null;
+    /* ?reel= decide SOLO il video. La lingua della pagina la decide il nome del file
+       (-it, -fr, oppure nessun suffisso per l'inglese) o un ?lang= esplicito. Fino
+       all'11/9/2026 un ?reel=fr cambiava anche la lingua della pagina: era la regola di
+       quando la lingua non stava ancora nell'indirizzo, e faceva aprire in francese una
+       pagina mandata in inglese col video francese. */
     if (requestedLang && ['it', 'en', 'fr'].indexOf(requestedLang) !== -1) {
       pageLang = requestedLang;
-    } else if (requestedReel && requestedReel !== 'tri' && ['it', 'en', 'fr'].indexOf(requestedReel) !== -1) {
-      pageLang = requestedReel;
     }
     if (pageLang) {
       try { localStorage.setItem('gm-portfolio-lang', pageLang); } catch (e) {}
