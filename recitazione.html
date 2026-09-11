@@ -1450,6 +1450,14 @@
   display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; opacity:0;
   transition:opacity .3s ease, transform .25s ease; }
 .fc-teaser:hover .fc-full, .fc-teaser .fc-full:focus-visible, .fc-teaser.is-unmuted .fc-full { opacity:1; }
+/* 11/9/2026, Gladia dal telefono: "non riesco a schiacciare l'audio, si muove il
+   cronometro". La barra di avanzamento (.reel-scrub) e' larga quanto il riquadro,
+   alta 1.6rem e sta a z-index 3, cioe' SOPRA il pulsante dell'audio, che di
+   z-index non ne aveva nessuno. Misurato a 390 px: il cerchio dell'audio sta fra
+   458 e 483, la barra fra 464 e 489, e elementFromPoint sul centro del cerchio
+   rispondeva "reel-scrub". Il tocco andava a spostare il video invece di accendere
+   il suono. Il pulsante sale sopra la barra. */
+.fc-teaser .sound-toggle { z-index:4; }
 .fc-teaser .fc-full:hover { transform:scale(1.08); background:rgba(0,0,0,0.5); }
 /* A schermo intero il riquadro perde le proporzioni 2.4:1 della griglia: il
    video (1280x533) va mostrato INTERO su fondo nero, non ritagliato ai lati
@@ -1468,7 +1476,17 @@
 .fc-title  { font-size:2.4rem; line-height:1.1; color:var(--accent); margin:0.6rem 0 0.9rem !important; }
 .fc-client { font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink); line-height:1.8; }
 .fc-detail { font-size:0.62rem; letter-spacing:0.04em; line-height:1.9; color:var(--ink-faint); margin-top:0.8rem !important; }
-@media (max-width:1px) {
+/* 11/9/2026, bozza B scelta da Gladia sul telefono vero fra due (l'altra era
+   togliere la barra di avanzamento dal riquadro piccolo). Il collage si mette
+   in colonna come il mosaico di Danza e Coreografia: a 390 px il teaser passa
+   da 189x76 a 294x123, e barra, cronometro e pulsanti tornano in proporzione
+   da soli invece che a forza di misure. La soglia e' 44rem = 704 px, cioe'
+   sotto tutti i telefoni e sopra tutti gli iPad in verticale (il piu' stretto,
+   l'iPad mini, e' 744), che restano quindi su due colonne.
+   La larghezza massima serve solo fra i 420 e i 704 px: senza, a 704 la
+   locandina diventerebbe alta 984 px. A 390 non cambia niente, il collage li'
+   e' gia' largo 294. */
+@media (max-width:44rem) {
   .film-collage { grid-template-columns:1fr; }
   .fc-still, .fc-teaser, .fc-poster, .fc-credits { grid-column:1; grid-row:auto; }
   .fc-poster .tile-media.is-poster { aspect-ratio:2/3; height:auto; }
@@ -1486,13 +1504,23 @@
 @media (max-width:44rem) {
   .film-collage { gap:clamp(0.55rem, 2.73vw, 1.2rem); }
   .fc-teaser .sound-toggle-label { display:none; }
-  .fc-teaser .sound-toggle { right:clamp(0.4rem, 1.6vw, 1rem); bottom:clamp(0.4rem, 1.6vw, 1rem); }
+  /* Il cerchio scende a 25 px, ma l'area che risponde al dito resta grande:
+     6 px di padding invisibile tutto intorno (37 x 37) e gli scostamenti
+     accorciati della stessa misura, cosi' il cerchio non si sposta di un pixel. */
+  .fc-teaser .sound-toggle { padding:6px;
+    right:calc(clamp(0.4rem, 1.6vw, 1rem) - 6px); bottom:calc(clamp(0.4rem, 1.6vw, 1rem) - 6px); }
   .fc-teaser .sound-toggle-circle { width:clamp(1.55rem, 6.4vw, 2.6rem); height:clamp(1.55rem, 6.4vw, 2.6rem); }
   .fc-teaser .sound-toggle-circle .sound-icon { width:clamp(11px, 2.77vw, 18px); height:clamp(11px, 2.77vw, 18px); }
   .fc-teaser .sound-toggle-circle::after { inset:clamp(-6px, -0.92vw, -3px); }
   .fc-teaser .fc-full { top:clamp(0.4rem, 1.6vw, 1rem); right:clamp(0.4rem, 1.6vw, 1rem);
     width:clamp(1.4rem, 5.6vw, 2.2rem); height:clamp(1.4rem, 5.6vw, 2.2rem); }
   .fc-teaser .fc-full svg { width:clamp(10px, 2.55vw, 16px); height:clamp(10px, 2.55vw, 16px); }
+  /* Il cronometro era largo 93 px su un riquadro di 189: meta' del video. E la
+     fascia sensibile della barra prendeva un terzo dell'altezza. Scendono con la
+     stessa legge dei pulsanti, e a 44rem valgono ancora le misure del desktop. */
+  .fc-teaser .reel-scrub { height:clamp(0.72rem, 3.636vw, 1.6rem); }
+  .fc-teaser .reel-clock { font-size:clamp(0.45rem, 1.545vw, 0.68rem);
+    left:clamp(0.35rem, 2.273vw, 1rem); bottom:clamp(0.3rem, 2.727vw, 1.2rem); }
 }
 
 /* ===== 6/9/2026, conforme a Danza (bozza A scelta da Gladia) ===== */
@@ -1508,6 +1536,10 @@
 #attrice .works-mosaic { padding-top:2.5rem; }
 /* Collage ridotto: si stringe la larghezza, l'altezza segue le proporzioni fisse. */
 .works-mosaic > .film-collage { width:min(100%, 58rem); margin:0 auto; }
+/* In colonna la larghezza va limitata, altrimenti a 704 px la locandina
+   diventa alta 984 px. Deve stare QUI, dopo la riga sopra: stessa specificita',
+   vince l'ultima. Misurato: senza, il video a 704 era 608 px invece di 416. */
+@media (max-width:44rem) { .works-mosaic > .film-collage { width:min(100%, 26rem); } }
 @media (min-width: 60rem) {
   .names-list.is-second:has(> li:nth-child(2):last-child) {
     grid-template-columns:repeat(2, minmax(19rem, 1fr)); max-width:50rem; margin-left:auto; margin-right:auto; }
