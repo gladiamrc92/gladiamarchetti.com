@@ -1626,12 +1626,16 @@
   var langLabelsEn = { it: 'italian', fr: 'french', en: 'english' };
   var langLabelsFr = { it: 'italien', fr: 'français', en: 'anglais' };
   var activeVideoLang = 'en';
+  /* Vero quando il video e' stato scelto nell'indirizzo (?reel=): da quel momento la lingua
+     della pagina non lo tocca piu'. Aggiunto l'11/9/2026, Recitazione ce l'aveva gia'. */
+  var reelSceltoDaIndirizzo = false;
   function currentUiLang() {
     var lang = document.documentElement.getAttribute('data-ui-lang');
     return lang === 'en' || lang === 'fr' ? lang : 'it';
   }
   function updateVideoLangLabel(e) {
     var lang = e && e.detail && e.detail.lang;
+    if (reelSceltoDaIndirizzo) return;
     if (!lang || !langSources[lang] || lang === activeVideoLang) return;
     var tab = document.querySelector('.lang-tab[data-lang="' + lang + '"]');
     if (tab) tab.click();
@@ -1658,6 +1662,7 @@
       var matchingTab = document.querySelector('.lang-tab[data-lang="' + requestedReel + '"]');
       if (matchingTab) matchingTab.classList.add('is-active');
       activeVideoLang = requestedReel;
+      reelSceltoDaIndirizzo = true;
       updateVideoLangLabel();
       video.poster = langSources[requestedReel].poster;
       videoSource.src = langSources[requestedReel].src;

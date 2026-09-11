@@ -2303,9 +2303,13 @@
   document.addEventListener('gm-lang-change', function (e) {
     var lang = e && e.detail ? e.detail.lang : null;
     if (!lang || !langSources[lang]) return;
-    /* Un ?reel= esplicito nell'indirizzo vince sul primo allineamento: chi manda
-       un link al trilingue vuole il trilingue, qualunque sia la lingua. */
-    if (primoGiroLingua && reelSceltoDaIndirizzo) { primoGiroLingua = false; return; }
+    /* Un ?reel= esplicito nell'indirizzo vince su OGNI allineamento automatico alla
+       lingua, non solo sul primo: chi manda un link al trilingue vuole il trilingue,
+       qualunque sia la lingua. Corretto l'11/9/2026: sulle copie per lingua (-it, -fr)
+       la lingua viene riapplicata piu' volte all'apertura, e dal secondo giro il reel
+       dell'indirizzo veniva sovrascritto. Il reel lo cambia solo un tocco della persona
+       sulle linguette del video, qui sotto. */
+    if (reelSceltoDaIndirizzo) { primoGiroLingua = false; return; }
     impostaReel(lang, !primoGiroLingua);
     primoGiroLingua = false;
   });
