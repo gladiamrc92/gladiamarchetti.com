@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="media/logo/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="media/logo/favicon-16.png">
 <link rel="apple-touch-icon" href="media/logo/favicon-180.png">
-<title>Gladia Marchetti — Recitazione</title>
+<title>Gladia Marchetti · Acting</title>
 <style>
   @font-face {
     font-family: "Playfair Display";
@@ -2361,7 +2361,7 @@
 (() => {
   const STORAGE_KEY = 'gm-portfolio-lang';
   const SUPPORTED = ['it', 'en', 'fr'];
-  const TITLES = { it: 'Gladia Marchetti — Recitazione', en: 'Gladia Marchetti — Acting', fr: 'Gladia Marchetti — Comédienne' };
+  const TITLES = { it: 'Gladia Marchetti · Recitazione', en: 'Gladia Marchetti · Acting', fr: 'Gladia Marchetti · Comédienne' };
 
   function apply(lang) {
     document.documentElement.setAttribute('data-ui-lang', lang);
@@ -3072,6 +3072,32 @@
     if (box.requestFullscreen) { box.requestFullscreen().catch(function () {}); }
     else if (video && video.webkitEnterFullscreen) { video.webkitEnterFullscreen(); }
   });
+})();
+</script>
+<script>
+/* ANTEPRIME DEL LINK 11/9/2026: l'indirizzo nella barra segue la lingua che si vede, cosi' il pulsante Condividi
+   del browser manda il link giusto. Non ricarica niente, cambia solo cio' che si legge. */
+(function () {
+  if (location.protocol === 'file:') return;   /* aprendo i file col doppio clic non si tocca niente */
+  var BASE = 'recitazione';
+  function indirizzo(l) {
+    if (!BASE) return (l === 'en') ? '/' : '/index-' + l + '.html';
+    return (l === 'en') ? '/' + BASE + '.html' : '/' + BASE + '-' + l + '.html';
+  }
+  function sincronizza() {
+    var l = document.documentElement.getAttribute('data-ui-lang');
+    if (!l) return;
+    var atteso = indirizzo(l);
+    if (location.pathname !== atteso) {
+      try { history.replaceState(null, '', atteso + location.search + location.hash); } catch (e) {}
+    }
+  }
+  document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+    b.addEventListener('click', function () { setTimeout(sincronizza, 0); });
+  });
+  document.addEventListener('gm-lang-change', sincronizza);
+  window.addEventListener('load', sincronizza);
+  setTimeout(sincronizza, 400);
 })();
 </script>
 </body>
