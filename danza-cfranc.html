@@ -1576,9 +1576,32 @@
     document.dispatchEvent(new CustomEvent('gm-lang-change', { detail: { lang } }));
   }
 
+  /* LINGUA NELL'INDIRIZZO 12/9/2026: questa pagina ha un indirizzo solo, quindi la lingua
+     viaggia in ?lang=it|en|fr. Comanda l'indirizzo, poi la memoria del browser, poi l'inglese.
+     Ogni tocco sulla linguetta riscrive ?lang=, cosi' il pulsante Condividi manda la lingua
+     che si vede. Stessa regola delle pagine principali, dove la lingua sta nel nome del file. */
+  function dallIndirizzo() {
+    try {
+      const l = new URLSearchParams(location.search).get('lang');
+      return SUPPORTED.includes(l) ? l : null;
+    } catch (e) { return null; }
+  }
+
+  function scriviIndirizzo(lang) {
+    if (location.protocol === 'file:') return;   /* col doppio clic sul file non si tocca niente */
+    try {
+      const u = new URL(location.href);
+      if (u.searchParams.get('lang') === lang) return;
+      u.searchParams.set('lang', lang);
+      history.replaceState(null, '', u.pathname + u.search + u.hash);
+    } catch (e) {}
+  }
+
   let stored = null;
   try { stored = localStorage.getItem(STORAGE_KEY); } catch (e) {}
-  apply(SUPPORTED.includes(stored) ? stored : 'en');
+  const dallIndir = dallIndirizzo();
+  apply(dallIndir || (SUPPORTED.includes(stored) ? stored : 'en'));
+  if (dallIndir) { try { localStorage.setItem(STORAGE_KEY, dallIndir); } catch (e) {} }
 
   document.querySelectorAll('.ui-lang-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -1586,6 +1609,7 @@
       if (!SUPPORTED.includes(lang)) return;
       try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
       apply(lang);
+      scriviIndirizzo(lang);
     });
   });
 })();

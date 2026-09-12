@@ -11,8 +11,8 @@
      mécanique que danza-cv-fr.html (vert à l'écran, blanc à l'impression, page web
      avec Imprimer / Télécharger). Palette de coreografia.html. Règles de Gladia :
      le nom seulement dans le logo, "Basée en France", Éteignons sans année, les liens
-     vidéo pointent vers le portfolio (data-portfolio, sans href tant que le site
-     n'est pas public), liens externes en onglet nouveau. */
+     vidéo pointent vers le portfolio, en adresse absolue vers la page dans la langue
+     du dossier (12/9/2026, le site est en ligne), liens externes en onglet nouveau. */
   @page { size: 280mm 157.5mm; margin: 0; }
   :root {
     --ground: #232f2f; --ground-soft: #2d3c3c;
@@ -42,9 +42,11 @@
     align-items: baseline; font-size: 7.5pt; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); }
   .foot .n { color: var(--ink-dim); }
   a { color: inherit; text-decoration: none; }
-  /* lien vidéo : vers le portfolio quand il sera public, inactif d'ici là */
+  /* lien vidéo : vers la page du portfolio dans la langue de ce dossier (12/9/2026) */
   .vid { display: inline-block; margin-top: 4mm; font-size: 7.4pt; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 0.6mm; pointer-events: none; }
+    color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 0.6mm; }
+  /* LINK AI VIDEO 12/9/2026: cliccabile dove il link c'e', inerte dove manca */
+  .vid:not([href]) { pointer-events: none; }
   .vid::before { content: "▶"; font-size: 6pt; margin-right: 2mm; }
 
   /* 1. Couverture */
@@ -168,6 +170,7 @@
 if (location.hash === '#pdf') document.documentElement.className += ' pdf';
 </script>
 <style>@media print { body, html { height:auto !important; min-height:0 !important; overflow:visible !important; } .stage { height:auto !important; } }</style>
+<!-- LINK AI VIDEO 12/9/2026 -->
 </head>
 <body>
 
@@ -214,7 +217,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
       <p class="gloss">A&nbsp;family musical about screen time, for&nbsp;ages 3 and&nbsp;up.</p>
       <p class="d mono">Choreography <b>Gladia Marchetti</b><br>On stage: <b>4 dancers, 3 circus artists,<br>1 singer, 2 backing vocalists, 4 musicians</b></p>
       <p class="role" style="max-width:325px"><b>Fourteen performers, moving as one.</b><br>The choreography doesn't stop at the dancers: circus artists, singer, backing vocalists and musicians are all directed with the same rigour, as one company, on the main stage of the Palais&nbsp;des&nbsp;Festivals in&nbsp;Cannes.</p>
-      <span class="vid mono" data-portfolio="coreografia-eteignons.html">Watch the teaser</span>
+      <a class="vid mono" href="https://gladiamarchetti.com/coreografia-eteignons.html?lang=en" target="_blank" rel="noopener">Watch the teaser</a>
     </div>
   </div>
   <div class="foot mono"><span>Gladia Marchetti · Choreographer</span><span class="n">02</span></div>
@@ -237,7 +240,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
         <p class="kicker mono k">The show · Choreographer, writer and performer</p>
         <p class="l mono">Festival Onze Bouge, Paris · 2021<br>Amman Contemporary Dance Festival · Jordan · 2023<br><i style="text-transform:none;letter-spacing:.04em">festival opening, presented in partnership with&nbsp;the&nbsp;Institut&nbsp;français&nbsp;de&nbsp;Jordanie</i></p>
         <p class="d mono">Concept and choreography <b>Gladia Marchetti</b><br>Performers <b>Gladia Marchetti, Nina Chati, Ambre Nunes</b><br>Music <b>Arthur Balatier</b> · Sociology consultant <b>Pauline Vessely</b></p>
-        <span class="vid mono" data-portfolio="coreografia-inequality.html">Watch an excerpt</span>
+        <a class="vid mono" href="https://gladiamarchetti.com/coreografia-inequality.html?lang=en" target="_blank" rel="noopener">Watch an excerpt</a>
       </div>
       <div>
         <div class="pics film">
@@ -248,7 +251,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
         <p class="l mono">Short film · 2021</p>
         <p class="d mono">Script, choreography and editing <b>Gladia Marchetti</b><br>Director and cinematographer <b>May Meng</b><br>Performers <b>Nina Chati, Gladia Marchetti, Greta Quadri</b><br>Music <b>Arthur Balatier</b> · Costumes <b>Ishanee Patra</b></p>
         <p class="pitch">Social inequality: something we now take for granted, yet it shapes how we live and how we relate to one another. A piece built on the way we look at each other, on the performers' acting, on gesture rooted in raw emotion, moving between the delicacy of classical music and the weight of a hip-hop beat.</p>
-        <span class="vid mono" data-portfolio="coreografia-inequality-film.html">Watch the short film</span>
+        <a class="vid mono" href="https://gladiamarchetti.com/coreografia-inequality-film.html?lang=en" target="_blank" rel="noopener">Watch the short film</a>
       </div>
     </div>
   </div>
@@ -272,7 +275,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
       <p class="l mono">Official music video for <i>Lucien Lumière</i><br>Maison Lumière · 2025</p>
       <p class="d mono">Choreography <b>Gladia Marchetti</b><br>Performers <b>Sarah Okendo, Lucien Lumière</b><br>Director <b>Eli Chicheportiche</b><br>Art direction <b>Roman Veiga</b><br>Production manager <b>Octave Donn</b><br>Lighting <b>Iban Bergery</b><br>Music <b>Solal Roubine</b><br>Mixing and mastering <b>Theo Chapira, Benjamin&nbsp;Savignoni</b></p>
       <p class="role" style="max-width:325px"><b>A duet for the camera.</b><br>Built around the rapper Lucien&nbsp;Lumière and the actress Sarah&nbsp;Okendo, in the empty house of&nbsp;the Théâtre&nbsp;de&nbsp;la&nbsp;Renaissance.</p>
-      <span class="vid mono" data-portfolio="coreografia-comme-si.html">Watch the video</span>
+      <a class="vid mono" href="https://gladiamarchetti.com/coreografia-comme-si.html?lang=en" target="_blank" rel="noopener">Watch the video</a>
     </div>
   </div>
   <div class="foot mono"><span>Gladia Marchetti · Choreographer</span><span class="n">04</span></div>

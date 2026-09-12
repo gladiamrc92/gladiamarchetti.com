@@ -11,8 +11,8 @@
      mécanique que danza-cv-fr.html (vert à l'écran, blanc à l'impression, page web
      avec Imprimer / Télécharger). Palette de coreografia.html. Règles de Gladia :
      le nom seulement dans le logo, "Basée en France", Éteignons sans année, les liens
-     vidéo pointent vers le portfolio (data-portfolio, sans href tant que le site
-     n'est pas public), liens externes en onglet nouveau. */
+     vidéo pointent vers le portfolio, en adresse absolue vers la page dans la langue
+     du dossier (12/9/2026, le site est en ligne), liens externes en onglet nouveau. */
   @page { size: 280mm 157.5mm; margin: 0; }
   :root {
     --ground: #232f2f; --ground-soft: #2d3c3c;
@@ -42,9 +42,11 @@
     align-items: baseline; font-size: 7.5pt; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); }
   .foot .n { color: var(--ink-dim); }
   a { color: inherit; text-decoration: none; }
-  /* lien vidéo : vers le portfolio quand il sera public, inactif d'ici là */
+  /* lien vidéo : vers la page du portfolio dans la langue de ce dossier (12/9/2026) */
   .vid { display: inline-block; margin-top: 4mm; font-size: 7.4pt; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 0.6mm; pointer-events: none; }
+    color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 0.6mm; }
+  /* LINK AI VIDEO 12/9/2026: cliccabile dove il link c'e', inerte dove manca */
+  .vid:not([href]) { pointer-events: none; }
   .vid::before { content: "▶"; font-size: 6pt; margin-right: 2mm; }
 
   /* 1. Couverture */
@@ -168,6 +170,7 @@
 if (location.hash === '#pdf') document.documentElement.className += ' pdf';
 </script>
 <style>@media print { body, html { height:auto !important; min-height:0 !important; overflow:visible !important; } .stage { height:auto !important; } }</style>
+<!-- LINK AI VIDEO 12/9/2026 -->
 </head>
 <body>
 
@@ -214,7 +217,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
       <p class="gloss">Spettacolo musicale sull'uso eccessivo degli&nbsp;schermi, per&nbsp;tutti dai&nbsp;3&nbsp;anni.</p>
       <p class="d mono">Coreografia <b>Gladia Marchetti</b><br>In scena: <b>4 danzatori, 3 circensi,<br>1 cantante, 2 coriste, 4 musicisti</b></p>
       <p class="role" style="max-width:285px"><b>Quattordici interpreti, un solo movimento.</b><br>La coreografia non si ferma ai danzatori: circensi, cantante, coriste e musicisti sono diretti insieme, con lo stesso rigore, sul grande palco del Palais des Festivals di Cannes.</p>
-      <span class="vid mono" data-portfolio="coreografia-eteignons.html">Guarda il teaser</span>
+      <a class="vid mono" href="https://gladiamarchetti.com/coreografia-eteignons.html?lang=it" target="_blank" rel="noopener">Guarda il teaser</a>
     </div>
   </div>
   <div class="foot mono"><span>Gladia Marchetti · Coreografa</span><span class="n">02</span></div>
@@ -237,7 +240,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
         <p class="kicker mono k">Lo spettacolo · Coreografa, autrice e interprete</p>
         <p class="l mono">Festival Onze Bouge, Parigi · 2021<br>Amman Contemporary Dance Festival · Giordania · 2023<br><i style="text-transform:none;letter-spacing:.04em">apertura del festival, in collaborazione con&nbsp;l'Institut&nbsp;français&nbsp;de&nbsp;Jordanie</i></p>
         <p class="d mono">Ideazione e coreografia <b>Gladia Marchetti</b><br>Interpreti <b>Gladia Marchetti, Nina Chati, Ambre Nunes</b><br>Musica <b>Arthur Balatier</b> · Consulenza sociologica <b>Pauline Vessely</b></p>
-        <span class="vid mono" data-portfolio="coreografia-inequality.html">Guarda un estratto</span>
+        <a class="vid mono" href="https://gladiamarchetti.com/coreografia-inequality.html?lang=it" target="_blank" rel="noopener">Guarda un estratto</a>
       </div>
       <div>
         <div class="pics film">
@@ -248,7 +251,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
         <p class="l mono">Cortometraggio · 2021</p>
         <p class="d mono">Sceneggiatura, coreografia, montaggio <b>Gladia Marchetti</b><br>Regia e fotografia <b>May Meng</b><br>Interpreti <b>Nina Chati, Gladia Marchetti, Greta Quadri</b><br>Musica <b>Arthur Balatier</b> · Costumi <b>Ishanee Patra</b></p>
         <p class="pitch">La disuguaglianza sociale è diventata la norma, eppure condiziona a&nbsp;fondo il nostro modo di vivere e le nostre relazioni. Uno spettacolo fatto di sguardi, di gesti che si legano alle emozioni, sospeso tra&nbsp;la&nbsp;delicatezza della musica classica e il peso del beat hip&nbsp;hop.</p>
-        <span class="vid mono" data-portfolio="coreografia-inequality-film.html">Guarda il cortometraggio</span>
+        <a class="vid mono" href="https://gladiamarchetti.com/coreografia-inequality-film.html?lang=it" target="_blank" rel="noopener">Guarda il cortometraggio</a>
       </div>
     </div>
   </div>
@@ -272,7 +275,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
       <p class="l mono">Videoclip ufficiale di <i>Lucien Lumière</i><br>Maison Lumière · 2025</p>
       <p class="d mono">Coreografia <b>Gladia Marchetti</b><br>Interpreti <b>Sarah Okendo, Lucien Lumière</b><br>Regia <b>Eli Chicheportiche</b><br>Direzione artistica <b>Roman Veiga</b><br>Direzione di produzione <b>Octave Donn</b><br>Luci <b>Iban Bergery</b><br>Musica <b>Solal Roubine</b><br>Mix e mastering <b>Theo Chapira, Benjamin&nbsp;Savignoni</b></p>
       <p class="role" style="max-width:285px"><b>Un duo per la macchina da&nbsp;presa.</b><br>Costruito attorno al rapper Lucien&nbsp;Lumière e all'attrice Sarah&nbsp;Okendo, nella sala vuota del Théâtre de la Renaissance.</p>
-      <span class="vid mono" data-portfolio="coreografia-comme-si.html">Guarda il videoclip</span>
+      <a class="vid mono" href="https://gladiamarchetti.com/coreografia-comme-si.html?lang=it" target="_blank" rel="noopener">Guarda il videoclip</a>
     </div>
   </div>
   <div class="foot mono"><span>Gladia Marchetti · Coreografa</span><span class="n">04</span></div>

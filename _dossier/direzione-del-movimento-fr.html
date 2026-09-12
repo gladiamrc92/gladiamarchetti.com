@@ -78,7 +78,9 @@
   .work .cred .l { font-size: 8.4pt; letter-spacing: 0.16em; text-transform: uppercase; line-height: 2.05; color: var(--ink); }
   .work .cred .d { font-size: 7.6pt; letter-spacing: 0.04em; line-height: 1.95; color: var(--ink-faint); margin-top: 3mm; }
   .vid { display: inline-block; margin-top: 5mm; font-size: 7.4pt; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 0.6mm; pointer-events: none; }
+    color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 0.6mm; }
+  /* LINK AI VIDEO 12/9/2026: cliccabile dove il link c'e', inerte dove manca */
+  .vid:not([href]) { pointer-events: none; }
   .vid::before { content: "\25B6"; font-size: 6pt; margin-right: 2mm; }
   html.paper .vid { display: none !important; }
   .work .cred .role { font-size: 10.5pt; line-height: 1.6; color: var(--ink-dim); margin-top: 7mm; font-style: italic; max-width: 72mm; text-align: justify; text-wrap: pretty; }
@@ -160,6 +162,7 @@
 if (location.hash === '#pdf') document.documentElement.className += ' pdf';
 </script>
 <style>@media print { body, html { height:auto !important; min-height:0 !important; overflow:visible !important; } .stage { height:auto !important; } }</style>
+<!-- LINK AI VIDEO 12/9/2026 -->
 </head>
 <body>
 
@@ -200,7 +203,7 @@ if (location.hash === '#pdf') document.documentElement.className += ' pdf';
       <p class="l mono">Clip officiel de Lucien Lumière<br>Production Maison Lumière</p>
       <p class="d mono">Réalisation Eli Chicheportiche<br>Direction artistique Roman Veiga<br>Avec Lucien Lumière et Sarah Okendo</p>
       <p class="role"><b>Direction du mouvement</b> pour le rappeur et la comédienne&#8239;: la construction physique de leur relation, le rythme des corps dans la salle vide d’un théâtre, le travail sur la présence face à la caméra.</p>
-      <span class="vid mono" data-portfolio="direzione-del-movimento.html#direzione-lavori">Voir le clip</span>
+      <a class="vid mono" href="https://gladiamarchetti.com/direzione-del-movimento-fr.html#direzione-lavori" target="_blank" rel="noopener">Voir le clip</a>
     </div>
   </div>
   <div class="foot mono"><span>Gladia Marchetti · Movement director</span><span class="n">02</span></div>
