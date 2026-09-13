@@ -1716,6 +1716,23 @@
 </script>
 
 <script>
+/* LINGUA NELL'INDIRIZZO 13/9/2026: la lingua della pagina la decide il nome del file
+   (-it, -fr, oppure nessun suffisso per l'inglese) oppure un ?lang= esplicito, che serve
+   ai link dei CV e dei dossier: l'indirizzo inglese e' il nome nudo, e senza questo
+   sarebbe la memoria del browser a decidere. Trovato da Gladia il 13/9 sul CV inglese,
+   dove il link di Bonduelle apriva la pagina in italiano. Stesso meccanismo, e stesse
+   parole, di recitazione.html e direzione-del-movimento.html dall'11/9.
+   Scrive solo la memoria: la applica il blocco qui sotto, che la legge. */
+(function () {
+  var chiesta = null;
+  try { chiesta = new URLSearchParams(window.location.search).get('lang'); } catch (e) {}
+  if (chiesta && ['it', 'en', 'fr'].indexOf(chiesta) !== -1) {
+    try { localStorage.setItem('gm-portfolio-lang', chiesta); } catch (e) {}
+  }
+})();
+</script>
+
+<script>
 (() => {
   const STORAGE_KEY = 'gm-portfolio-lang';
   const SUPPORTED = ['it', 'en', 'fr'];
