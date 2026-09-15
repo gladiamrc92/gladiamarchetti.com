@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" data-ui-lang="en">
+<html lang="it" data-ui-lang="en">
 <head>
+<script>
+/* INDIRIZZI NELLA LINGUA 15/9/2026: ogni pagina ha l'indirizzo nella sua lingua (danza, danse, dance).
+   Un vecchio link con ?lang= porta alla sorella giusta, con il resto dell'indirizzo intatto. */
+window.GM_INDIRIZZI = { pagina: 'coreografia-inequality-film', lingua: 'it', radice: false, mappa: {'home': {it: 'it', fr: 'fr', en: 'en'}, 'danza': {it: 'danza', fr: 'danse', en: 'dance'}, 'coreografia': {it: 'coreografia', fr: 'choregraphie', en: 'choreography'}, 'recitazione': {it: 'recitazione', fr: 'comedienne', en: 'acting'}, 'direzione-del-movimento': {it: 'direzione-del-movimento', fr: 'direction-du-mouvement', en: 'movement-direction'}, 'danza-cfranc': {it: 'danza-cfranc', fr: 'danse-cfranc', en: 'dance-c-franc'}, 'danza-paralimpiadi': {it: 'danza-paralimpiadi', fr: 'danse-paralympiques', en: 'dance-paralympics'}, 'coreografia-comme-si': {it: 'coreografia-comme-si', fr: 'choregraphie-comme-si', en: 'choreography-comme-si'}, 'coreografia-eteignons': {it: 'coreografia-eteignons', fr: 'choregraphie-eteignons-les-ecrans', en: 'choreography-eteignons'}, 'coreografia-inequality': {it: 'coreografia-inequality', fr: 'choregraphie-inequality', en: 'choreography-inequality'}, 'coreografia-inequality-film': {it: 'coreografia-inequality-film', fr: 'choregraphie-inequality-film', en: 'choreography-inequality-film'}, 'cv-danza': {it: 'cv-danzatrice', fr: 'cv-danseuse', en: 'dance-cv'}, 'cv-recitazione': {it: 'cv-attrice', fr: 'cv-comedienne', en: 'acting-cv'}, 'dossier-coreografia': {it: 'dossier-coreografia', fr: 'dossier-choregraphie', en: 'choreography-dossier'}, 'dossier-direzione': {it: 'dossier-direzione-del-movimento', fr: 'dossier-direction-du-mouvement', en: 'movement-direction-dossier'}} };
+(function () {
+  if (location.protocol === 'file:') return;
+  var G = window.GM_INDIRIZZI, q = new URLSearchParams(location.search), l = q.get('lang');
+  if (l && G.mappa[G.pagina][l] && l !== G.lingua) {
+    q.delete('lang'); var s = q.toString();
+    location.replace('/' + G.mappa[G.pagina][l] + (s ? '?' + s : '') + location.hash);
+  }
+})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="media/logo/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="media/logo/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="media/logo/favicon-16.png">
 <link rel="apple-touch-icon" href="media/logo/favicon-180.png">
-<title>Gladia Marchetti — INequality, court-métrage</title>
+<title>Gladia Marchetti — INequality, cortometraggio</title>
 <style>
   @font-face {
     font-family: "Playfair Display";
@@ -1451,6 +1465,12 @@
   .sub-crosslink a { border-bottom:0; text-decoration:underline; text-underline-offset:0.4em; text-decoration-thickness:1px; line-height:2.1; }
 }
 </style>
+<!-- INDIRIZZI NELLA LINGUA 15/9/2026 -->
+<link rel="canonical" href="https://gladiamarchetti.com/coreografia-inequality-film">
+<link rel="alternate" hreflang="en" href="https://gladiamarchetti.com/choreography-inequality-film">
+<link rel="alternate" hreflang="it" href="https://gladiamarchetti.com/coreografia-inequality-film">
+<link rel="alternate" hreflang="fr" href="https://gladiamarchetti.com/choregraphie-inequality-film">
+<link rel="alternate" hreflang="x-default" href="https://gladiamarchetti.com/choreography-inequality-film">
 </head>
 <body data-primo-schermo="centro">
 <a class="salta-al-contenuto" href="#inequality-film" data-i18n="it">Salta al contenuto</a>
@@ -1469,14 +1489,14 @@
 </div>
 
 <div class="page-header">
-  <a class="wordmark page-logo" href="./" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
+  <a class="wordmark page-logo" href="/it" data-gm-pagina="home" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
     <span class="logo-light" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-light.png&quot;);"></span>
     <span class="logo-dark" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-dark.png&quot;);"></span>
   </a>
 </div>
 
 <div class="sub-head is-compact">
-  <a class="sub-back mono" href="coreografia.html">
+  <a class="sub-back mono" href="/coreografia" data-gm-pagina="coreografia">
     <span data-i18n="it">Torna a&nbsp;Coreografia</span><span data-i18n="en">Back to&nbsp;Choreography</span><span data-i18n="fr">Retour aux&nbsp;chor&eacute;graphies</span>
   </a>
 </div>
@@ -1545,9 +1565,9 @@
       <li><b data-i18n-text-it="Musica" data-i18n-text-en="Music" data-i18n-text-fr="Musique">Musique</b><span>Arthur&nbsp;Balatier</span></li>
       <li><b data-i18n-text-it="Costumi" data-i18n-text-en="Costumes" data-i18n-text-fr="Costumes">Costumes</b><span>Ishanee&nbsp;Patra</span></li>
     </ul>
-    <p class="sub-crosslink mono"><a href="coreografia-inequality.html"><span data-i18n="it">INequality esiste anche&nbsp;come&nbsp;spettacolo&nbsp;dal&nbsp;vivo</span><span data-i18n="en">INequality is also&nbsp;a&nbsp;live&nbsp;show</span><span data-i18n="fr">INequality existe&nbsp;aussi&nbsp;en&nbsp;spectacle&nbsp;vivant</span></a></p>
+    <p class="sub-crosslink mono"><a href="/coreografia-inequality" data-gm-pagina="coreografia-inequality"><span data-i18n="it">INequality esiste anche&nbsp;come&nbsp;spettacolo&nbsp;dal&nbsp;vivo</span><span data-i18n="en">INequality is also&nbsp;a&nbsp;live&nbsp;show</span><span data-i18n="fr">INequality existe&nbsp;aussi&nbsp;en&nbsp;spectacle&nbsp;vivant</span></a></p>
   </div>
-  <div class="sub-foot"><a class="sub-back mono" href="coreografia.html"><span data-i18n="it">Torna a&nbsp;Coreografia</span><span data-i18n="en">Back to&nbsp;Choreography</span><span data-i18n="fr">Retour aux&nbsp;chor&eacute;graphies</span></a></div>
+  <div class="sub-foot"><a class="sub-back mono" href="/coreografia" data-gm-pagina="coreografia"><span data-i18n="it">Torna a&nbsp;Coreografia</span><span data-i18n="en">Back to&nbsp;Choreography</span><span data-i18n="fr">Retour aux&nbsp;chor&eacute;graphies</span></a></div>
 </section>
 
 <div class="closing-band">
@@ -1577,7 +1597,7 @@
 </footer>
 
 <div class="page-header is-closing">
-  <a class="wordmark page-logo" href="./" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
+  <a class="wordmark page-logo" href="/it" data-gm-pagina="home" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
     <span class="logo-light" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-light.png&quot;);"></span>
     <span class="logo-dark" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-dark.png&quot;);"></span>
   </a>
@@ -1614,12 +1634,12 @@
      che si vede. Stessa regola delle pagine principali, dove la lingua sta nel nome del file. */
   function dallIndirizzo() {
     try {
-      const l = new URLSearchParams(location.search).get('lang');
+      const l = 'it';
       return SUPPORTED.includes(l) ? l : null;
     } catch (e) { return null; }
   }
 
-  function scriviIndirizzo(lang) {
+  function scriviIndirizzo(lang) { return;
     if (location.protocol === 'file:') return;   /* col doppio clic sul file non si tocca niente */
     try {
       const u = new URL(location.href);
@@ -1986,6 +2006,44 @@
   window.addEventListener('resize', function () { clearTimeout(window.__sepT); window.__sepT = setTimeout(function () { misura(); primoSchermo(); }, 120); });
   document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.ui-lang-btn')) setTimeout(tuttoAncorato, 80); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { misura(); primoSchermo(); });
+})();
+</script>
+<script>
+/* INDIRIZZI NELLA LINGUA 15/9/2026: l'indirizzo nella barra e i collegamenti seguono la lingua che si
+   vede. Cosi' copiare il link o premere Condividi manda l'indirizzo nella lingua della pagina, e chi
+   naviga resta nella lingua che ha scelto. Non ricarica niente. */
+(function () {
+  if (location.protocol === 'file:') return;
+  var G = window.GM_INDIRIZZI;
+  function coda() {
+    var q = new URLSearchParams(location.search); q.delete('lang');
+    var s = q.toString(); return s ? '?' + s : '';
+  }
+  function sincronizza() {
+    var l = document.documentElement.getAttribute('data-ui-lang');
+    if (!l || !G.mappa[G.pagina][l]) return;
+    /* la home inglese all'indirizzo nudo resta nuda: gladiamarchetti.com, non /en */
+    var atteso = (G.radice && l === 'en') ? '/' : '/' + G.mappa[G.pagina][l], s = coda();
+    if (location.pathname !== atteso || location.search !== s) {
+      try { history.replaceState(null, '', atteso + s + location.hash); } catch (e) {}
+    }
+    [['data-gm-pagina', 'href'], ['data-gm-pagina-dati', 'data-href']].forEach(function (c) {
+      document.querySelectorAll('[' + c[0] + ']').forEach(function (a) {
+        var k = a.getAttribute(c[0]), v = a.getAttribute(c[1]);
+        if (!G.mappa[k] || v === null) return;
+        var m = v.match(/^\/[^?#]*(.*)$/); if (!m) return;
+        var nuovo = '/' + G.mappa[k][l] + m[1];
+        if (v !== nuovo) a.setAttribute(c[1], nuovo);
+      });
+    });
+  }
+  document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+    b.addEventListener('click', function () { setTimeout(sincronizza, 0); });
+  });
+  document.addEventListener('gm-lang-change', function () { setTimeout(sincronizza, 0); });
+  window.addEventListener('load', sincronizza);
+  setTimeout(sincronizza, 400);
+  setTimeout(sincronizza, 1600);
 })();
 </script>
 </body>

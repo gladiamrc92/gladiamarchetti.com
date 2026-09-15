@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" data-ui-lang="en">
+<html lang="it" data-ui-lang="en">
 <head>
+<script>
+/* INDIRIZZI NELLA LINGUA 15/9/2026: ogni pagina ha l'indirizzo nella sua lingua (danza, danse, dance).
+   Un vecchio link con ?lang= porta alla sorella giusta, con il resto dell'indirizzo intatto. */
+window.GM_INDIRIZZI = { pagina: 'danza', lingua: 'it', radice: false, mappa: {'home': {it: 'it', fr: 'fr', en: 'en'}, 'danza': {it: 'danza', fr: 'danse', en: 'dance'}, 'coreografia': {it: 'coreografia', fr: 'choregraphie', en: 'choreography'}, 'recitazione': {it: 'recitazione', fr: 'comedienne', en: 'acting'}, 'direzione-del-movimento': {it: 'direzione-del-movimento', fr: 'direction-du-mouvement', en: 'movement-direction'}, 'danza-cfranc': {it: 'danza-cfranc', fr: 'danse-cfranc', en: 'dance-c-franc'}, 'danza-paralimpiadi': {it: 'danza-paralimpiadi', fr: 'danse-paralympiques', en: 'dance-paralympics'}, 'coreografia-comme-si': {it: 'coreografia-comme-si', fr: 'choregraphie-comme-si', en: 'choreography-comme-si'}, 'coreografia-eteignons': {it: 'coreografia-eteignons', fr: 'choregraphie-eteignons-les-ecrans', en: 'choreography-eteignons'}, 'coreografia-inequality': {it: 'coreografia-inequality', fr: 'choregraphie-inequality', en: 'choreography-inequality'}, 'coreografia-inequality-film': {it: 'coreografia-inequality-film', fr: 'choregraphie-inequality-film', en: 'choreography-inequality-film'}, 'cv-danza': {it: 'cv-danzatrice', fr: 'cv-danseuse', en: 'dance-cv'}, 'cv-recitazione': {it: 'cv-attrice', fr: 'cv-comedienne', en: 'acting-cv'}, 'dossier-coreografia': {it: 'dossier-coreografia', fr: 'dossier-choregraphie', en: 'choreography-dossier'}, 'dossier-direzione': {it: 'dossier-direzione-del-movimento', fr: 'dossier-direction-du-mouvement', en: 'movement-direction-dossier'}} };
+(function () {
+  if (location.protocol === 'file:') return;
+  var G = window.GM_INDIRIZZI, q = new URLSearchParams(location.search), l = q.get('lang');
+  if (l && G.mappa[G.pagina][l] && l !== G.lingua) {
+    q.delete('lang'); var s = q.toString();
+    location.replace('/' + G.mappa[G.pagina][l] + (s ? '?' + s : '') + location.hash);
+  }
+})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="media/logo/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="media/logo/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="media/logo/favicon-16.png">
 <link rel="apple-touch-icon" href="media/logo/favicon-180.png">
-<title>Gladia Marchetti · Dance</title>
+<title>Gladia Marchetti · Danza</title>
 <style>
   @font-face {
     font-family: "Playfair Display";
@@ -1508,27 +1522,60 @@
 }
 </style>
 <!-- ANTEPRIME DEL LINK 11/9/2026: come appare il link quando lo si manda. Testo scritto dai madrelingua. -->
-<link rel="canonical" href="https://gladiamarchetti.com/danza.html">
-<meta name="description" content="Contemporary and experimental performer, at home on stage and on camera: film, music video, advertising.">
+<meta name="description" content="Interprete di danza contemporanea ed experimental, per la scena e per lo schermo.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gladia Marchetti">
-<meta property="og:locale" content="en_GB">
-<meta property="og:url" content="https://gladiamarchetti.com/danza.html">
-<meta property="og:title" content="Gladia Marchetti · Dance">
-<meta property="og:description" content="Contemporary and experimental performer, at home on stage and on camera: film, music video, advertising.">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://gladiamarchetti.com/danza">
+<meta property="og:title" content="Gladia Marchetti · Danza">
+<meta property="og:description" content="Interprete di danza contemporanea ed experimental, per la scena e per lo schermo.">
 <meta property="og:image" content="https://gladiamarchetti.com/media/anteprime/danza.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gladia Marchetti">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gladia Marchetti · Dance">
-<meta name="twitter:description" content="Contemporary and experimental performer, at home on stage and on camera: film, music video, advertising.">
+<meta name="twitter:title" content="Gladia Marchetti · Danza">
+<meta name="twitter:description" content="Interprete di danza contemporanea ed experimental, per la scena e per lo schermo.">
 <meta name="twitter:image" content="https://gladiamarchetti.com/media/anteprime/danza.jpg">
-<link rel="alternate" hreflang="en" href="https://gladiamarchetti.com/danza.html">
-<link rel="alternate" hreflang="it" href="https://gladiamarchetti.com/danza-it.html">
-<link rel="alternate" hreflang="fr" href="https://gladiamarchetti.com/danza-fr.html">
-<link rel="alternate" hreflang="x-default" href="https://gladiamarchetti.com/danza.html">
+<!-- INDIRIZZI NELLA LINGUA 15/9/2026 -->
+<link rel="canonical" href="https://gladiamarchetti.com/danza">
+<link rel="alternate" hreflang="en" href="https://gladiamarchetti.com/dance">
+<link rel="alternate" hreflang="it" href="https://gladiamarchetti.com/danza">
+<link rel="alternate" hreflang="fr" href="https://gladiamarchetti.com/danse">
+<link rel="alternate" hreflang="x-default" href="https://gladiamarchetti.com/dance">
 </head>
+<script>
+/* ANTEPRIME DEL LINK 11/9/2026: questa copia si apre in it e ci resta, anche dove il browser non lascia
+   scrivere in memoria (browser dentro le app, navigazione privata). Se pero' la persona sceglie
+   un'altra lingua, comanda lei. */
+(function () {
+  var L = 'it', scelta = false, mioClic = false;
+  try { localStorage.setItem('gm-portfolio-lang', L); } catch (e) {}
+  document.documentElement.setAttribute('data-ui-lang', L);
+  document.documentElement.lang = L;
+  function ascolta() {
+    document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+      if (b.dataset.gmAscolto) return;
+      b.dataset.gmAscolto = '1';
+      b.addEventListener('click', function () { if (!mioClic) scelta = true; }, true);
+    });
+  }
+  function forza() {
+    ascolta();
+    if (scelta) return;
+    if (document.documentElement.getAttribute('data-ui-lang') === L) return;
+    var b = document.querySelector('.ui-lang-btn[data-ui-lang="' + L + '"]');
+    if (b) { mioClic = true; window.__gmClicAutomatico = true; b.click(); window.__gmClicAutomatico = false; mioClic = false; }
+    else {
+      document.documentElement.setAttribute('data-ui-lang', L);
+      document.documentElement.lang = L;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', forza);
+  window.addEventListener('load', forza);
+  [0, 50, 200, 600, 1500].forEach(function (t) { setTimeout(forza, t); });
+})();
+</script>
 <body data-primo-schermo="centro">
 
 <h1 class="sr-only" data-i18n="it">Gladia Marchetti, danza</h1>
@@ -1548,7 +1595,7 @@
 </div>
 
 <div class="page-header">
-  <a class="wordmark page-logo" href="./" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
+  <a class="wordmark page-logo" href="/it" data-gm-pagina="home" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
     <span class="logo-light" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-light.png&quot;);"></span>
     <span class="logo-dark" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-dark.png&quot;);"></span>
   </a>
@@ -1628,7 +1675,7 @@
 <section class="page is-standalone" id="danza" aria-label="Danza, i lavori" data-i18n-aria-it="Danza, i lavori" data-i18n-aria-en="Dance, selected work" data-i18n-aria-fr="Danse, projets">
 
   <div class="works-mosaic" id="danza-lavori">
-    <article class="work-tile is-apribile at-left" style="--w:60%;" id="lavoro-paralimpiadi" data-yt="jCSCyGR2Fzo" tabindex="0" role="link" data-href="danza-paralimpiadi.html"
+    <article class="work-tile is-apribile at-left" style="--w:60%;" id="lavoro-paralimpiadi" data-yt="jCSCyGR2Fzo" tabindex="0" role="link" data-href="/danza-paralimpiadi" data-gm-pagina-dati="danza-paralimpiadi"
       data-lb-detail-it="Cerimonia di apertura, Place de la Concorde, 28.08.2024 &middot; Coreografia Alexander Ekman &middot; Direzione artistica Thomas Jolly &middot; Con Chilly Gonzales, Christine and the Queens, Lucky Love"
       data-lb-detail-en="Opening ceremony, Place de la Concorde, 28.08.2024 &middot; Choreography Alexander Ekman &middot; Artistic director Thomas Jolly &middot; With Chilly Gonzales, Christine and the Queens, Lucky Love"
       data-lb-detail-fr="C&eacute;r&eacute;monie d&rsquo;ouverture, Place de la Concorde, 28.08.2024 &middot; Chor&eacute;graphie Alexander Ekman &middot; Direction artistique Thomas Jolly &middot; Avec Chilly Gonzales, Christine and the Queens, Lucky Love">
@@ -1679,7 +1726,7 @@
          ufficiale (lei da sola a terra nel fumo rosa), ritagliato al centro
          perche' la ripresa e' larga; foto 04 e 05 dal sito della compagnia
          (media/danza/_nomad-scaricate), da chiedere l'ok alla compagnia. -->
-    <article class="work-tile is-apribile at-right" style="--w:48%;" id="lavoro-cfranc" data-href="danza-cfranc.html" data-yt="gCKdMcCAMEE" tabindex="0" role="link" data-lb-fotos="media/danza/cfranc-foto-2.jpg|media/danza/cfranc-foto-1.jpg"
+    <article class="work-tile is-apribile at-right" style="--w:48%;" id="lavoro-cfranc" data-href="/danza-cfranc" data-gm-pagina-dati="danza-cfranc" data-yt="gCKdMcCAMEE" tabindex="0" role="link" data-lb-fotos="media/danza/cfranc-foto-2.jpg|media/danza/cfranc-foto-1.jpg"
       data-lb-detail-it="Creazione hip hop &middot; Coreografia Mehdi Slimani &middot; 15 repliche nella regione parigina"
       data-lb-detail-en="Hip hop piece &middot; Choreography Mehdi Slimani &middot; 15 performances in the Paris region"
       data-lb-detail-fr="Cr&eacute;ation hip hop &middot; Chor&eacute;graphie Mehdi Slimani &middot; 15 dates en &Icirc;le-de-France">
@@ -1726,9 +1773,9 @@
          si preme Stampa; da lì si scarica il PDF chiaro (-impression.pdf).
          Decisione di Gladia. 2/9: il CV esiste in tre lingue, ogni pulsante
          apre la sua (danza-cv-it / -en / -fr). -->
-    <a class="btn-square" href="_dossier/danza-cv-it.html" target="_blank" rel="noopener" data-i18n="it">Sfoglia il CV completo</a>
-    <a class="btn-square" href="_dossier/danza-cv-en.html" target="_blank" rel="noopener" data-i18n="en">See the full CV</a>
-    <a class="btn-square" href="_dossier/danza-cv-fr.html" target="_blank" rel="noopener" data-i18n="fr">Consulter le CV complet</a>
+    <a class="btn-square" href="/cv-danzatrice" target="_blank" rel="noopener" data-i18n="it">Sfoglia il CV completo</a>
+    <a class="btn-square" href="/dance-cv" target="_blank" rel="noopener" data-i18n="en">See the full CV</a>
+    <a class="btn-square" href="/cv-danseuse" target="_blank" rel="noopener" data-i18n="fr">Consulter le CV complet</a>
   </div>
 </div>
 
@@ -1766,7 +1813,7 @@
 </footer>
 
 <div class="page-header is-closing">
-  <a class="wordmark page-logo" href="./" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
+  <a class="wordmark page-logo" href="/it" data-gm-pagina="home" aria-label="Torna al portfolio" data-i18n-aria-it="Torna al portfolio" data-i18n-aria-en="Back to portfolio" data-i18n-aria-fr="Retour au portfolio">
     <span class="logo-light" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-light.png&quot;);"></span>
     <span class="logo-dark" role="img" aria-label="Gladia Marchetti" style="--logo-mask: url(&quot;media/logo/logo-dark.png&quot;);"></span>
   </a>
@@ -2679,29 +2726,41 @@
 })();
 </script>
 <script>
-/* ANTEPRIME DEL LINK 11/9/2026: l'indirizzo nella barra segue la lingua che si vede, cosi' il pulsante Condividi
-   del browser manda il link giusto. Non ricarica niente, cambia solo cio' che si legge. */
+/* INDIRIZZI NELLA LINGUA 15/9/2026: l'indirizzo nella barra e i collegamenti seguono la lingua che si
+   vede. Cosi' copiare il link o premere Condividi manda l'indirizzo nella lingua della pagina, e chi
+   naviga resta nella lingua che ha scelto. Non ricarica niente. */
 (function () {
-  if (location.protocol === 'file:') return;   /* aprendo i file col doppio clic non si tocca niente */
-  var BASE = 'danza';
-  function indirizzo(l) {
-    if (!BASE) return (l === 'en') ? '/' : '/index-' + l + '.html';
-    return (l === 'en') ? '/' + BASE + '.html' : '/' + BASE + '-' + l + '.html';
+  if (location.protocol === 'file:') return;
+  var G = window.GM_INDIRIZZI;
+  function coda() {
+    var q = new URLSearchParams(location.search); q.delete('lang');
+    var s = q.toString(); return s ? '?' + s : '';
   }
   function sincronizza() {
     var l = document.documentElement.getAttribute('data-ui-lang');
-    if (!l) return;
-    var atteso = indirizzo(l);
-    if (location.pathname !== atteso) {
-      try { history.replaceState(null, '', atteso + location.search + location.hash); } catch (e) {}
+    if (!l || !G.mappa[G.pagina][l]) return;
+    /* la home inglese all'indirizzo nudo resta nuda: gladiamarchetti.com, non /en */
+    var atteso = (G.radice && l === 'en') ? '/' : '/' + G.mappa[G.pagina][l], s = coda();
+    if (location.pathname !== atteso || location.search !== s) {
+      try { history.replaceState(null, '', atteso + s + location.hash); } catch (e) {}
     }
+    [['data-gm-pagina', 'href'], ['data-gm-pagina-dati', 'data-href']].forEach(function (c) {
+      document.querySelectorAll('[' + c[0] + ']').forEach(function (a) {
+        var k = a.getAttribute(c[0]), v = a.getAttribute(c[1]);
+        if (!G.mappa[k] || v === null) return;
+        var m = v.match(/^\/[^?#]*(.*)$/); if (!m) return;
+        var nuovo = '/' + G.mappa[k][l] + m[1];
+        if (v !== nuovo) a.setAttribute(c[1], nuovo);
+      });
+    });
   }
   document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
     b.addEventListener('click', function () { setTimeout(sincronizza, 0); });
   });
-  document.addEventListener('gm-lang-change', sincronizza);
+  document.addEventListener('gm-lang-change', function () { setTimeout(sincronizza, 0); });
   window.addEventListener('load', sincronizza);
   setTimeout(sincronizza, 400);
+  setTimeout(sincronizza, 1600);
 })();
 </script>
 </body>
