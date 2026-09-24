@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script>
+/* INDIRIZZI NELLA LINGUA 15/9/2026: ogni pagina ha l'indirizzo nella sua lingua (danza, danse, dance).
+   Un vecchio link con ?lang= porta alla sorella giusta, con il resto dell'indirizzo intatto. */
+window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, mappa: {'home': {it: 'it', fr: 'fr', en: 'en'}, 'danza': {it: 'danza', fr: 'danse', en: 'dance'}, 'coreografia': {it: 'coreografia', fr: 'choregraphie', en: 'choreography'}, 'recitazione': {it: 'recitazione', fr: 'comedienne', en: 'acting'}, 'direzione-del-movimento': {it: 'direzione-del-movimento', fr: 'direction-du-mouvement', en: 'movement-direction'}, 'assistant-md': {it: 'assistente', fr: 'assistante', en: 'assistant'}, 'danza-cfranc': {it: 'danza-cfranc', fr: 'danse-cfranc', en: 'dance-c-franc'}, 'danza-paralimpiadi': {it: 'danza-paralimpiadi', fr: 'danse-paralympiques', en: 'dance-paralympics'}, 'coreografia-comme-si': {it: 'coreografia-comme-si', fr: 'choregraphie-comme-si', en: 'choreography-comme-si'}, 'coreografia-eteignons': {it: 'coreografia-eteignons', fr: 'choregraphie-eteignons-les-ecrans', en: 'choreography-eteignons'}, 'coreografia-inequality': {it: 'coreografia-inequality', fr: 'choregraphie-inequality', en: 'choreography-inequality'}, 'coreografia-inequality-film': {it: 'coreografia-inequality-film', fr: 'choregraphie-inequality-film', en: 'choreography-inequality-film'}, 'cv-danza': {it: 'cv-danzatrice', fr: 'cv-danseuse', en: 'dance-cv'}, 'cv-recitazione': {it: 'cv-attrice', fr: 'cv-comedienne', en: 'acting-cv'}, 'dossier-coreografia': {it: 'dossier-coreografia', fr: 'dossier-choregraphie', en: 'choreography-dossier'}, 'dossier-direzione': {it: 'dossier-direzione-del-movimento', fr: 'dossier-direction-du-mouvement', en: 'movement-direction-dossier'}} };
+(function () {
+  if (location.protocol === 'file:') return;
+  var G = window.GM_INDIRIZZI, q = new URLSearchParams(location.search), l = q.get('lang');
+  if (l && G.mappa[G.pagina][l] && l !== G.lingua) {
+    q.delete('lang'); var s = q.toString();
+    location.replace('/' + G.mappa[G.pagina][l] + (s ? '?' + s : '') + location.hash);
+  }
+})();
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gladia Marchetti · Assistante direction du mouvement</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gladia Marchetti">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://gladiamarchetti.com/assistante">
+<meta property="og:title" content="Gladia Marchetti · Assistante direction du mouvement">
+<meta property="og:image" content="https://gladiamarchetti.com/media/anteprime/assistant.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gladia Marchetti">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="media/logo/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="media/logo/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: #0b1016;
+    --ground-soft: #131a22;
+    --line: #243040;
+    --ink: #e8e6dd;
+    --ink-dim: #8b96a3;
+    --ink-faint: #697d94;
+    --accent: #7ca0c2;
+    --serif: "Playfair Display", "Big Caslon", Baskerville, Georgia, serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--ground); color: var(--ink); }
+  body { font-family: var(--serif); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .bozza { position: fixed; top: 14px; right: 14px; z-index: 5; font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+           text-transform: uppercase; color: var(--ground); background: var(--accent); padding: 4px 10px; }
+  .etichetta { font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 16px; }
+
+  /* COPERTINA, come la prima pagina del dossier */
+  .copertina { position: relative; height: 100vh; min-height: 620px; max-height: 920px; overflow: hidden; }
+  .copertina .foto { position: absolute; left: 0; top: 0; width: 46%; height: 100%; object-fit: cover; object-position: 50% 18%; display: block; }
+  .copertina .velo { position: absolute; left: 0; top: 0; width: 47%; height: 100%;
+    background: linear-gradient(90deg, rgba(11,16,22,0) 66%, var(--ground) 97%),
+                linear-gradient(180deg, rgba(11,16,22,0) 89%, rgba(11,16,22,.85) 100%); }
+  .copertina .testo { position: absolute; left: 47%; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; padding: 0 6%; }
+  .copertina .etichetta { color: var(--accent); letter-spacing: .24em; margin-bottom: 20px; }
+  .copertina .logo { width: min(320px, 72%); height: auto; display: block; margin: 0 0 6px; }
+  .copertina h1 { font-weight: 400; font-size: clamp(28px, 2.9vw, 38px); color: var(--accent); margin: 0 0 40px; line-height: 1.15; }
+  .copertina .intro { font-style: italic; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.7; color: var(--ink); max-width: 470px; margin: 0; text-wrap: balance; }
+  .copertina .contatti { position: absolute; left: 47%; right: 0; bottom: 7%; text-align: center; font-family: var(--mono);
+    font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); line-height: 2.1; margin: 0; }
+  .copertina .contatti a { color: var(--ink-dim); text-decoration: none; }
+
+  /* LAVORI: video largo, testo accanto, come la pagina 2 del dossier */
+  .largo { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+  .lavoro { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr); gap: 48px; align-items: center; padding: 96px 0 0; }
+  .schermo { position: relative; width: 100%; background: #000; }
+  .schermo.cinema { aspect-ratio: 1920 / 816; }
+  .schermo.tv { aspect-ratio: 16 / 9; }
+  .schermo video, .schermo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
+  .scheda .etichetta { text-wrap: balance; }
+  .scheda .titolo { font-size: clamp(30px, 3vw, 42px); line-height: 1.12; color: var(--accent); margin: 0 0 18px; font-weight: 400; text-wrap: balance; }
+  .scheda .titolo em { font-style: italic; }
+  .scheda .ruolo { font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); line-height: 1.9; margin: 0 0 14px; }
+  .scheda .crediti { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); line-height: 1.9; margin: 0; }
+  .scheda .descr { font-size: 17.5px; line-height: 1.7; color: var(--ink); margin: 0; text-wrap: balance; max-width: 330px; }
+
+  /* TRE COLONNE */
+  .colonne { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; padding: 120px 0 0; }
+  .colonne section { border-top: 1px solid var(--line); padding-top: 22px; }
+  .colonne p { font-size: 16.5px; line-height: 1.65; margin: 0 0 14px; padding-left: 20px; text-wrap: pretty; position: relative; }
+  .colonne p::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .colonne p em { font-style: italic; }
+
+  footer { max-width: 1240px; margin: 0 auto; padding: 110px 40px 70px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--ink-faint); text-align: center; }
+  footer a { color: var(--ink-dim); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .lavoro { grid-template-columns: 1fr; gap: 26px; padding-top: 72px; }
+    .colonne { grid-template-columns: 1fr; gap: 40px; padding-top: 80px; }
+  }
+  @media (max-width: 700px) {
+    .copertina { height: auto; min-height: 0; max-height: none; }
+    .copertina .foto { position: relative; width: 100%; height: min(64vh, 560px); object-position: 32% 15%; }
+    .copertina .velo { top: 0; width: 100%; height: min(64vh, 560px); background: linear-gradient(180deg, rgba(11,16,22,0) 60%, var(--ground) 100%); }
+    .copertina .testo { position: relative; left: 0; padding: 6px 24px 0; }
+    .copertina h1 { margin-bottom: 26px; }
+    .copertina .contatti { position: relative; left: 0; bottom: auto; padding: 30px 24px 0; }
+    .largo { padding: 0 20px; }
+  }
+</style>
+<!-- INDIRIZZI NELLA LINGUA 15/9/2026 -->
+<link rel="canonical" href="https://gladiamarchetti.com/assistante">
+<link rel="alternate" hreflang="en" href="https://gladiamarchetti.com/assistant">
+<link rel="alternate" hreflang="it" href="https://gladiamarchetti.com/assistente">
+<link rel="alternate" hreflang="fr" href="https://gladiamarchetti.com/assistante">
+<link rel="alternate" hreflang="x-default" href="https://gladiamarchetti.com/assistant">
+</head>
+<body>
+
+<header class="copertina">
+  <img class="foto" src="media/recitazione/_DSC3648.jpg" alt="Gladia Marchetti">
+  <div class="velo"></div>
+  <div class="testo">
+    <p class="etichetta">Cinéma et télévision</p>
+    <img class="logo" src="media/logo/logo-dark.png" alt="Gladia Marchetti">
+    <h1>Assistante direction du&nbsp;mouvement</h1>
+    <p class="intro">Je viens de la danse et de la chorégraphie, et je suis aussi comédienne. Depuis quelques années, je trouve peu à peu ma place dans la direction du mouvement au cinéma, et je cherche aujourd'hui à être l'assistante d'une directrice ou d'un directeur expérimenté, pour apprendre le métier sur le&nbsp;plateau.</p>
+  </div>
+  <p class="contatti"><a href="mailto:gladiamarchetti@gmail.com">gladiamarchetti@gmail.com</a><br>France<br>Italien · Français · Anglais</p>
+</header>
+
+<main class="largo">
+  <article class="lavoro">
+    <div class="schermo cinema">
+      <video controls preload="none" poster="media/direzione-del-movimento/lucien-duo-poltrone.jpg">
+        <source src="media/direzione-del-movimento/lucien-normal-integrale-web.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="scheda">
+      <p class="etichetta">Direction du mouvement · Clip musical</p>
+      <h2 class="titolo"><em>NORMAL</em></h2>
+      <p class="ruolo">Clip officiel de Lucien Lumière<br>Production Maison Lumière</p>
+      <p class="crediti">Réalisation Eli Chicheportiche<br>Direction artistique Roman Veiga<br>Avec Lucien Lumière et Sarah Okendo</p>
+    </div>
+  </article>
+
+  <article class="lavoro">
+    <div class="schermo tv">
+      <iframe src="https://www.youtube-nocookie.com/embed/PQbcUkMXHx0?rel=0" title="If the Godfather were a woman" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="scheda">
+      <p class="etichetta">Interprète · Coaching par Alexandra Reynolds</p>
+      <h2 class="titolo"><em>If the Godfather were a woman</em></h2>
+      <p class="descr">Un exercice de transformation&nbsp;: peu à peu, les gestes de Vito Corleone deviennent ceux d'une femme.</p>
+      <p class="crediti" style="margin-top:16px">Image Tom Afiyan</p>
+    </div>
+  </article>
+
+  <div class="colonne">
+    <section>
+      <h2 class="etichetta">Ce que je peux apporter</h2>
+      <p>Montrer les mouvements moi-même.</p>
+      <p>Échauffer et préparer les acteurs et actrices, y compris ceux qui ne viennent pas de la danse.</p>
+      <p>Travailler sur le plateau en anglais, en français et en italien.</p>
+      <p>Être présente de la préparation jusqu'à la dernière prise, dès la première répétition.</p>
+    </section>
+    <section>
+      <h2 class="etichetta">Formation</h2>
+      <p>Stage intensif Movement for Film avec Alexandra Reynolds et Tom Afiyan, Londres, 2023.</p>
+      <p>Au fil des années, auprès d'amateurs comme de professionnels, je construis peu à peu ma propre manière d'accompagner les interprètes dans le mouvement.</p>
+    </section>
+    <section>
+      <h2 class="etichetta">Parcours</h2>
+      <p>Danseuse dans la cérémonie d'ouverture des Jeux paralympiques de Paris 2024, chorégraphie d'Alexander Ekman.</p>
+      <p>Assistante à la chorégraphie de Brice Kapel sur <em>Coloricolex</em> (Boston, 2019), la version américaine de son spectacle <em>Coloricocolà</em>.</p>
+      <p>Comédienne dans <em>Les Rayons et les Ombres</em>, réalisation Xavier Giannoli (Gaumont, 2026).</p>
+    </section>
+  </div>
+</main>
+
+<footer><a href="https://gladiamarchetti.com">gladiamarchetti.com</a></footer>
+<script>
+/* INDIRIZZI NELLA LINGUA 15/9/2026: l'indirizzo nella barra e i collegamenti seguono la lingua che si
+   vede. Cosi' copiare il link o premere Condividi manda l'indirizzo nella lingua della pagina, e chi
+   naviga resta nella lingua che ha scelto. Non ricarica niente. */
+(function () {
+  if (location.protocol === 'file:') return;
+  var G = window.GM_INDIRIZZI;
+  function coda() {
+    var q = new URLSearchParams(location.search); q.delete('lang');
+    var s = q.toString(); return s ? '?' + s : '';
+  }
+  function sincronizza() {
+    var l = document.documentElement.getAttribute('data-ui-lang');
+    if (!l || !G.mappa[G.pagina][l]) return;
+    /* la home inglese all'indirizzo nudo resta nuda: gladiamarchetti.com, non /en */
+    var atteso = (G.radice && l === 'en') ? '/' : '/' + G.mappa[G.pagina][l], s = coda();
+    if (location.pathname !== atteso || location.search !== s) {
+      try { history.replaceState(null, '', atteso + s + location.hash); } catch (e) {}
+    }
+    [['data-gm-pagina', 'href'], ['data-gm-pagina-dati', 'data-href']].forEach(function (c) {
+      document.querySelectorAll('[' + c[0] + ']').forEach(function (a) {
+        var k = a.getAttribute(c[0]), v = a.getAttribute(c[1]);
+        if (!G.mappa[k] || v === null) return;
+        var m = v.match(/^\/[^?#]*(.*)$/); if (!m) return;
+        var nuovo = '/' + G.mappa[k][l] + m[1];
+        if (v !== nuovo) a.setAttribute(c[1], nuovo);
+      });
+    });
+  }
+  document.querySelectorAll('.ui-lang-btn').forEach(function (b) {
+    b.addEventListener('click', function () { setTimeout(sincronizza, 0); });
+  });
+  document.addEventListener('gm-lang-change', function () { setTimeout(sincronizza, 0); });
+  window.addEventListener('load', sincronizza);
+  setTimeout(sincronizza, 400);
+  setTimeout(sincronizza, 1600);
+})();
+</script>
+</body>
+</html>
