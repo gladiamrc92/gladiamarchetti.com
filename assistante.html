@@ -54,7 +54,7 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
 
   /* COPERTINA, come la prima pagina del dossier */
   .copertina { position: relative; height: 100vh; min-height: 620px; max-height: 920px; overflow: hidden; }
-  .copertina .foto { position: absolute; left: 0; top: 0; width: 46%; height: 100%; object-fit: cover; object-position: 50% 18%; display: block; }
+  .copertina .foto { position: absolute; left: 0; top: 0; width: 46%; height: 100%; object-fit: cover; object-position: 50% 72%; display: block; }
   .copertina .velo { position: absolute; left: 0; top: 0; width: 47%; height: 100%;
     background: linear-gradient(90deg, rgba(11,16,22,0) 66%, var(--ground) 97%),
                 linear-gradient(180deg, rgba(11,16,22,0) 89%, rgba(11,16,22,.85) 100%); }
@@ -75,6 +75,14 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   .schermo.cinema { aspect-ratio: 1920 / 816; }
   .schermo.tv { aspect-ratio: 16 / 9; }
   .schermo.padrino { aspect-ratio: 16 / 9; }
+  .video-con-take { position: relative; }
+  .take-scelta { position: absolute; top: 100%; left: 0; right: 0; display: flex; gap: 1.4rem; justify-content: center; margin-top: 14px; }
+  @media (max-width: 900px) { .take-scelta { position: static; } }
+  .take-tab { background: none; border: none; padding: 0.2em 0; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-faint); cursor: pointer; border-bottom: 1px solid transparent;
+    transition: color 0.25s ease, border-color 0.25s ease; }
+  .take-tab.is-active { color: var(--accent); border-color: var(--accent); }
+  .take-tab:hover, .take-tab:focus-visible { color: var(--ink); }
   .schermo video, .schermo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
   .scheda .etichetta { text-wrap: balance; }
   .scheda .titolo { font-size: clamp(30px, 3vw, 42px); line-height: 1.12; color: var(--accent); margin: 0 0 18px; font-weight: 400; text-wrap: balance; }
@@ -149,15 +157,21 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   </article>
 
   <article class="lavoro">
-    <div class="schermo padrino">
-      <video id="video-padrino" controls preload="none" poster="media/assistant/padrino-poster.jpg" src="media/assistant/padrino-1a.mp4"></video>
+    <div class="video-con-take">
+      <div class="schermo padrino">
+        <video id="video-padrino" controls preload="none" poster="media/assistant/take1-poster.jpg" src="media/assistant/take1.mp4"></video>
+      </div>
+      <div class="take-scelta">
+        <button class="take-tab is-active" type="button" aria-pressed="true" data-src="media/assistant/take1.mp4" data-poster="media/assistant/take1-poster.jpg">Take 1</button>
+        <button class="take-tab" type="button" aria-pressed="false" data-src="media/assistant/take2.mp4" data-poster="media/assistant/take2-poster.jpg">Take 2</button>
+      </div>
     </div>
     <div class="scheda">
       <p class="etichetta">Stage de formation</p>
       <h2 class="titolo"><em>If the Godfather were a woman</em></h2>
       <p class="ruolo">Movement for Film Intensive<br>Ferus Animi // Terra Nova</p>
       <p class="crediti">Dirigé par Alexandra Reynolds et Tom Afiyan<br>Londres, janvier 2023<br>Image Tom Afiyan</p>
-      <p class="testo-ruolo"><b>Interprète</b> <em>d’un exercice de transformation&nbsp;: peu à peu, les gestes de Vito Corleone deviennent ceux d’une femme.</em></p>
+      <p class="testo-ruolo"><b>Participante et sujet</b> <em>de l’exercice de transformation&nbsp;: peu à peu, les gestes de Vito Corleone deviennent ceux d’une femme.</em></p>
     </div>
   </article>
 
@@ -185,15 +199,20 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
 
 <footer><a href="https://gladiamarchetti.com">gladiamarchetti.com</a></footer>
 <script>
-/* 24/9/2026: il video del Padrino e' in tre file (GitHub non accetta file sopra i 100 MB):
-   finito un pezzo, parte da solo il successivo, cosi' chi guarda vede il video intero di seguito. */
+/* 24/9/2026: sotto il video del Padrino due linguette, Take 1 e Take 2, come le lingue del
+   self tape su Recitazione. Si sceglie la ripresa, il video cambia senza ricaricare la pagina. */
 (function () {
   var v = document.getElementById('video-padrino');
   if (!v) return;
-  var parti = ['media/assistant/padrino-1a.mp4', 'media/assistant/padrino-1b.mp4', 'media/assistant/padrino-2.mp4'], i = 0;
-  v.addEventListener('ended', function () {
-    if (i + 1 < parti.length) { i++; v.src = parti[i]; v.play(); }
-    else { i = 0; v.src = parti[0]; v.load(); }
+  document.querySelectorAll('.take-tab').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.classList.contains('is-active')) return;
+      document.querySelectorAll('.take-tab').forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-pressed', 'false'); });
+      b.classList.add('is-active'); b.setAttribute('aria-pressed', 'true');
+      var suonava = !v.paused;
+      v.poster = b.getAttribute('data-poster'); v.src = b.getAttribute('data-src');
+      if (suonava) v.play();
+    });
   });
 })();
 </script>
