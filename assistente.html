@@ -50,6 +50,13 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
   body { font-family: var(--serif); line-height: 1.6; -webkit-font-smoothing: antialiased; }
   .bozza { position: fixed; top: 14px; right: 14px; z-index: 5; font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
            text-transform: uppercase; color: var(--ground); background: var(--accent); padding: 4px 10px; }
+  .ui-lang-select { position: fixed; top: 1.4rem; right: 1.6rem; z-index: 20; display: flex; gap: 0.9rem; }
+  .ui-lang-btn { background: none; border: none; padding: 0.2em 0.1em; font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-faint); cursor: pointer; border-bottom: 1px solid transparent; text-decoration: none;
+    transition: color 0.25s ease, border-color 0.25s ease; }
+  .ui-lang-btn.is-active { color: var(--accent); border-color: var(--accent); }
+  .ui-lang-btn:hover:not(.is-active), .ui-lang-btn:focus-visible { color: var(--ink); }
+  @media (max-width: 40rem) { .ui-lang-select { top: 0.9rem; right: 1.1rem; gap: 0.7rem; background: rgba(11,16,22,.6); padding: 0.35rem 0.7rem; border-radius: 4px; } .ui-lang-btn { color: var(--ink-dim); } .ui-lang-btn.is-active { color: var(--accent); } }
   .etichetta { font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 16px; }
 
   /* COPERTINA, come la prima pagina del dossier */
@@ -92,6 +99,12 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
   .scheda .testo-ruolo { font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin: 22px 0 0; text-wrap: pretty; max-width: 380px; }
   .scheda .testo-ruolo b { font-weight: 400; color: var(--ink); }
   .scheda .testo-ruolo em { font-style: italic; }
+  /* 24/9: NORMAL e' molto largo e basso: il testo accanto deve stare nell'altezza del video */
+  .lavoro:first-of-type .scheda .etichetta { margin-bottom: 10px; }
+  .lavoro:first-of-type .scheda .titolo { margin-bottom: 10px; font-size: clamp(30px, 2.6vw, 38px); }
+  .lavoro:first-of-type .scheda .ruolo { margin-bottom: 8px; line-height: 1.75; }
+  .lavoro:first-of-type .scheda .crediti { line-height: 1.75; }
+  .lavoro:first-of-type .scheda .testo-ruolo { max-width: none; margin-top: 12px; font-size: 16px; line-height: 1.55; }
   .scheda .descr { font-size: 17.5px; line-height: 1.7; color: var(--ink); margin: 0; text-wrap: balance; max-width: 330px; }
 
   /* TRE COLONNE */
@@ -128,6 +141,11 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
 </head>
 <body>
 
+<nav class="ui-lang-select" aria-label="Lingua">
+  <a class="ui-lang-btn" href="/assistant" hreflang="en">EN</a>
+  <a class="ui-lang-btn" href="/assistante" hreflang="fr">FR</a>
+  <a class="ui-lang-btn is-active" href="/assistente" hreflang="it" aria-current="page">IT</a>
+</nav>
 <header class="copertina">
   <img class="foto" src="media/recitazione/_DSC3648.jpg" alt="Gladia Marchetti">
   <div class="velo"></div>
