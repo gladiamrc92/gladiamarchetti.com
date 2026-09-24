@@ -74,12 +74,16 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
   .schermo { position: relative; width: 100%; background: #000; }
   .schermo.cinema { aspect-ratio: 1920 / 816; }
   .schermo.tv { aspect-ratio: 16 / 9; }
+  .schermo.padrino { aspect-ratio: 16 / 9; }
   .schermo video, .schermo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
   .scheda .etichetta { text-wrap: balance; }
   .scheda .titolo { font-size: clamp(30px, 3vw, 42px); line-height: 1.12; color: var(--accent); margin: 0 0 18px; font-weight: 400; text-wrap: balance; }
   .scheda .titolo em { font-style: italic; }
   .scheda .ruolo { font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); line-height: 1.9; margin: 0 0 14px; }
   .scheda .crediti { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); line-height: 1.9; margin: 0; }
+  .scheda .testo-ruolo { font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin: 22px 0 0; text-wrap: pretty; max-width: 380px; }
+  .scheda .testo-ruolo b { font-weight: 400; color: var(--ink); }
+  .scheda .testo-ruolo em { font-style: italic; }
   .scheda .descr { font-size: 17.5px; line-height: 1.7; color: var(--ink); margin: 0; text-wrap: balance; max-width: 330px; }
 
   /* TRE COLONNE */
@@ -136,22 +140,24 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
       </video>
     </div>
     <div class="scheda">
-      <p class="etichetta">Movement coach · Videoclip</p>
+      <p class="etichetta">Il lavoro</p>
       <h2 class="titolo"><em>NORMAL</em></h2>
       <p class="ruolo">Videoclip ufficiale di Lucien Lumière<br>Produzione Maison Lumière</p>
       <p class="crediti">Regia Eli Chicheportiche<br>Direzione artistica Roman Veiga<br>Con Lucien Lumière e Sarah Okendo</p>
+      <p class="testo-ruolo"><b>Movement coach</b> <em>per il rapper e l’attrice: la costruzione fisica della relazione, il ritmo dei corpi nella platea vuota di un teatro, la presenza davanti alla macchina da presa.</em></p>
     </div>
   </article>
 
   <article class="lavoro">
-    <div class="schermo tv">
-      <iframe src="https://www.youtube-nocookie.com/embed/PQbcUkMXHx0?rel=0" title="If the Godfather were a woman" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>
+    <div class="schermo padrino">
+      <video id="video-padrino" controls preload="none" poster="media/assistant/padrino-poster.jpg" src="media/assistant/padrino-1a.mp4"></video>
     </div>
     <div class="scheda">
-      <p class="etichetta">Interprete · Coaching di Alexandra Reynolds</p>
+      <p class="etichetta">Workshop di formazione</p>
       <h2 class="titolo"><em>If the Godfather were a woman</em></h2>
-      <p class="descr">Un esercizio di trasformazione: i gesti di Vito Corleone che diventano lentamente quelli di una donna.</p>
-      <p class="crediti" style="margin-top:16px">Riprese Tom Afiyan</p>
+      <p class="ruolo">Movement for Film Intensive<br>Ferus Animi // Terra Nova</p>
+      <p class="crediti">Condotto da Alexandra Reynolds e Tom Afiyan<br>Londra, gennaio 2023<br>Riprese Tom Afiyan</p>
+      <p class="testo-ruolo"><b>Interprete</b> <em>di un esercizio di trasformazione: i gesti di Vito Corleone che diventano lentamente quelli di una donna.</em></p>
     </div>
   </article>
 
@@ -178,6 +184,19 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
 </main>
 
 <footer><a href="https://gladiamarchetti.com">gladiamarchetti.com</a></footer>
+<script>
+/* 24/9/2026: il video del Padrino e' in tre file (GitHub non accetta file sopra i 100 MB):
+   finito un pezzo, parte da solo il successivo, cosi' chi guarda vede il video intero di seguito. */
+(function () {
+  var v = document.getElementById('video-padrino');
+  if (!v) return;
+  var parti = ['media/assistant/padrino-1a.mp4', 'media/assistant/padrino-1b.mp4', 'media/assistant/padrino-2.mp4'], i = 0;
+  v.addEventListener('ended', function () {
+    if (i + 1 < parti.length) { i++; v.src = parti[i]; v.play(); }
+    else { i = 0; v.src = parti[0]; v.load(); }
+  });
+})();
+</script>
 <script>
 /* INDIRIZZI NELLA LINGUA 15/9/2026: l'indirizzo nella barra e i collegamenti seguono la lingua che si
    vede. Cosi' copiare il link o premere Condividi manda l'indirizzo nella lingua della pagina, e chi
