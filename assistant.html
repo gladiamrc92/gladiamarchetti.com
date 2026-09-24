@@ -68,8 +68,10 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
   .copertina .testo { position: absolute; left: 47%; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; text-align: center; padding: 0 6%; }
   .copertina .etichetta { color: var(--accent); letter-spacing: .24em; margin-bottom: 20px; }
-  .copertina .logo { width: min(320px, 72%); height: auto; display: block; margin: 0 0 6px; }
-  .copertina h1 { font-weight: 400; font-size: clamp(28px, 2.9vw, 38px); color: var(--accent); margin: 0 0 40px; line-height: 1.15; }
+  /* 24/9: il titolo ha la stessa larghezza del logo in tutte le lingue: la riga piu' lunga tocca i bordi del logo */
+  .copertina .testo { container-type: inline-size; }
+  .copertina .logo { width: min(320px, 72cqi); height: auto; display: block; margin: 0 0 22px; }
+  .copertina h1 { font-weight: 400; font-size: calc(min(320px, 72cqi) * 0.1153); white-space: nowrap; color: var(--accent); margin: 0 0 40px; line-height: 1.15; }
   .copertina .intro { font-style: italic; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.7; color: var(--ink); max-width: 470px; margin: 0; text-wrap: balance; }
   .copertina .contatti { position: absolute; left: 47%; right: 0; bottom: 7%; text-align: center; font-family: var(--mono);
     font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); line-height: 2.1; margin: 0; }
@@ -105,6 +107,17 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
   .lavoro:first-of-type .scheda .ruolo { margin-bottom: 8px; line-height: 1.75; }
   .lavoro:first-of-type .scheda .crediti { line-height: 1.75; }
   .lavoro:first-of-type .scheda .testo-ruolo { max-width: none; margin-top: 12px; font-size: 16px; line-height: 1.55; }
+  /* 24/9: giustificato come nel dossier: il ruolo su una riga sua, il corsivo giustificato sotto, larghezza misurata
+     uguale nelle tre lingue. Sotto 1180 px a bandiera. */
+  .scheda .testo-ruolo b { display: block; margin-bottom: 2px; }
+  /* 24/9 sera: colonna del testo a 406 px (il video resta largo come prima sopra 1280): con 346 il francese del Padrino
+     stirava a 10 px, a 406 px gli spazi tornano normali nelle tre lingue (5 a 6 px). NORMAL resta a 368, la sua misura migliore. */
+  @media (min-width: 1180px) {
+    .lavoro { grid-template-columns: minmax(0, 1fr) 406px; }
+    .lavoro .scheda .testo-ruolo { text-align: justify; hyphens: none; width: 406px; max-width: 406px; }
+    .lavoro:first-of-type .scheda .testo-ruolo { width: 368px; max-width: 368px; }
+  }
+  @media (min-width: 1280px) { .lavoro { margin: 0 -23px; } }
   .scheda .descr { font-size: 17.5px; line-height: 1.7; color: var(--ink); margin: 0; text-wrap: balance; max-width: 330px; }
 
   /* TRE COLONNE */
@@ -184,7 +197,7 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
   <div class="testo">
     <p class="etichetta">Film and TV</p>
     <img class="logo" src="media/logo/logo-dark.png" alt="Gladia Marchetti">
-    <h1>Assistant movement director</h1>
+    <h1>Assistant<br>movement director</h1>
     <p class="intro">I come from dance and choreography, and I also act. For the past few years I've been finding my way into movement for film, and I'm now looking to assist an experienced movement director to learn the craft on&nbsp;set.</p>
   </div>
   <p class="contatti"><a href="mailto:gladiamarchetti@gmail.com">gladiamarchetti@gmail.com</a><br>France<br>Italian · French · English</p>
@@ -264,6 +277,35 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
       if (suonava) v.play();
     });
   });
+})();
+</script>
+<script>
+/* 24/9/2026: selettore delle lingue. 1) In locale gli indirizzi del sito (/assistant, /assistante,
+   /assistente) non esistono: si usano i file di lavoro. 2) Cambiando lingua si resta nello stesso
+   punto della pagina: la posizione viaggia nel link (?pos=), niente memoria del browser. */
+(function () {
+  var locale = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || location.protocol === 'file:';
+  var FILE = { '/assistant': 'assistant-md.html', '/assistante': 'assistant-md-fr.html', '/assistente': 'assistant-md-it.html' };
+  document.querySelectorAll('.ui-lang-btn').forEach(function (a) {
+    var base = a.getAttribute('href');
+    if (locale && FILE[base]) { a.setAttribute('href', FILE[base]); base = FILE[base]; }
+    a.addEventListener('click', function (e) {
+      if (a.classList.contains('is-active')) { e.preventDefault(); return; }
+      var h = document.documentElement.scrollHeight - innerHeight;
+      var pos = h > 0 ? (scrollY / h).toFixed(4) : 0;
+      a.setAttribute('href', base + '?pos=' + pos);
+    });
+  });
+  var m = location.search.match(/[?&]pos=([0-9.]+)/);
+  if (m) {
+    var torna = function () {
+      var h = document.documentElement.scrollHeight - innerHeight;
+      scrollTo(0, Math.round(parseFloat(m[1]) * h));
+    };
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    torna(); addEventListener('load', torna);
+    try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+  }
 })();
 </script>
 <script>
