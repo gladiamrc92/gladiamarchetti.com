@@ -144,6 +144,17 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
     .copertina .contatti { position: relative; left: 0; bottom: auto; padding: 30px 24px 0; }
     .largo { padding: 0 20px; }
   }
+  /* 24/9 sera, Gladia: « mettimi il play sui video, se no non si capisce come farli partire ». Cerchio come quello
+     dell'audio nelle pagine del portfolio (bordo bianco, fondo scuro velato), grande e al centro; sparisce quando il
+     video parte, torna a video fermo all'inizio o alla fine. */
+  .play-grande { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 4.6rem; height: 4.6rem;
+    border-radius: 50%; border: 1.5px solid rgba(255,255,255,.85); background: rgba(0,0,0,.38); backdrop-filter: blur(3px);
+    cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; transition: background .25s ease, transform .25s ease; }
+  .play-grande::before { content: ""; display: block; margin-left: 5px; border-style: solid; border-width: 11px 0 11px 18px;
+    border-color: transparent transparent transparent #fff; }
+  .play-grande:hover, .play-grande:focus-visible { background: rgba(0,0,0,.55); transform: translate(-50%, -50%) scale(1.06); }
+  .play-grande[hidden] { display: none; }
+  @media (max-width: 700px) { .play-grande { width: 3.6rem; height: 3.6rem; } .play-grande::before { border-width: 9px 0 9px 15px; margin-left: 4px; } }
 </style>
 <!-- INDIRIZZI NELLA LINGUA 15/9/2026 -->
 <link rel="canonical" href="https://gladiamarchetti.com/assistente">
@@ -274,6 +285,21 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
     torna(); addEventListener('load', torna);
     try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
   }
+})();
+</script>
+<script>
+/* 24/9 sera: il play grande al centro di ogni video (vedi il CSS .play-grande) */
+(function () {
+  document.querySelectorAll('.schermo video').forEach(function (v) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'play-grande'; b.setAttribute('aria-label', 'Guarda il video');
+    v.parentNode.appendChild(b);
+    b.addEventListener('click', function () { v.play().catch(function () {}); });
+    v.addEventListener('play', function () { b.hidden = true; });
+    v.addEventListener('pause', function () { if (v.ended || v.currentTime < 0.1) b.hidden = false; });
+    v.addEventListener('ended', function () { b.hidden = false; });
+    v.addEventListener('emptied', function () { b.hidden = false; });
+  });
 })();
 </script>
 <script>
