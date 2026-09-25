@@ -102,11 +102,11 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
   .scheda .testo-ruolo b { font-weight: 400; color: var(--ink); }
   .scheda .testo-ruolo em { font-style: italic; }
   /* 24/9: NORMAL e' molto largo e basso: il testo accanto deve stare nell'altezza del video */
-  .lavoro:first-of-type .scheda .etichetta { margin-bottom: 10px; }
-  .lavoro:first-of-type .scheda .titolo { margin-bottom: 10px; font-size: clamp(30px, 2.6vw, 38px); }
-  .lavoro:first-of-type .scheda .ruolo { margin-bottom: 8px; line-height: 1.75; }
-  .lavoro:first-of-type .scheda .crediti { line-height: 1.75; }
-  .lavoro:first-of-type .scheda .testo-ruolo { max-width: none; margin-top: 12px; font-size: 16px; line-height: 1.55; }
+  .lavoro.normal-vecchio .scheda .etichetta { margin-bottom: 10px; }
+  .lavoro.normal-vecchio .scheda .titolo { margin-bottom: 10px; font-size: clamp(30px, 2.6vw, 38px); }
+  .lavoro.normal-vecchio .scheda .ruolo { margin-bottom: 8px; line-height: 1.75; }
+  .lavoro.normal-vecchio .scheda .crediti { line-height: 1.75; }
+  .lavoro.normal-vecchio .scheda .testo-ruolo { max-width: none; margin-top: 12px; font-size: 16px; line-height: 1.55; }
   /* 24/9: giustificato come nel dossier: il ruolo su una riga sua, il corsivo giustificato sotto, larghezza misurata
      uguale nelle tre lingue. Sotto 1180 px a bandiera. */
   .scheda .testo-ruolo b { display: block; margin-bottom: 2px; }
@@ -115,7 +115,7 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
   @media (min-width: 1180px) {
     .lavoro { grid-template-columns: minmax(0, 1fr) 406px; }
     .lavoro .scheda .testo-ruolo { text-align: justify; hyphens: none; width: 406px; max-width: 406px; }
-    .lavoro:first-of-type .scheda .testo-ruolo { width: 368px; max-width: 368px; }
+    .lavoro.normal-vecchio .scheda .testo-ruolo { width: 368px; max-width: 368px; }
   }
   @media (min-width: 1280px) { .lavoro { margin: 0 -23px; } }
   .scheda .descr { font-size: 17.5px; line-height: 1.7; color: var(--ink); margin: 0; text-wrap: balance; max-width: 330px; }
@@ -222,6 +222,25 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
 </header>
 
 <main class="largo">
+  <article class="lavoro">
+    <div class="video-con-take">
+      <div class="schermo padrino">
+        <video id="video-padrino" controls preload="none" poster="media/assistant/take1-poster.jpg" src="media/assistant/take1.mp4"></video>
+      </div>
+      <div class="take-scelta">
+        <button class="take-tab is-active" type="button" aria-pressed="true" data-src="media/assistant/take1.mp4" data-poster="media/assistant/take1-poster.jpg">Take 1</button>
+        <button class="take-tab" type="button" aria-pressed="false" data-src="media/assistant/take2.mp4" data-poster="media/assistant/take2-poster.jpg">Take 2</button>
+      </div>
+    </div>
+    <div class="scheda">
+      <p class="etichetta">Training workshop</p>
+      <h2 class="titolo"><em>If the Godfather were a woman</em></h2>
+      <p class="ruolo">Movement for Film Intensive<br>Ferus Animi // Terra Nova</p>
+      <p class="crediti">Led by Alexandra Reynolds and Tom Afiyan<br>London, January 2023<br>Filmed by Tom Afiyan</p>
+      <p class="testo-ruolo"><b>Participant and subject</b> <em>of the transformation exercise: Vito Corleone’s gestures slowly becoming a woman’s.</em></p>
+    </div>
+  </article>
+
   <!-- 25/9/2026, Gladia: NORMAL tolto come video (resta come riga in Background), al suo posto i reel di danza e coreografia -->
   <article class="lavoro reel">
     <div class="schermo cinema">
@@ -251,46 +270,28 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'en', radice: false, map
     </div>
   </article>
 
-  <article class="lavoro">
-    <div class="video-con-take">
-      <div class="schermo padrino">
-        <video id="video-padrino" controls preload="none" poster="media/assistant/take1-poster.jpg" src="media/assistant/take1.mp4"></video>
-      </div>
-      <div class="take-scelta">
-        <button class="take-tab is-active" type="button" aria-pressed="true" data-src="media/assistant/take1.mp4" data-poster="media/assistant/take1-poster.jpg">Take 1</button>
-        <button class="take-tab" type="button" aria-pressed="false" data-src="media/assistant/take2.mp4" data-poster="media/assistant/take2-poster.jpg">Take 2</button>
-      </div>
-    </div>
-    <div class="scheda">
-      <p class="etichetta">Training workshop</p>
-      <h2 class="titolo"><em>If the Godfather were a woman</em></h2>
-      <p class="ruolo">Movement for Film Intensive<br>Ferus Animi // Terra Nova</p>
-      <p class="crediti">Led by Alexandra Reynolds and Tom Afiyan<br>London, January 2023<br>Camera Tom Afiyan</p>
-      <p class="testo-ruolo"><b>Participant and subject</b> <em>of the transformation exercise: Vito Corleone’s gestures slowly becoming a woman’s.</em></p>
-    </div>
-  </article>
 
   <div class="colonne">
     <section>
       <h2 class="etichetta">What I can bring</h2>
       <div class="voci">
-      <p>Demonstrating movement on my own body.</p>
+      <p>Demonstrating movement myself.</p>
       <p>Warming up and preparing actors, including those who don't come from dance.</p>
-      <p>Working on set in English, French and Italian.</p>
-      <p>Being there from prep to the first rehearsal to the last take.</p>
+      <p>Working in English, French and Italian, on set and on stage.</p>
+      <p>Being there from prep and the first rehearsal to the last take or the last performance.</p>
       </div>
     </section>
     <section>
       <h2 class="etichetta">Training</h2>
       <div class="voci">
       <p>Movement for Film intensive with Alexandra Reynolds and Tom Afiyan, London, 2023.</p>
-      <p>Over the years, working with both amateurs and professionals, I've been gradually building my own way of accompanying performers in movement.</p>
+      <p>Over the years, working with both amateurs and professionals, I've been building my own approach to movement coaching.</p>
       </div>
     </section>
     <section>
       <h2 class="etichetta">Background</h2>
       <div class="voci">
-      <p>Movement coach on <em>NORMAL</em>, the official video for Lucien Lumière, directed by Eli Chicheportiche (Maison Lumière).</p>
+      <p>Movement coach on <em>NORMAL</em>, the official music video for Lucien Lumière, directed by Eli Chicheportiche (Maison Lumière).</p>
       <p>Assistant choreographer to Brice Kapel on <em>Coloricolex</em> (Boston, 2019), the American version of his show <em>Coloricocolà</em>.</p>
       <p>Actor in <em>Les Rayons et les Ombres</em>, directed by Xavier Giannoli (Gaumont, 2026).</p>
       </div>

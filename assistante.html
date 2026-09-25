@@ -18,12 +18,12 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Gladia Marchetti · Assistante direction du mouvement</title>
+<title>Gladia Marchetti · Assistante à la direction du mouvement</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gladia Marchetti">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://gladiamarchetti.com/assistante">
-<meta property="og:title" content="Gladia Marchetti · Assistante direction du mouvement">
+<meta property="og:title" content="Gladia Marchetti · Assistante à la direction du mouvement">
 <meta property="og:image" content="https://gladiamarchetti.com/media/anteprime/assistant.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -102,11 +102,11 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   .scheda .testo-ruolo b { font-weight: 400; color: var(--ink); }
   .scheda .testo-ruolo em { font-style: italic; }
   /* 24/9: NORMAL e' molto largo e basso: il testo accanto deve stare nell'altezza del video */
-  .lavoro:first-of-type .scheda .etichetta { margin-bottom: 10px; }
-  .lavoro:first-of-type .scheda .titolo { margin-bottom: 10px; font-size: clamp(30px, 2.6vw, 38px); }
-  .lavoro:first-of-type .scheda .ruolo { margin-bottom: 8px; line-height: 1.75; }
-  .lavoro:first-of-type .scheda .crediti { line-height: 1.75; }
-  .lavoro:first-of-type .scheda .testo-ruolo { max-width: none; margin-top: 12px; font-size: 16px; line-height: 1.55; }
+  .lavoro.normal-vecchio .scheda .etichetta { margin-bottom: 10px; }
+  .lavoro.normal-vecchio .scheda .titolo { margin-bottom: 10px; font-size: clamp(30px, 2.6vw, 38px); }
+  .lavoro.normal-vecchio .scheda .ruolo { margin-bottom: 8px; line-height: 1.75; }
+  .lavoro.normal-vecchio .scheda .crediti { line-height: 1.75; }
+  .lavoro.normal-vecchio .scheda .testo-ruolo { max-width: none; margin-top: 12px; font-size: 16px; line-height: 1.55; }
   /* 24/9: giustificato come nel dossier: il ruolo su una riga sua, il corsivo giustificato sotto, larghezza misurata
      uguale nelle tre lingue. Sotto 1180 px a bandiera. */
   .scheda .testo-ruolo b { display: block; margin-bottom: 2px; }
@@ -115,7 +115,7 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   @media (min-width: 1180px) {
     .lavoro { grid-template-columns: minmax(0, 1fr) 406px; }
     .lavoro .scheda .testo-ruolo { text-align: justify; hyphens: none; width: 406px; max-width: 406px; }
-    .lavoro:first-of-type .scheda .testo-ruolo { width: 368px; max-width: 368px; }
+    .lavoro.normal-vecchio .scheda .testo-ruolo { width: 368px; max-width: 368px; }
   }
   @media (min-width: 1280px) { .lavoro { margin: 0 -23px; } }
   .scheda .descr { font-size: 17.5px; line-height: 1.7; color: var(--ink); margin: 0; text-wrap: balance; max-width: 330px; }
@@ -183,13 +183,32 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   <div class="testo">
     <p class="etichetta">Cinéma, télévision et théâtre</p>
     <img class="logo" src="media/logo/logo-dark.png" alt="Gladia Marchetti">
-    <h1>Assistante direction<br>du&nbsp;mouvement</h1>
-    <p class="intro">Je viens de la danse et de la chorégraphie, et je suis aussi comédienne. Depuis quelques années, je trouve peu à peu ma place dans la direction du mouvement, et je cherche aujourd'hui à être l'assistante d'une directrice ou d'un directeur expérimenté, pour apprendre le métier sur le plateau et en salle de répétition.</p>
+    <h1>Assistante à la direction<br>du&nbsp;mouvement</h1>
+    <p class="intro">Je viens de la danse et de la chorégraphie, et je suis aussi comédienne. Depuis quelques années, je trouve ma place dans la direction du mouvement, et je cherche aujourd'hui à être l'assistante d'une directrice ou d'un directeur expérimenté, pour apprendre le métier sur le plateau et en salle de répétition.</p>
   </div>
   <p class="contatti"><a href="mailto:gladiamarchetti@gmail.com">gladiamarchetti@gmail.com</a><br>France<br>Italien · Français · Anglais</p>
 </header>
 
 <main class="largo">
+  <article class="lavoro">
+    <div class="video-con-take">
+      <div class="schermo padrino">
+        <video id="video-padrino" controls preload="none" poster="media/assistant/take1-poster.jpg" src="media/assistant/take1.mp4"></video>
+      </div>
+      <div class="take-scelta">
+        <button class="take-tab is-active" type="button" aria-pressed="true" data-src="media/assistant/take1.mp4" data-poster="media/assistant/take1-poster.jpg">Prise 1</button>
+        <button class="take-tab" type="button" aria-pressed="false" data-src="media/assistant/take2.mp4" data-poster="media/assistant/take2-poster.jpg">Prise 2</button>
+      </div>
+    </div>
+    <div class="scheda">
+      <p class="etichetta">Stage de formation</p>
+      <h2 class="titolo"><em>If the Godfather were a woman</em></h2>
+      <p class="ruolo">Movement for Film Intensive<br>Ferus Animi // Terra Nova</p>
+      <p class="crediti">Dirigé par Alexandra Reynolds et Tom Afiyan<br>Londres, janvier 2023<br>Image Tom Afiyan</p>
+      <p class="testo-ruolo"><b>Participante et sujet</b> <em>de l’exercice de transformation&nbsp;: peu à peu, les gestes de Vito Corleone deviennent ceux d’une femme.</em></p>
+    </div>
+  </article>
+
   <!-- 25/9/2026, Gladia: NORMAL tolto come video (resta come riga in Background), al suo posto i reel di danza e coreografia -->
   <article class="lavoro reel">
     <div class="schermo cinema">
@@ -219,40 +238,22 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
     </div>
   </article>
 
-  <article class="lavoro">
-    <div class="video-con-take">
-      <div class="schermo padrino">
-        <video id="video-padrino" controls preload="none" poster="media/assistant/take1-poster.jpg" src="media/assistant/take1.mp4"></video>
-      </div>
-      <div class="take-scelta">
-        <button class="take-tab is-active" type="button" aria-pressed="true" data-src="media/assistant/take1.mp4" data-poster="media/assistant/take1-poster.jpg">Take 1</button>
-        <button class="take-tab" type="button" aria-pressed="false" data-src="media/assistant/take2.mp4" data-poster="media/assistant/take2-poster.jpg">Take 2</button>
-      </div>
-    </div>
-    <div class="scheda">
-      <p class="etichetta">Stage de formation</p>
-      <h2 class="titolo"><em>If the Godfather were a woman</em></h2>
-      <p class="ruolo">Movement for Film Intensive<br>Ferus Animi // Terra Nova</p>
-      <p class="crediti">Dirigé par Alexandra Reynolds et Tom Afiyan<br>Londres, janvier 2023<br>Image Tom Afiyan</p>
-      <p class="testo-ruolo"><b>Participante et sujet</b> <em>de l’exercice de transformation&nbsp;: peu à peu, les gestes de Vito Corleone deviennent ceux d’une femme.</em></p>
-    </div>
-  </article>
 
   <div class="colonne">
     <section>
       <h2 class="etichetta">Ce que je peux apporter</h2>
       <div class="voci">
-      <p>Montrer les mouvements moi-même.</p>
+      <p>Faire les démonstrations en personne.</p>
       <p>Échauffer et préparer les acteurs et actrices, y compris ceux qui ne viennent pas de la danse.</p>
-      <p>Travailler sur le plateau en anglais, en français et en italien.</p>
-      <p>Être présente de la préparation jusqu'à la dernière prise, dès la première répétition.</p>
+      <p>Travailler en anglais, en français et en italien, sur le plateau comme sur scène.</p>
+      <p>Être présente de la préparation jusqu'à la dernière prise ou la dernière représentation.</p>
       </div>
     </section>
     <section>
       <h2 class="etichetta">Formation</h2>
       <div class="voci">
       <p>Stage intensif Movement for Film avec Alexandra Reynolds et Tom Afiyan, Londres, 2023.</p>
-      <p>Au fil des années, auprès d'amateurs comme de professionnels, je construis peu à peu ma propre manière d'accompagner les interprètes dans le mouvement.</p>
+      <p>Au fil des années, auprès d'amateurs comme de professionnels, je construis peu à peu ma propre approche du coaching en mouvement.</p>
       </div>
     </section>
     <section>
