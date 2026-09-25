@@ -72,7 +72,7 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
   .copertina .testo { container-type: inline-size; }
   .copertina .logo { width: min(320px, 72cqi); height: auto; display: block; margin: 0 0 22px; }
   .copertina h1 { font-weight: 400; font-size: calc(min(320px, 72cqi) * 0.1153); white-space: nowrap; color: var(--accent); margin: 0 0 40px; line-height: 1.15; }
-  .copertina .intro { font-style: italic; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.7; color: var(--ink); max-width: 470px; margin: 0; text-wrap: balance; }
+  .copertina .intro { font-style: italic; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.7; color: var(--ink); max-width: 470px; margin: 0; text-align: justify; text-align-last: center; hyphens: none; }  /* 25/9, Gladia: giustificato, ultima riga centrata */
   .copertina .contatti { position: absolute; left: 47%; right: 0; bottom: 7%; text-align: center; font-family: var(--mono);
     font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); line-height: 2.1; margin: 0; }
   .copertina .contatti a { color: var(--ink-dim); text-decoration: none; }
@@ -131,6 +131,13 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
     text-transform: uppercase; color: var(--ink-faint); text-align: center; }
   footer a { color: var(--ink-dim); text-decoration: none; }
 
+  /* 25/9/2026, Gladia: le tre sezioni una sotto l'altra (What I can bring prima), le voci di ciascuna in orizzontale */
+  .colonne { grid-template-columns: 1fr; gap: 0; }
+  .colonne section { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: 40px; padding: 26px 0 30px; }
+  .colonne section .etichetta { margin-top: 4px; }
+  .colonne section .voci { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 48px; }
+  @media (max-width: 700px) { .colonne section .voci { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .colonne section { grid-template-columns: 1fr; row-gap: 14px; } }
   @media (max-width: 900px) {
     .lavoro { grid-template-columns: 1fr; gap: 26px; padding-top: 72px; }
     .colonne { grid-template-columns: 1fr; gap: 40px; padding-top: 80px; }
@@ -174,27 +181,41 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
   <img class="foto" src="media/recitazione/_DSC3648.jpg" alt="Gladia Marchetti">
   <div class="velo"></div>
   <div class="testo">
-    <p class="etichetta">Cinema e TV</p>
+    <p class="etichetta">Cinema, TV e teatro</p>
     <img class="logo" src="media/logo/logo-dark.png" alt="Gladia Marchetti">
     <h1>Assistente<br>movement director</h1>
-    <p class="intro">Vengo dalla danza e dalla coreografia, e sono anche attrice. Da qualche anno mi sto avvicinando alla direzione del movimento per il cinema, e ora vorrei affiancare un movement director esperto per imparare il mestiere sul&nbsp;set.</p>
+    <p class="intro">Vengo dalla danza e dalla coreografia, e sono anche attrice. Da qualche anno mi sto avvicinando alla direzione del movimento, e ora vorrei affiancare un movement director esperto per imparare il mestiere sul set e in sala prove.</p>
   </div>
   <p class="contatti"><a href="mailto:gladiamarchetti@gmail.com">gladiamarchetti@gmail.com</a><br>Francia<br>Italiano · Francese · Inglese</p>
 </header>
 
 <main class="largo">
-  <article class="lavoro">
+  <!-- 25/9/2026, Gladia: NORMAL tolto come video (resta come riga in Background), al suo posto i reel di danza e coreografia -->
+  <article class="lavoro reel">
     <div class="schermo cinema">
-      <video controls preload="none" poster="media/direzione-del-movimento/lucien-duo-poltrone.jpg">
-        <source src="media/direzione-del-movimento/lucien-normal-integrale-web.mp4" type="video/mp4">
+      <video controls preload="none" poster="media/danza/danza-reel-1-cinema-poster.jpg">
+        <source src="media/danza/danza-reel-1-cinema.mp4" type="video/mp4">
       </video>
     </div>
     <div class="scheda">
-      <p class="etichetta">Il lavoro</p>
-      <h2 class="titolo"><em>NORMAL</em></h2>
-      <p class="ruolo">Videoclip ufficiale di Lucien Lumière<br>Produzione Maison Lumière</p>
-      <p class="crediti">Regia Eli Chicheportiche<br>Direzione artistica Roman Veiga<br>Con Lucien Lumière e Sarah Okendo</p>
-      <p class="testo-ruolo"><b>Movement coach</b> <em>per il rapper e l’attrice: la costruzione fisica della relazione, il ritmo dei corpi nella platea vuota di un teatro, la presenza davanti alla macchina da presa.</em></p>
+      <p class="etichetta">Showreel</p>
+      <h2 class="titolo"><em>Danza</em></h2>
+      <p class="ruolo">Alcuni lavori</p>
+      <p class="crediti">Giochi paralimpici di Parigi 2024 · Alexander Ekman<br><em>Carmen</em> · Compagnie CTBL<br><em>Encore en corps</em> · Compagnie Relief<br><em>Coloricocolà</em> · Brice Kapel, Cannes</p>
+    </div>
+  </article>
+
+  <article class="lavoro reel">
+    <div class="schermo cinema">
+      <video controls preload="none" poster="media/coreografia/coreografia-reel-cinema-poster.jpg">
+        <source src="media/coreografia/coreografia-reel-cinema.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="scheda">
+      <p class="etichetta">Showreel</p>
+      <h2 class="titolo"><em>Coreografia</em></h2>
+      <p class="ruolo">Alcuni lavori</p>
+      <p class="crediti"><em>Éteignons les écrans</em> · Brice Kapel, Cannes<br><em>Comme Si</em> · Lucien Lumière, videoclip<br><em>INequality</em> · Compagnie Wected, teatro e film</p>
     </div>
   </article>
 
@@ -220,21 +241,27 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'it', radice: false, map
   <div class="colonne">
     <section>
       <h2 class="etichetta">Cosa posso offrire</h2>
+      <div class="voci">
       <p>Mostrare i movimenti agli attori, facendoli io per prima.</p>
       <p>Riscaldare e preparare gli attori, anche quelli che non vengono dalla danza.</p>
       <p>Lavorare sul set in inglese, francese e italiano.</p>
       <p>Esserci dalla preparazione all'ultimo ciak, prove comprese.</p>
+      </div>
     </section>
     <section>
       <h2 class="etichetta">Formazione</h2>
+      <div class="voci">
       <p>Corso intensivo Movement for Film con Alexandra Reynolds e Tom Afiyan, Londra, 2023.</p>
       <p>Negli anni, lavorando con professionisti e non, sto costruendo un mio metodo di accompagnamento al movimento.</p>
+      </div>
     </section>
     <section>
       <h2 class="etichetta">Percorso</h2>
-      <p>Danzatrice nella cerimonia di apertura dei Giochi Paralimpici di Parigi 2024, coreografia di Alexander Ekman.</p>
+      <div class="voci">
+      <p>Movement coach in <em>NORMAL</em>, video ufficiale di Lucien Lumière, diretto da Eli Chicheportiche (Maison Lumière).</p>
       <p>Assistente alla coreografia di Brice Kapel per <em>Coloricolex</em> (Boston, 2019), la versione americana del suo spettacolo <em>Coloricocolà</em>.</p>
       <p>Attrice in <em>Les Rayons et les Ombres</em>, regia di Xavier Giannoli (Gaumont, 2026).</p>
+      </div>
     </section>
   </div>
 </main>

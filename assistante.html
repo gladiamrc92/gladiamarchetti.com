@@ -72,7 +72,7 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   .copertina .testo { container-type: inline-size; }
   .copertina .logo { width: min(320px, 72cqi); height: auto; display: block; margin: 0 0 22px; }
   .copertina h1 { font-weight: 400; font-size: calc(min(320px, 72cqi) * 0.1118); white-space: nowrap; color: var(--accent); margin: 0 0 40px; line-height: 1.15; }
-  .copertina .intro { font-style: italic; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.7; color: var(--ink); max-width: 470px; margin: 0; text-wrap: balance; }
+  .copertina .intro { font-style: italic; font-size: clamp(17px, 1.45vw, 20px); line-height: 1.7; color: var(--ink); max-width: 470px; margin: 0; text-align: justify; text-align-last: center; hyphens: none; }  /* 25/9, Gladia: giustificato, ultima riga centrata */
   .copertina .contatti { position: absolute; left: 47%; right: 0; bottom: 7%; text-align: center; font-family: var(--mono);
     font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); line-height: 2.1; margin: 0; }
   .copertina .contatti a { color: var(--ink-dim); text-decoration: none; }
@@ -131,6 +131,13 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
     text-transform: uppercase; color: var(--ink-faint); text-align: center; }
   footer a { color: var(--ink-dim); text-decoration: none; }
 
+  /* 25/9/2026, Gladia: le tre sezioni una sotto l'altra (What I can bring prima), le voci di ciascuna in orizzontale */
+  .colonne { grid-template-columns: 1fr; gap: 0; }
+  .colonne section { display: grid; grid-template-columns: 200px minmax(0, 1fr); column-gap: 40px; padding: 26px 0 30px; }
+  .colonne section .etichetta { margin-top: 4px; }
+  .colonne section .voci { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 48px; }
+  @media (max-width: 700px) { .colonne section .voci { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .colonne section { grid-template-columns: 1fr; row-gap: 14px; } }
   @media (max-width: 900px) {
     .lavoro { grid-template-columns: 1fr; gap: 26px; padding-top: 72px; }
     .colonne { grid-template-columns: 1fr; gap: 40px; padding-top: 80px; }
@@ -174,27 +181,41 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   <img class="foto" src="media/recitazione/_DSC3648.jpg" alt="Gladia Marchetti">
   <div class="velo"></div>
   <div class="testo">
-    <p class="etichetta">Cinéma et télévision</p>
+    <p class="etichetta">Cinéma, télévision et théâtre</p>
     <img class="logo" src="media/logo/logo-dark.png" alt="Gladia Marchetti">
     <h1>Assistante direction<br>du&nbsp;mouvement</h1>
-    <p class="intro">Je viens de la danse et de la chorégraphie, et je suis aussi comédienne. Depuis quelques années, je trouve peu à peu ma place dans la direction du mouvement au cinéma, et je cherche aujourd'hui à être l'assistante d'une directrice ou d'un directeur expérimenté, pour apprendre le métier sur le&nbsp;plateau.</p>
+    <p class="intro">Je viens de la danse et de la chorégraphie, et je suis aussi comédienne. Depuis quelques années, je trouve peu à peu ma place dans la direction du mouvement, et je cherche aujourd'hui à être l'assistante d'une directrice ou d'un directeur expérimenté, pour apprendre le métier sur le plateau et en salle de répétition.</p>
   </div>
   <p class="contatti"><a href="mailto:gladiamarchetti@gmail.com">gladiamarchetti@gmail.com</a><br>France<br>Italien · Français · Anglais</p>
 </header>
 
 <main class="largo">
-  <article class="lavoro">
+  <!-- 25/9/2026, Gladia: NORMAL tolto come video (resta come riga in Background), al suo posto i reel di danza e coreografia -->
+  <article class="lavoro reel">
     <div class="schermo cinema">
-      <video controls preload="none" poster="media/direzione-del-movimento/lucien-duo-poltrone.jpg">
-        <source src="media/direzione-del-movimento/lucien-normal-integrale-web.mp4" type="video/mp4">
+      <video controls preload="none" poster="media/danza/danza-reel-1-cinema-poster.jpg">
+        <source src="media/danza/danza-reel-1-cinema.mp4" type="video/mp4">
       </video>
     </div>
     <div class="scheda">
-      <p class="etichetta">Le projet</p>
-      <h2 class="titolo"><em>NORMAL</em></h2>
-      <p class="ruolo">Clip officiel de Lucien Lumière<br>Production Maison Lumière</p>
-      <p class="crediti">Réalisation Eli Chicheportiche<br>Direction artistique Roman Veiga<br>Avec Lucien Lumière et Sarah Okendo</p>
-      <p class="testo-ruolo"><b>Coach mouvement</b> <em>pour le rappeur et la comédienne&nbsp;: la construction physique de leur relation, le rythme des corps dans la salle vide d’un théâtre, le travail sur la présence face à la caméra.</em></p>
+      <p class="etichetta">Showreel</p>
+      <h2 class="titolo"><em>Danse</em></h2>
+      <p class="ruolo">Quelques projets</p>
+      <p class="crediti">Jeux paralympiques de Paris 2024 · Alexander Ekman<br><em>Carmen</em> · Compagnie CTBL<br><em>Encore en corps</em> · Compagnie Relief<br><em>Coloricocolà</em> · Brice Kapel, Cannes</p>
+    </div>
+  </article>
+
+  <article class="lavoro reel">
+    <div class="schermo cinema">
+      <video controls preload="none" poster="media/coreografia/coreografia-reel-cinema-poster.jpg">
+        <source src="media/coreografia/coreografia-reel-cinema.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="scheda">
+      <p class="etichetta">Showreel</p>
+      <h2 class="titolo"><em>Chorégraphie</em></h2>
+      <p class="ruolo">Quelques projets</p>
+      <p class="crediti"><em>Éteignons les écrans</em> · Brice Kapel, Cannes<br><em>Comme Si</em> · Lucien Lumière, clip<br><em>INequality</em> · Compagnie Wected, scène et film</p>
     </div>
   </article>
 
@@ -220,21 +241,27 @@ window.GM_INDIRIZZI = { pagina: 'assistant-md', lingua: 'fr', radice: false, map
   <div class="colonne">
     <section>
       <h2 class="etichetta">Ce que je peux apporter</h2>
+      <div class="voci">
       <p>Montrer les mouvements moi-même.</p>
       <p>Échauffer et préparer les acteurs et actrices, y compris ceux qui ne viennent pas de la danse.</p>
       <p>Travailler sur le plateau en anglais, en français et en italien.</p>
       <p>Être présente de la préparation jusqu'à la dernière prise, dès la première répétition.</p>
+      </div>
     </section>
     <section>
       <h2 class="etichetta">Formation</h2>
+      <div class="voci">
       <p>Stage intensif Movement for Film avec Alexandra Reynolds et Tom Afiyan, Londres, 2023.</p>
       <p>Au fil des années, auprès d'amateurs comme de professionnels, je construis peu à peu ma propre manière d'accompagner les interprètes dans le mouvement.</p>
+      </div>
     </section>
     <section>
       <h2 class="etichetta">Parcours</h2>
-      <p>Danseuse dans la cérémonie d'ouverture des Jeux paralympiques de Paris 2024, chorégraphie d'Alexander Ekman.</p>
+      <div class="voci">
+      <p>Coach mouvement sur <em>NORMAL</em>, clip officiel de Lucien Lumière, réalisé par Eli Chicheportiche (Maison Lumière).</p>
       <p>Assistante à la chorégraphie de Brice Kapel sur <em>Coloricolex</em> (Boston, 2019), la version américaine de son spectacle <em>Coloricocolà</em>.</p>
       <p>Comédienne dans <em>Les Rayons et les Ombres</em>, réalisation Xavier Giannoli (Gaumont, 2026).</p>
+      </div>
     </section>
   </div>
 </main>
